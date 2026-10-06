@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="import_types_array">
-        <item>Catima</item>
-        <item>Fidme</item>
-        <item>@string/app_loyalty_card_keychain</item>
-        <item>Voucher Vault</item>
-    </string-array>
-
-    <string-array name="sort_types_array">
-        <item>@string/sort_by_name</item>
-        <item>@string/sort_by_most_recently_added</item>
-        <item>@string/sort_by_most_recently_used</item>
-        <item>@string/sort_by_valid_from</item>
-        <item>@string/sort_by_expiry</item>
-    </string-array>
+    <!-- Catima's colours for a card that came without one. Nothing here is drawn in colour;
+         they are kept so a card brought in and sent back out to Catima keeps a colour. -->
+    <array name="letter_tile_colors">
+        <item>#f16364</item>
+        <item>#f58559</item>
+        <item>#f9a43e</item>
+        <item>#67bf74</item>
+        <item>#59a2be</item>
+        <item>#2093cd</item>
+        <item>#ad62a7</item>
+    </array>
 </resources>

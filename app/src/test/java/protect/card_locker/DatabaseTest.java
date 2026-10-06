@@ -35,7 +35,7 @@ public class DatabaseTest {
 
     @Before
     public void setUp() {
-        mActivity = Robolectric.setupActivity(MainActivity.class);
+        mActivity = Robolectric.buildActivity(Activity.class).setup().get();
         mDatabase = TestHelpers.getEmptyDb(mActivity).getWritableDatabase();
     }
 

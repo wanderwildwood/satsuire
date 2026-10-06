@@ -1,399 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Catima</string>
-    <string name="action_search">Search</string>
-    <string name="action_add">Add</string>
-    <plurals name="selectedCardCount">
-        <item quantity="one"><xliff:g>%d</xliff:g> selected</item>
-        <item quantity="other"><xliff:g>%d</xliff:g> selected</item>
-    </plurals>
-    <string name="noGiftCards">Click the + plus button to add a card, or import from the ⋮ menu</string>
-    <string name="noGiftCardsGroup">Create some cards, and then assign them to the group here</string>
-    <string name="noMatchingGiftCards">No results. Try changing your search.</string>
-    <string name="storeName">Name</string>
-    <string name="note">Note</string>
-    <string name="cardId">Card ID</string>
-    <string name="barcodeType">Barcode type</string>
-    <string name="noBarcode">No barcode</string>
-    <string name="star">Add to favorites</string>
-    <string name="unstar">Remove from favorites</string>
-    <string name="cancel">Cancel</string>
-    <string name="save">Save</string>
-    <string name="edit">Edit</string>
-    <string name="delete">Delete</string>
-    <string name="confirm">Confirm</string>
-    <!-- START NOTE: i18n oddness -->
-    <!-- The following may seem weird, but it is necessary to give translators enough flexibility.
-         For example, in Russian, Android's plural quantity "one" actually refers to "any number ending on 1 but not ending in 11".
-         So while in English the extra non-plural form seems unnecessary duplication, it is necessary to give translators enough flexibility.
-         In Catima, we use the plain string when meaning exactly 1, and otherwise use the plural forms -->
-    <string name="deleteTitle">Delete card</string>
-    <plurals name="deleteCardsTitle">
-        <item quantity="one">Delete <xliff:g>%d</xliff:g> card</item>
-        <item quantity="other">Delete <xliff:g>%d</xliff:g> cards</item>
-    </plurals>
-    <string name="deleteConfirmation">Delete this card permanently?</string>
-    <plurals name="deleteCardsConfirmation">
-        <item quantity="one">Delete this <xliff:g>%d</xliff:g> card permanently?</item>
-        <item quantity="other">Delete these <xliff:g>%d</xliff:g> cards permanently?</item>
-    </plurals>
-    <!-- END NOTE: i18n oddness -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Wallet</string>
+    <!-- In other apps' share lists and "open with" lists -->
+    <string name="share_label">Add to Wallet</string>
+
+    <!-- Read aloud by a screen reader -->
+    <string name="cd_back">Back</string>
+    <string name="cd_close">Close</string>
+    <string name="cd_about">About</string>
+    <string name="cd_add">Add a card</string>
+    <string name="cd_settings">Settings</string>
+    <string name="cd_edit">Change this card</string>
+    <string name="cd_more">More</string>
+    <!-- %1$s is a kind of barcode, such as "QR Code" -->
+    <string name="cd_barcode">Barcode, %1$s</string>
+
     <string name="ok">OK</string>
-    <string name="share">Share</string>
-    <string name="sendLabel">Send…</string>
-    <string name="editCardTitle">Edit card</string>
-    <string name="addCardTitle">Add card</string>
-    <string name="scanCardBarcode">Scan barcode</string>
-    <string name="cardShortcut">Card shortcut</string>
-    <string name="noCardsMessage">Add a card first</string>
-    <!-- %s is a type of barcode here -->
-    <string name="barcodeImageDescriptionWithType">Image <xliff:g>%s</xliff:g> barcode</string>
-    <string name="noCardExistsError">Couldn\'t find that card</string>
-    <string name="failedParsingImportUriError">Couldn\'t parse the import URI</string>
-    <string name="importExport">Import/export</string>
-    <string name="exportName">Export</string>
-    <string name="importExportHelp">Backing up your data allows moving it to another device</string>
-    <string name="importSuccessfulTitle">Imported</string>
-    <string name="importFailedTitle">Import failed</string>
-    <string name="importFailed">Could not perform import</string>
-    <string name="exportSuccessfulTitle">Exported</string>
-    <string name="exportFailedTitle">Export failed</string>
-    <string name="exportFailed">Could not perform export</string>
-    <string name="importing">Importing…</string>
-    <string name="exporting">Exporting…</string>
-    <string name="storageReadPermissionRequired">Permission to read storage needed for this action…</string>
-    <string name="cameraPermissionRequired">Permission to access camera needed for this action…</string>
-    <string name="permissionReadCardsLabel">Read Catima cards</string>
-    <string name="permissionReadCardsDescription">read your Catima cards and all its details, including notes and images</string>
-    <string name="cameraPermissionDeniedTitle">Couldn\'t access the camera</string>
-    <string name="noCameraPermissionDirectToSystemSetting">To scan barcodes, Catima will need access to your camera. Tap here to change your permission settings.</string>
-    <string name="exportOptionExplanation">The data will be written to a location of your choice</string>
-    <string name="importOptionFilesystemTitle">Import from filesystem</string>
-    <string name="importOptionFilesystemExplanation">Choose a specific file from the filesystem</string>
-    <string name="importOptionFilesystemButton">From filesystem</string>
-    <string name="about">About</string>
-    <string name="app_copyright_fmt" tools:ignore="PluralsCandidate">Copyright © 2019–<xliff:g>%d</xliff:g> Sylvia van Os and contributors</string>
-    <string name="app_copyright_short">Copyright © Sylvia van Os and contributors</string>
-    <string name="app_copyright_old">Based on Loyalty Card Keychain\ncopyright © 2016–2020 Branden Archer</string>
-    <string name="app_license">Copylefted libre software, licensed GPLv3+</string>
-    <string name="about_title_fmt">About <xliff:g id="app_name">%s</xliff:g></string>
-    <string name="debug_version_fmt">Version: <xliff:g id="version">%s</xliff:g></string>
-    <string name="app_libraries">Third-party libraries: <xliff:g id="app_libraries_list">%s</xliff:g></string>
-    <string name="app_resources">Third-party resources: <xliff:g id="app_resources_list">%s</xliff:g></string>
-    <string name="selectBarcodeTitle">Select barcode</string>
-    <string name="thumbnailDescription">Thumbnail</string>
-    <string name="starImage">Favorite star</string>
-    <string name="settings">Settings</string>
-    <string name="settings_theme">Theme</string>
-    <string name="settings_key_theme" translatable="false">pref_theme</string>
-    <string name="settings_system_theme">System</string>
-    <string name="settings_key_system_theme" translatable="false">system</string>
-    <string name="settings_light_theme">Light</string>
-    <string name="settings_key_light_theme" translatable="false">light</string>
-    <string name="settings_dark_theme">Dark</string>
-    <string name="settings_key_dark_theme" translatable="false">dark</string>
-    <string name="settings_key_max_font_size_scale" translatable="false">pref_max_font_size_scale</string>
-    <string name="settings_display_barcode_max_brightness">Brighten screen</string>
-    <string name="settings_display_barcode_max_brightness_summary">Necessary for some scanners to work</string>
-    <string name="settings_key_display_barcode_max_brightness" translatable="false">pref_display_card_max_brightness</string>
-    <string name="settings_keep_screen_on">Keep screen on</string>
-    <string name="settings_keep_screen_on_summary">Disables screen timeout while viewing a card</string>
-    <string name="settings_key_keep_screen_on" translatable="false">pref_keep_screen_on</string>
-    <string name="settings_disable_lockscreen_while_viewing_card">Prevent screen lock</string>
-    <string name="settings_disable_lockscreen_while_viewing_card_summary">Disables screen lock while viewing a card</string>
-    <string name="settings_disable_nfc_while_viewing_card">Pause NFC</string>
-    <string name="settings_disable_nfc_while_viewing_card_summary">Pauses NFC to prevent NFC payments from triggering while viewing a card</string>
-    <string name="settings_key_disable_nfc_while_viewing_card" translatable="false">pref_disable_nfc_while_viewing_card</string>
-    <string name="settings_allow_content_provider_read_title">Sync with Gadgetbridge</string>
-    <string name="settings_allow_content_provider_read_summary">Allows the Gadgetbridge app to sync your cards to supported watches</string>
-    <string name="settings_key_disable_lockscreen_while_viewing_card" translatable="false">pref_disable_lockscreen_while_viewing_card</string>
-    <string name="settings_key_allow_content_provider_read" translatable="false">pref_allow_content_provider_read</string>
-    <string name="settings_key_oled_dark" translatable="false">pref_oled_dark</string>
-    <string name="settings_use_volume_keys_navigation">Switch cards using volume buttons</string>
-    <string name="settings_use_volume_keys_navigation_summary">Use the volume buttons to change which card is displayed</string>
-    <string name="settings_key_use_volume_keys_navigation" translatable="false">pref_use_volume_keys_navigation</string>
-    <string name="sharedpreference_active_tab" translatable="false">sharedpreference_active_tab</string>
-    <string name="sharedpreference_sort" translatable="false">sharedpreference_sort</string>
-    <string name="sharedpreference_sort_order" translatable="false">sharedpreference_sort_order</string>
-    <string name="sharedpreference_sort_direction" translatable="false">sharedpreference_sort_direction</string>
-    <string name="sharedpreference_card_details" translatable="false">sharedpreference_card_details</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+    <string name="save">Save</string>
+
+    <!-- ============================================================ -->
+    <!-- The list -->
+
+    <string name="list_empty">No cards yet. Press + to scan one, type its number, or read it from a picture. A picture, a PDF or a pass file shared from another app comes here too.</string>
+    <!-- The last row of the list, opening the cards put away -->
+    <plurals name="put_away_row">
+        <item quantity="one">Put away: %1$d card</item>
+        <item quantity="other">Put away: %1$d cards</item>
+    </plurals>
+    <string name="put_away_title">Put away</string>
+    <string name="put_away_none">Nothing is put away.</string>
+
+    <!-- What a card's dates mean today. %1$s and %2$s are days, written out -->
+    <string name="validity_expired">Expired %1$s</string>
+    <string name="validity_not_yet">Not valid until %1$s</string>
+    <string name="validity_until">Valid until %1$s</string>
+    <string name="validity_from">Valid from %1$s</string>
+    <string name="validity_from_until">Valid %1$s to %2$s</string>
+
+    <!-- ============================================================ -->
+    <!-- Adding a card -->
+
+    <string name="add_title">Add a card</string>
+    <string name="add_scan">Scan it with the camera</string>
+    <string name="add_type">Type the number</string>
+    <string name="add_file">Read it from a picture or a file</string>
+    <string name="add_file_note">A photo or screenshot, a PDF ticket, or a pass file</string>
+    <string name="no_file_picker">There is nothing on this phone to choose a file with.</string>
+
+    <string name="scan_title">Scan</string>
+    <string name="scan_hint">Hold the barcode flat and still in front of the camera. The picture is only for aiming; it does not need to look sharp here.</string>
+    <string name="scan_no_camera">Without the camera, Wallet cannot scan. The number can be typed instead, or read from a picture.</string>
+
+    <string name="incoming_reading">Looking for a barcode…</string>
+    <string name="incoming_no_barcode">No barcode could be found in that. A photo works best taken straight on, with the whole barcode in it.</string>
+    <string name="incoming_unreadable">That could not be read. Wallet reads pictures, PDFs, pass files and text.</string>
+    <string name="incoming_several">There is more than one. Which?</string>
+
+    <!-- ============================================================ -->
+    <!-- A card -->
+
+    <string name="card_too_long">This barcode holds too much to draw on this screen. The number below can be read out or typed instead.</string>
+    <!-- %1$s is a kind of barcode -->
+    <string name="card_cannot_draw">This number cannot be drawn as %1$s. Change the card to pick another kind.</string>
+
+    <string name="action_star">Keep at the top</string>
+    <string name="action_unstar">Stop keeping at the top</string>
+    <string name="action_calendar">Add to calendar</string>
+    <string name="action_share">Share</string>
+    <string name="action_archive">Put away</string>
+    <string name="action_unarchive">Bring back</string>
+    <string name="no_calendar">There is no calendar app on this phone to add it to.</string>
+    <string name="share_failed">There is no app on this phone to share it with.</string>
+
+    <!-- ============================================================ -->
+    <!-- Changing a card -->
+
+    <string name="edit_new">New card</string>
+    <string name="edit_title">Change card</string>
+    <string name="edit_name">Name</string>
+    <string name="edit_number">Number</string>
+    <!-- Catima's separate value for the barcode, shown only when a card has one -->
+    <string name="edit_barcode_value">What the barcode holds, if not the number</string>
+    <string name="edit_format">Kind of barcode</string>
+    <string name="edit_valid_from">Valid from</string>
+    <string name="edit_valid_until">Valid until</string>
+    <string name="edit_no_date">No date</string>
+    <string name="edit_change_date">Choose a day</string>
+    <string name="edit_clear_date">No date</string>
+    <string name="edit_note">Note</string>
+    <string name="edit_delete">Delete this card</string>
+    <string name="edit_delete_armed">Delete this card — tap again</string>
+    <string name="edit_needs_name">A card needs a name.</string>
+    <string name="edit_needs_number">A card needs a number.</string>
+    <string name="edit_dates_backwards">The last day comes before the first.</string>
+    <!-- %1$s is a kind of barcode -->
+    <string name="edit_cannot_draw">This number cannot be drawn as %1$s. Check the number, or choose another kind.</string>
+    <string name="edit_not_saved">The card could not be saved.</string>
+
+    <string name="format_none">No barcode</string>
+    <string name="format_note_boarding">Boarding passes and rail tickets</string>
+    <string name="format_note_qr">Event tickets and most codes on paper</string>
+    <string name="format_note_shops">Most shop cards</string>
+
+    <!-- ============================================================ -->
+    <!-- Settings -->
+
+    <string name="settings_title">Settings</string>
+    <string name="settings_lock_screen">Today\'s tickets on the lock screen</string>
+    <string name="settings_lock_screen_no_glance">Glance draws them there, and it is not on this phone.</string>
+    <string name="settings_bring_in">Bring in cards</string>
+    <string name="settings_bring_in_value">From a Catima, FidMe or Voucher Vault export</string>
+    <string name="settings_send_out">Save every card to a file</string>
+    <string name="settings_send_out_value">A Catima file, without a password: anyone holding it can read the cards</string>
+
+    <string name="transfer_reading">Reading the file…</string>
+    <plurals name="transfer_brought">
+        <item quantity="one">Brought in %1$d card.</item>
+        <item quantity="other">Brought in %1$d cards.</item>
+    </plurals>
+    <string name="transfer_nothing_new">No cards came in from that file. Either it holds none, or every one in it is here already.</string>
+    <string name="transfer_not_cards">That is not a card export from Catima, FidMe or Voucher Vault.</string>
+    <string name="transfer_password">That file is locked. Its password:</string>
+    <string name="transfer_wrong_password">That password does not open it.</string>
+    <string name="transfer_open">Open</string>
+    <string name="transfer_saved">Every card is saved.</string>
+    <string name="transfer_not_saved">The cards could not be saved there.</string>
+
+    <!-- Above today's tickets on the lock screen -->
+    <string name="glance_heading">Today\'s tickets</string>
+
+    <!-- ============================================================ -->
+    <!-- About -->
+
+    <string name="about_title">Wallet %1$s</string>
+    <string name="about_what">The cards stay on this phone. The app has no internet; the camera is used only while scanning.</string>
+    <string name="about_licence">GNU General Public License v3</string>
+    <string name="about_catima">Built on Catima, GPL v3 or later</string>
+    <string name="about_zxing">Barcodes drawn and read by ZXing, Apache 2.0</string>
+    <string name="about_icons">Icons from Material Symbols, Apache 2.0</string>
+    <string name="about_feed_the_llamas">feed the llamas</string>
+    <string name="about_no_browser">There is no browser on this phone to open that with.</string>
+    <string name="about_close">Close</string>
+
+    <!-- ============================================================ -->
+    <!-- Catima's own words, used by the readers kept from it -->
+
+    <string name="noBarcode">No barcode</string>
+    <string name="errorReadingFile">Couldn\'t read the file</string>
+    <string name="unsupportedFile">This file is not supported</string>
+    <string name="pageWithNumber">Page <xliff:g>%d</xliff:g></string>
+    <string name="cardWithNumber">Card <xliff:g>%d</xliff:g></string>
+    <string name="cardWithNumberAndLocale">Card <xliff:g>%1$d</xliff:g> (<xliff:g>%2$s</xliff:g>)</string>
+    <plurals name="balancePoints">
+        <item quantity="one"><xliff:g>%s</xliff:g> point</item>
+        <item quantity="other"><xliff:g>%s</xliff:g> points</item>
+    </plurals>
     <string name="intent_import_card_from_url_share_text">I want to share a card with you</string>
+    <string name="intent_import_card_from_url_share_multiple_text">I want to share some cards with you</string>
     <string name="intent_import_card_from_url_host_catima_app" translatable="false">catima.app</string>
     <string name="intent_import_card_from_url_path_prefix_catima_app" translatable="false">/share</string>
     <string name="intent_import_card_from_url_host_thelastproject" translatable="false">thelastproject.github.io</string>
     <string name="intent_import_card_from_url_path_prefix_thelastproject" translatable="false">/Catima/share</string>
     <string name="intent_import_card_from_url_host_brarcher" translatable="false">brarcher.github.io</string>
     <string name="intent_import_card_from_url_path_prefix_brarcher" translatable="false">/loyalty-card-locker/share</string>
-    <string name="importSuccessful">Data imported</string>
-    <string name="exportSuccessful">Data exported</string>
-    <string name="enter_group_name">Enter group name</string>
-    <string name="groups">Groups</string>
-    <string name="group_edit">Edit Group</string>
-    <string name="noGroups">Click the + plus button to add groups for categorization</string>
-    <string name="noGroupCards">This group is empty</string>
-    <plurals name="groupCardCount">
-        <item quantity="one"><xliff:g>%d</xliff:g> card</item>
-        <item quantity="other"><xliff:g>%d</xliff:g> cards</item>
-    </plurals>
-    <string name="group_name_already_in_use">Group name already in use</string>
-    <string name="group_name_is_empty">Group name must not be empty</string>
-    <string name="group_updated">Group updated</string>
-    <string name="all">All</string>
-    <string name="deleteConfirmationGroup">Delete group?</string>
-    <string name="failedOpeningFileManager">Failed to open file manager</string>
-    <string name="moveUp">Move upwards</string>
-    <string name="moveDown">Move downwards</string>
-    <string name="leaveWithoutSaveTitle">Exit</string>
-    <string name="leaveWithoutSaveConfirmation">Leave without saving?</string>
-    <string name="addManually">Enter the barcode manually</string>
-    <string name="addFromImage">Select an image from gallery</string>
-    <string name="groupsList">Groups: <xliff:g>%s</xliff:g></string>
-    <string name="editGroup">Editing group: <xliff:g>%s</xliff:g></string>
-    <string name="expiryStateSentence">Expires: <xliff:g>%s</xliff:g></string>
-    <string name="expiryStateSentenceExpired">Expired: <xliff:g>%s</xliff:g></string>
-    <string name="balanceSentence">Balance: <xliff:g>%s</xliff:g></string>
-    <plurals name="balancePoints">
-        <item quantity="one"><xliff:g>%s</xliff:g> point</item>
-        <item quantity="other"><xliff:g>%s</xliff:g> points</item>
-    </plurals>
-    <string name="card">Card</string>
-    <string name="editBarcode">Edit barcode</string>
-    <string name="expiryDate">Expiry date</string>
-    <string name="never">Never</string>
-    <string name="chooseExpiryDate">Choose expiry date</string>
-    <string name="moveBarcodeToTopOfScreen">Move the barcode to the top of the screen</string>
-    <string name="noBarcodeFound">No barcode was found</string>
-    <string name="errorReadingImage">Couldn\'t read the image</string>
-    <string name="balance">Balance</string>
-    <string name="currency">Currency</string>
-    <string name="points">Points</string>
-    <string name="balanceParsingFailed">Invalid balance</string>
-    <string name="chooseImportType">Import data from</string>
-    <string name="app_loyalty_card_keychain">Loyalty Card Keychain</string>
-    <string name="privacy_policy">Privacy policy</string>
-    <string name="accept">Accept</string>
-    <string name="importCatima">Import from Catima</string>
-    <string name="importCatimaMessage">Select your export from Catima to import.
-\nCreate it from the "Import/export" menu of another Catima app by pressing "Export".</string>
-    <string name="importFidme">Import from FidMe</string>
-    <string name="importFidmeMessage">Select your export from FidMe to import, and select the barcode types manually afterwards.
-\nCreate it from your FidMe profile by choosing "Data Protection" and then pressing "Extract my data".</string>
-    <string name="importLoyaltyCardKeychain">Import from Loyalty Card Keychain</string>
-    <string name="importLoyaltyCardKeychainMessage">Select your export from Loyalty Card Keychain to import.
-\nCreate it from the "Import/Export" menu in Loyalty Card Keychain by pressing "Export".</string>
-    <string name="importVoucherVault">Import from Voucher Vault</string>
-    <string name="importVoucherVaultMessage">Select your export from Voucher Vault to import.
-\nCreate it by pressing "Export" in Voucher Vault.</string>
-    <string name="barcodeId">Barcode value</string>
-    <string name="sameAsCardId">Same as ID</string>
-    <string name="setBarcodeId">Set barcode value</string>
-    <string name="unsupportedBarcodeType">This barcode type can\'t yet be displayed. It may be supported in a later version of the app.</string>
-    <string name="wrongValueForBarcodeType">The value isn\'t valid for the selected barcode type</string>
-    <string name="intent_import_card_from_url_share_multiple_text">I want to share some cards with you</string>
-    <string name="frontImageDescription">Front image</string>
-    <string name="backImageDescription">Back image</string>
-    <string name="photos">Photos</string>
-    <string name="setFrontImage">Set front image</string>
-    <string name="setBackImage">Set back image</string>
-    <string name="removeImage">Remove image</string>
-    <string name="takePhoto">Take a photo</string>
-    <string name="updateBarcodeQuestionTitle">Update barcode value?</string>
-    <string name="updateBarcodeQuestionText">You changed the ID. Do you want to also update the barcode to use the same value?</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
-    <string name="passwordRequired">Enter the password</string>
-    <string name="exportPassword">Set a password to protect your export (optional)</string>
-    <string name="exportPasswordHint">Enter password</string>
-    <string name="failedGeneratingShareURL">Couldn\'t generate sharable URL</string>
-    <string name="turn_flashlight_on">Turn flashlight on</string>
-    <string name="turn_flashlight_off">Turn flashlight off</string>
-    <string name="settings_locale">Language</string>
-    <string name="settings_oled_dark">Pure black background for dark theme</string>
-    <string name="settings_oled_dark_summary">Reduces battery usage on OLED displays</string>
-    <string name="settings_key_locale" translatable="false">pref_locale</string>
-    <string name="settings_system_locale">System</string>
-    <string name="selectColor">Select color</string>
-    <string name="setIcon">Set thumbnail</string>
-    <string name="app_contributors">Made possible by: <xliff:g id="app_contributors">%s</xliff:g></string>
-    <string name="sort">Sort</string>
-    <string name="showMoreInfo">Show info</string>
-    <string name="updateBalance">Update balance</string>
-    <string name="failedToRetrieveImageFile">Failed to retrieve image file</string>
-    <string name="sort_by_name">Name</string>
-    <string name="sort_by_most_recently_added">Most recently added</string>
-    <string name="sort_by_most_recently_used">Most recently used</string>
-    <string name="sort_by_valid_from">Valid from</string>
-    <string name="sort_by_expiry">Expiry</string>
-    <!-- \"Reversed order\" is also OK. This is an option in the card sorting list -->
-    <string name="reverse">…in reversed order</string>
-    <string name="sort_by">Sort by</string>
-    <string name="version_history">Version history</string>
-    <string name="arrow" translatable="false"><![CDATA[>]]></string>
-    <string name="credits">Credits</string>
-    <string name="help_translate_this_app">Help translate this app</string>
-    <string name="license">License</string>
-    <string name="source_repository">Source repository</string>
-    <string name="on_github">on GitHub</string>
-    <string name="and_data_usage">and data usage</string>
-    <string name="rate_this_app">Rate this app</string>
-    <string name="on_google_play">on Google Play</string>
-    <string name="report_error">Report error</string>
-    <string name="translate_platform">on Weblate</string>
-    <string name="shortcutSelectCard">Select a card</string>
-    <string name="options">Options</string>
-    <string name="starred">Starred</string>
-    <string name="include_if_asking_support">If you want to request support, include the following info:</string>
-    <string name="duplicateCard">Duplicate</string>
-    <string name="archive">Archive</string>
-    <string name="unarchive">Unarchive</string>
-    <string name="archived">Card archived</string>
-    <string name="unarchived">Card unarchived</string>
-    <string name="overflowMenu" translatable="false">Overflow menu</string>
-    <string name="failedLaunchingPhotoPicker">Couldn\'t find a supported image picker</string>
-    <plurals name="groupCardCountWithArchived">
-        <item quantity="one"><xliff:g>%1$d</xliff:g> card (<xliff:g id="archivedCount">%2$d</xliff:g> archived)</item>
-        <item quantity="other"><xliff:g>%1$d</xliff:g> cards (<xliff:g id="archivedCount">%2$d</xliff:g> archived)</item>
-    </plurals>
-    <string name="previousCard">Previous</string>
-    <string name="nextCard">Next</string>
-    <string name="failedToOpenUrl">Install a web browser first</string>
-    <string name="welcome">Welcome to Catima</string>
-    <string name="importCards">Import cards</string>
-    <string name="updateBalanceTitle">How much did you spend or receive?</string>
-    <string name="updateBalanceHint">Enter amount</string>
-    <string name="currentBalanceSentence">Current balance: <xliff:g>%s</xliff:g></string>
-    <string name="newBalanceSentence">New balance: <xliff:g>%s</xliff:g></string>
-    <string name="validFromDate">Valid from</string>
-    <string name="anyDate">Any date</string>
-    <string name="chooseValidFromDate">Choose valid from date</string>
-    <string name="validFromSentence">Valid from: <xliff:g>%s</xliff:g></string>
-    <string name="height">Height</string>
-    <string name="switchToFrontImage">Switch to front image</string>
-    <string name="switchToBackImage">Switch to back image</string>
-    <string name="switchToBarcode">Switch to barcode</string>
-    <string name="zoomFrontImage">Zoom front image</string>
-    <string name="zoomBackImage">Zoom back image</string>
-    <string name="setBarcodeHeight">Set barcode height</string>
-    <string name="donate">Donate</string>
-    <string name="icon_header_click_text">Long press to edit thumbnail</string>
-    <string name="show_name_below_image_thumbnail">Show name below image thumbnail</string>
-    <string name="show_note">Show note</string>
-    <string name="show_balance">Show balance</string>
-    <string name="show_validity">Show validity</string>
-    <string name="show_card_id">Show card ID</string>
-    <string name="sharedpreference_card_details_show_name_below_thumbnail" translatable="false">sharedpreference_card_details_show_name_below_thumbnail</string>
-    <string name="sharedpreference_card_details_show_note" translatable="false">sharedpreference_card_details_show_note</string>
-    <string name="sharedpreference_card_details_show_balance" translatable="false">sharedpreference_card_details_show_balance</string>
-    <string name="sharedpreference_card_details_show_validity" translatable="false">sharedpreference_card_details_show_validity</string>
-    <string name="sharedpreference_card_details_show_card_id" translatable="false">sharedpreference_card_details_show_card_id</string>
-    <string name="sharedpreference_card_details_show_archived_cards" translatable="false">sharedpreference_card_details_show_archived_cards</string>
-    <string name="settings_category_title_cards">Card view</string>
-    <string name="settings_category_title_cards_overview">Cards overview</string>
-    <string name="settings_column_count_portrait">Columns in portrait mode</string>
-    <string name="settings_column_count_landscape">Columns in landscape mode</string>
-    <string name="settings_automatic_column_count">Automatic</string>
-    <string name="settings_key_automatic_column_count" translatable="false">default</string>
-    <string name="settings_column_count_1">1</string>
-    <string name="settings_column_count_2">2</string>
-    <string name="settings_column_count_3">3</string>
-    <string name="settings_column_count_4">4</string>
-    <string name="settings_column_count_5">5</string>
-    <string name="settings_column_count_6">6</string>
-    <string name="settings_column_count_7">7</string>
-    <string name="setting_key_column_count_portrait" translatable="false">pref_column_count_portrait</string>
-    <string name="setting_key_column_count_landscape" translatable="false">pref_column_count_landscape</string>
-    <string name="settings_category_title_general">General</string>
-    <string name="settings_category_title_privacy">Privacy</string>
-    <string name="settings_key_wear_sync" translatable="false">pref_wear_sync</string>
-    <string name="settings_wear_sync">Sync with Wear OS</string>
-    <string name="settings_wear_sync_summary">Allows the Wear OS companion app to read your cards over Bluetooth</string>
-    <string name="wear_sync_permission_required">Catima needs the permissions you denied to sync with your Wear OS smartwatch</string>
-    <string name="settings_key_wear_sync_devices" translatable="false">pref_wear_sync_devices</string>
-    <string name="settings_wear_sync_devices">Allowed Wear OS devices</string>
-    <string name="settings_wear_sync_devices_summary">Manage devices allowed to sync over Bluetooth</string>
-    <string name="settings_wear_sync_no_devices">No allowed devices</string>
-    <plurals name="settings_wear_sync_devices_summary_count">
-        <item quantity="one"><xliff:g>%d</xliff:g> device allowed</item>
-        <item quantity="other"><xliff:g>%d</xliff:g> devices allowed</item>
-    </plurals>
-    <string name="settings_key_wear_sync_blocked_devices" translatable="false">pref_wear_sync_blocked_devices</string>
-    <string name="settings_wear_sync_blocked_devices">Blocked Wear OS devices</string>
-    <string name="settings_wear_sync_blocked_devices_summary">Manage blocked Wear OS devices</string>
-    <string name="settings_wear_sync_no_blocked_devices">No blocked devices</string>
-    <plurals name="settings_wear_sync_blocked_devices_summary_count">
-        <item quantity="one"><xliff:g>%d</xliff:g> device blocked</item>
-        <item quantity="other"><xliff:g>%d</xliff:g> devices blocked</item>
-    </plurals>
-    <string name="settings_wear_sync_unpair_title">Remove device?</string>
-    <string name="settings_wear_sync_unpair_message">Remove <xliff:g>%1$s</xliff:g> from Catima? It will no longer be able to sync your cards.</string>
-    <string name="settings_wear_sync_unblock_message">Remove <xliff:g>%1$s</xliff:g> from the blocked list? It will be able to request access again.</string>
-    <string name="settings_wear_sync_unpair">Remove</string>
-    <string name="settings_wear_sync_device_name"><xliff:g>%1$s</xliff:g> (<xliff:g>%2$s</xliff:g>)</string>
-    <string name="settings_wear_sync_tap_to_remove">Tap a device to remove it.</string>
-    <string name="wear_bt_pairing_channel_name">Wear OS device pairing</string>
-    <string name="wear_bt_pairing_title">Wear OS device wants to sync</string>
-    <string name="wear_bt_pairing_message">Allow <xliff:g>%1$s</xliff:g> to access your cards?</string>
-    <string name="wear_bt_pairing_allow">Allow</string>
-    <string name="wear_bt_pairing_block">Block</string>
-    <string name="wear_bt_pairing_allowed"><xliff:g>%1$s</xliff:g> is now allowed to sync.</string>
-    <string name="wear_bt_pairing_blocked"><xliff:g>%1$s</xliff:g> has been blocked.</string>
-    <string name="wear_bt_pairing_mismatch_title">New authorization request from "<xliff:g>%1$s</xliff:g>"</string>
-    <string name="wear_bt_pairing_mismatch_message">This device was previously authorized but is now presenting a different identity token. This happens when the Wear OS app is reinstalled or its data is cleared. It can also indicate a Bluetooth MAC spoofing attempt.\n\nOnly accept if you recently reinstalled the Catima Wear OS app on this watch.</string>
-    <string name="open_settings">Open settings</string>
-    <string name="action_display_options">Display options</string>
-    <string name="show_archived_cards">Show archived cards</string>
-    <string name="view_online">View online</string>
-    <string name="action_more_options">More options</string>
-    <string name="addWithoutBarcode">Add a card with no barcode</string>
-    <string name="enter_card_id">Enter the ID number or text on your card</string>
-    <string name="card_id_must_not_be_empty">Card ID must not be empty</string>
-    <string name="add_a_card_in_a_different_way">Add a card in a different way</string>
-    <string name="field_must_not_be_empty">Field must not be empty</string>
-    <string name="manually_enter_barcode_instructions">Enter the ID number or text on your card and press the barcode that looks like the one on your card.</string>
-    <string name="add_manually_warning_title">Scanning is recommended</string>
-    <string name="add_manually_warning_message">For some cards, the barcode value differs from the number written on the card. Because of this, entering a barcode manually may not always work. It is recommended to scan the barcode with your camera instead. Do you still want to continue?</string>
-    <string name="continue_">Continue</string>
-    <string name="spend">Spend</string>
-    <string name="receive">Receive</string>
-    <string name="amountParsingFailed">Invalid amount</string>
-    <string name="addFromPdfFile">Select a PDF file</string>
-    <string name="errorReadingFile">Couldn\'t read the file</string>
-    <string name="failedLaunchingFileManager">Couldn\'t find a supported file manager</string>
-    <string name="multipleBarcodesFoundPleaseChooseOne">Which of the found barcodes do you want to use?</string>
-    <string name="pageWithNumber">Page <xliff:g>%d</xliff:g></string>
-    <string name="noCameraFoundGuideText">Your device does not seem to have a camera. If it does, try rebooting the device. Otherwise, use the "More options" button below to add a barcode another way.</string>
-    <string name="importCancelled">Import cancelled</string>
-    <string name="exportCancelled">Export cancelled</string>
-    <string name="useFrontImage">Use front image</string>
-    <string name="useBackImage">Use back image</string>
-    <string name="addFromPkpass">Select a Passbook file (.pkpass / .pkpasses)</string>
-    <string name="unsupportedFile">This file is not supported</string>
-    <string name="generic_error_please_retry">An error occurred</string>
-    <string name="width">Width</string>
-    <string name="card_list_widget_name">Card list</string>
-    <string name="setBarcodeWidth">Set barcode width</string>
-    <string name="card_list_widget_empty">After you add some loyalty cards in Catima, they will appear here. If you have cards, make sure they are not all archived.</string>
-    <string name="cardWithNumber">Card <xliff:g>%d</xliff:g></string>
-    <string name="cardWithNumberAndLocale">Card <xliff:g>%d</xliff:g> (<xliff:g>%s</xliff:g>)</string>
-    <string name="pleaseDoNotRotateTheDevice">Please do not rotate the device, as this will cancel the action</string>
-    <string name="acra_catima_has_crashed">We\'re sorry, but <xliff:g id="app_name">%s</xliff:g> has crashed. Please help us fix this issue by sending us an error report.</string>
-    <string name="acra_explain_crash">If possible, please add more details on what you were doing here:</string>
-    <string name="acra_crash_email_subject"><xliff:g id="app_name">%s</xliff:g> crash report</string>
-    <string name="pref_enable_acra">Ask to send crash reports</string>
-    <string name="pref_enable_acra_summary">When enabled, you will be asked to report a crash when it happens. Crash reports are never sent automatically.</string>
-    <string name="copy_value">Copy value</string>
-    <string name="copied_to_clipboard">Copied to clipboard</string>
-    <string name="nothing_to_copy">No value found</string>
-    <string name="barcodeEncoding">Barcode encoding</string>
-    <string name="back">Back</string>
-    <string name="nfc_blocked_while_viewing_card">NFC is paused</string>
-    <string name="change_settings">Change settings</string>
-    <string name="nfc_block_system_error">Failed to pause NFC</string>
-    <string name="open_in_gallery">Open in image gallery</string>
-    <string name="wear_bt_channel_name">Wear OS companion</string>
-    <string name="wear_bt_notification_title">Catima Wear OS sync active</string>
-    <string name="settings_category_title_smartwatch">Smartwatch support</string>
-    <string name="wear_bt_failed_foreground_notification_title">Failed to start Wear OS sync service</string>
-    <string name="wear_bt_critical_error_channel_name">Wear OS sync critical error</string>
-    <string name="android_blocked_startup">Android blocked starting the Wear OS service</string>
 </resources>

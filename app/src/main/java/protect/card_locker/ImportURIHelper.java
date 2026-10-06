@@ -1,5 +1,6 @@
 package protect.card_locker;
 
+import com.wanderwildwood.satsuire.R;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;

@@ -1,72 +1,50 @@
 [versions]
-# AndroidX
-compose = "2026.06.01"
-kotlin = "2.4.20"
+# Versions mirror the other Kompakt apps rather than the newest available, so this app builds
+# against the same Compose/MMD combination that is known to work on the Kompakt.
+agp = "8.13.1"
+kotlin = "2.2.21"
+mmd = "1.0.2"
 
-# Third-party
-acra = "5.13.1"
+androidx-activity = "1.12.0"
+androidx-core = "1.17.0"
+androidx-lifecycle = "2.10.0"
+androidx-compose = "1.9.5"
+androidx-material3 = "1.4.0"
 
-# Testing
-androidXTest = "1.7.0"
+# Catima's own choices for the parts kept from it: the barcode library, the camera
+# scanner over it, and the readers for the files it imports and writes.
+zxing-core = "3.5.4"
+zxing-embedded = "4.3.0"
+commons-csv = "1.9.0"
+zip4j = "2.11.6"
 
-# Wear OS
-wearCompose = "1.6.2"
+junit = "4.13.2"
+robolectric = "4.16"
+androidx-test-core = "1.7.0"
 
 [libraries]
-# AndroidX
-androidx-appcompat-appcompat = { group = "androidx.appcompat", name = "appcompat", version = "1.8.0" }
-androidx-constraintlayout-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version = "2.2.2" }
-androidx-core-core-ktx = { group = "androidx.core", name = "core-ktx", version = "1.18.0" }
-androidx-core-core-remoteviews = { group = "androidx.core", name = "core-remoteviews", version = "1.1.0" }
-androidx-core-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version = "1.2.0" }
-androidx-exifinterface-exifinterface = { group = "androidx.exifinterface", name = "exifinterface", version = "1.4.2" }
-androidx-palette-palette = { group = "androidx.palette", name = "palette", version = "1.0.0" }
-androidx-preference-preference = { group = "androidx.preference", name = "preference", version = "1.2.1" }
-com-google-android-material-material = { group = "com.google.android.material", name = "material", version = "1.14.0" }
-com-android-tools-desugar_jdk_libs = { group = "com.android.tools", name = "desugar_jdk_libs", version = "2.1.5" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
+androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 
-# Compose
-androidx-activity-activity = { group = "androidx.activity", name = "activity", version = "1.13.0" }
-androidx-activity-activity-compose = { group = "androidx.activity", name = "activity-compose", version = "1.13.0" }
-androidx-compose-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose" }
-androidx-compose-foundation-foundation = { group = "androidx.compose.foundation", name = "foundation" }
-androidx-compose-material3-material3 = { group = "androidx.compose.material3", name = "material3"}
-androidx-compose-material-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended", version = "1.7.8" }
-androidx-compose-ui-ui-tooling-preview-android = { group = "androidx.compose.ui", name = "ui-tooling-preview-android" }
-androidx-compose-ui-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
-androidx-compose-ui-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "androidx-compose" }
+compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "androidx-material3" }
+compose-ui = { module = "androidx.compose.ui:ui", version.ref = "androidx-compose" }
+compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "androidx-compose" }
+compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "androidx-compose" }
 
-# Third-party
-com-journeyapps-zxing_android_embedded = { group = "com.journeyapps", name = "zxing-android-embedded", version = "4.3.0" }
-com-github-yalantis-ucrop = { group = "com.github.yalantis", name = "ucrop", version = "2.2.11" }
-com-google-zxing-core = { group = "com.google.zxing", name = "core", version = "3.5.4" }
-org-apache-commons-commons_csv = { group = "org.apache.commons", name = "commons-csv", version = "1.9.0" }
-com-jaredrummler-colorpicker = { group = "com.jaredrummler", name = "colorpicker", version = "1.1.0" }
-net-lingala-zip4j-zip4j = { group = "net.lingala.zip4j", name = "zip4j", version = "2.11.6" }
-ch-acra-acra-mail = { group = "ch.acra", name = "acra-mail", version.ref = "acra" }
-ch-acra-acra-dialog = { group = "ch.acra", name = "acra-dialog", version.ref = "acra" }
+mmd = { module = "com.mudita:MMD", version.ref = "mmd" }
 
-# Wear OS
-androidx-wear-compose-foundation = { group = "androidx.wear.compose", name = "compose-foundation", version.ref = "wearCompose" }
-androidx-wear-compose-material3 = { group = "androidx.wear.compose", name = "compose-material3", version.ref = "wearCompose" }
-androidx-wear-compose-navigation = { group = "androidx.wear.compose", name = "compose-navigation", version.ref = "wearCompose" }
+zxing-core = { module = "com.google.zxing:core", version.ref = "zxing-core" }
+zxing-embedded = { module = "com.journeyapps:zxing-android-embedded", version.ref = "zxing-embedded" }
+commons-csv = { module = "org.apache.commons:commons-csv", version.ref = "commons-csv" }
+zip4j = { module = "net.lingala.zip4j:zip4j", version.ref = "zip4j" }
 
-# Testing
-androidx-test-core = { group = "androidx.test", name = "core", version.ref = "androidXTest" }
-androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "androidXTest" }
-androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidXTest" }
-androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version = "1.3.0" }
-androidx-test-uiautomator-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version = "2.4.0" }
-androidx-test-espresso-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version = "3.7.0" }
-junit-junit = { group = "junit", name = "junit", version = "4.13.2" }
-org-robolectric-robolectric = { group = "org.robolectric", name = "robolectric", version = "4.17" }
+junit = { module = "junit:junit", version.ref = "junit" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+androidx-test-core = { module = "androidx.test:core", version.ref = "androidx-test-core" }
 
 [plugins]
-com-android-application = { id = "com.android.application", version = "9.4.1" }
-com-android-library = { id = "com.android.library", version = "9.4.1" }
-org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-org-jetbrains-kotlin-plugin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-
-[bundles]
-acra = ["ch-acra-acra-mail", "ch-acra-acra-dialog"]
-androidx-test = ["androidx-test-core", "androidx-test-runner"]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
