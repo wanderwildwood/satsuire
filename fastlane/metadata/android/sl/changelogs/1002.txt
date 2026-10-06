@@ -1,2 +1,0 @@
-- Dodan strežnik Bluetooth za podporo spremljevalni aplikaciji Wear OS
-- Odstranitev vgrajenega seznama sprememb (CHANGELOG)

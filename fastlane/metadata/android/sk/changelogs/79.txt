@@ -1,2 +1,0 @@
-- Fix widget vytvorenie rôznych skratiek ako skratky aplikácie
-- Nahradiť predvolené Android čierna obrazovka s striekacou obrazovkou

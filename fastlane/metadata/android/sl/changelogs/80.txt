@@ -1,2 +1,0 @@
-- Popravek težave s slikami, ki niso bile uvožene iz varnostne kopije
-- Možnost prepisovanja jezika

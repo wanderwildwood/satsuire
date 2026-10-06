@@ -1,1 +1,0 @@
-- Millora la visualització de les icones d'arxiu/destacat

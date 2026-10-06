@@ -1,2 +1,0 @@
-- Kopiranje ID kartice v odložišče iz pogovornega okna za pregled ali z dolgim pritiskom
-- Zamenjava polj za stanje in valuto, za zmanjšanje nenamernega zaokroževanja

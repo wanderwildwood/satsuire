@@ -1,2 +1,0 @@
-- Parseerlogica verbeterd voor balans
-- Decimale weergave van valuta op het hoofdscherm gerepareerd

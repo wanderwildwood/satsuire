@@ -1,2 +1,0 @@
-- Oprava widgetu vytvářejícího jinak vypadající zástupce než zástupce aplikací
-- Nahrazení výchozí černé obrazovky systému Android úvodní obrazovkou

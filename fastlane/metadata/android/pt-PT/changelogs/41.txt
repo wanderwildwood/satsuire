@@ -1,2 +1,0 @@
-- Adicionado cantos arredondados aos ícones dos cards na visão geral
-- Adicionado suporte para agrupar entradas

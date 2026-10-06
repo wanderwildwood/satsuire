@@ -1,7 +1,0 @@
-Der Name „Locker“ war missverständlich. Ein neues Icon von betsythefc und der neue Name „Loyalty Card Keychain“ verdeutlichen den Zweck der App.
-
-Zusätzliche Funktionen/Verbesserungen:
-
-- Flexiblerer Import/Export von Karten. (https://github.com/brarcher/loyalty-card-locker/pull/76)
-- NEU: Litauische Übersetzung. (https://github.com/brarcher/loyalty-card-locker/pull/62)
-- NEU: Französische Übersetzung. (https://github.com/brarcher/loyalty-card-locker/pull/80)

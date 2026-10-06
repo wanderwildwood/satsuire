@@ -1,1 +1,0 @@
-- Soporte para seleccionar exactamente que detalles ver en la vista general de tarjeta

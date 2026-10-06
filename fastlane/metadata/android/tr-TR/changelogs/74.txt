@@ -1,3 +1,0 @@
-- Kısayol oluşturma düzeltildi
-- Karta özel kısayol simgesi oluştur
-- Sadakat kartı rengini değiştirme yeteneği düzeltildi

@@ -1,3 +1,0 @@
-- Oprava vytváření zkratek
-- Generování ikony zástupce pro konkrétní kartu
-- Oprava možnosti změny barvy věrnostní karty

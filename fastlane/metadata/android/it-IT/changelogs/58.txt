@@ -1,1 +1,0 @@
-- Corretto l'arresto anomalo nelle versioni precedenti ad Android 7

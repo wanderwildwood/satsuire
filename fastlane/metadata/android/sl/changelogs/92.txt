@@ -1,2 +1,0 @@
-- Nova postavitev na glavnem zaslonu
-- Odprava težave s spreminjanjem velikosti spodnjega lista pri preklopu iz ali v celozaslonski način

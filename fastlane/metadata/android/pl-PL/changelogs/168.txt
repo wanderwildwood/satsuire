@@ -1,1 +1,0 @@
-- Dodano opcję otwierania zdjęć w wbudowanej przeglądarce zdjęć galerii

@@ -1,5 +1,0 @@
-- Precompilazione ID esistente, quando si modifica un codice carta (pull #94)
-- Limitazione della larghezza dei codici a barre generati per migliorie di memoria (pull #103)
-- In caso di modifiche di carte esistenti, il pulsante "Inserisci carta" diventa "Modifica carta" (pull #104)
-- Modificata lo schema di colori, attenuato e in linea con l'icona dell'app; pulizia del layout di visualizzazione scheda (pull #107)
-- Aggiunta un'introduzione guidata al primo avvio dell'applicazione (pull #108)

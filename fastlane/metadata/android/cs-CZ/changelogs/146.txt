@@ -1,2 +1,0 @@
-- Možnost třídit karty podle začátku platnosti
-- Dočasný návrat na cílový systém Android 14 kvůli opravě některých problémů s uživatelským rozhraním

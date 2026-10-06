@@ -1,1 +1,0 @@
-- Popravek barve statusne vrstice in navigacijske vrstice v novi dejavnosti »O aplikaciji«

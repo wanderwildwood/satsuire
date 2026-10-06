@@ -1,1 +1,0 @@
-- Unterstützung bei der Auswahl der Details, die in der Kartenübersicht angezeigt werden sollen

@@ -1,2 +1,0 @@
-- A keresés, a kibontás és a rendezés ikonjainak elrejtése, amíg nincs legalább egy kártya
-- Különböző témajavítások

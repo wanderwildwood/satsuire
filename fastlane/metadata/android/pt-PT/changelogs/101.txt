@@ -1,3 +1,0 @@
-- Corrige a ferramenta de corte não usando cor do tema
-- Corrige pequenos problems nos temas
-- Adiciona tema preto puro para telas OLED

@@ -1,2 +1,0 @@
-- Berbagai perbaikan kecil
-- Memperbaiki kerusakan saat menggunakan terjemahan bahasa Norwegia

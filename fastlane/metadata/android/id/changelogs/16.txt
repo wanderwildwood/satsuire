@@ -1,5 +1,0 @@
-- Penambahan pintasan ke layar utama saat menambah atau mengedit kartu (pull #155 (https://github.com/brarcher/loyalty-card-locker/pull/155))
-- Menghapus widget
-- Memperbaiki ekspor cadangan di Android 7+ (pull #153 (https://github.com/brarcher/loyalty-card-locker/pull/153))
-- Mime lebih akurat saat mengekspor cadangan (pull #156 (https://github.com/brarcher/loyalty-card-locker/pull/156))
-- Memperbaiki kartu gagal diedit (pull #155 (https://github.com/brarcher/loyalty-card-locker/pull/155))

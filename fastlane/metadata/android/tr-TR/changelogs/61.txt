@@ -1,2 +1,0 @@
-- Bakiye ayrıştırma mantığı iyileştirildi
-- Ana ekranda para birimi ondalık gösterimi düzeltildi

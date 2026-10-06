@@ -1,1 +1,0 @@
-- Çeşitli sağdan sola (RTL) düzeltmeleri

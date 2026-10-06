@@ -1,1 +1,0 @@
-- Podpora výběru, které podrobnosti mají být zobrazeny v přehledu karty

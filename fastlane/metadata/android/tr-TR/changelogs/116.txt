@@ -1,2 +1,0 @@
-- Hızlı harcama iletişim kutusunun , ayırıcısına izin vermemesi düzeltildi
-- Dosya yöneticisinden resim yükleme desteği

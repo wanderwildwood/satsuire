@@ -1,3 +1,0 @@
-- Implementeer alle eisen voor Android 15 support
-- Voorkom dat toetsenbord over de opsla knop in het bewerkscherm komt
-- Verbeterde herkenning van pkpass bestanden (ondersteuning voor application/vnd-com.apple.pkpass mime type)

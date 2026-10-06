@@ -1,2 +1,0 @@
-- Slėpti paiešką, išskleisti ir rūšiuoti piktogramas, kol bus bent 1 kortelė
-- Įvairūs temų pataisymai

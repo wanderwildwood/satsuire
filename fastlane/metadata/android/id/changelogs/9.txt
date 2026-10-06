@@ -1,7 +1,0 @@
-Kata "Locker" yang merupakan bagian dari nama aplikasi ini dinilai tidak intuitif. Untuk membantu memperbaiki hal ini, sebuah ikon aplikasi baru telah dibuat oleh betsythefc yang dapat mewakili tujuan dari aplikasi ini dengan lebih baik: untuk menyimpan kartu loyalitas yang menggunakan barcode. Seiring dengan ikon baru ini, nama aplikasi telah diubah menjadi "Loyalty Card Keychain".
-
-Fitur tambahan/peningkatan:
-
-- Mengimpor / Mengekspor kartu diubah menjadi lebih fleksibel. (pull #76 (https://github.com/brarcher/loyalty-card-locker/pull/76))
-- Terjemahan untuk bahasa Lituania ditambahkan. (pull #62 (https://github.com/brarcher/loyalty-card-locker/pull/62))
-- Terjemahan untuk bahasa Prancis ditambahkan. (pull #80 (https://github.com/brarcher/loyalty-card-locker/pull/80))

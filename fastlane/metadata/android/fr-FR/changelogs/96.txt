@@ -1,2 +1,0 @@
-- Ajoute la prise en charge de CODE 93
-- Diverses corrections de bogues et améliorations mineures

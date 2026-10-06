@@ -1,2 +1,0 @@
-- Fix images not imported from backup
-- Option to override language

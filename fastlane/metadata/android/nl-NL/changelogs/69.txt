@@ -1,3 +1,0 @@
-- Ontbrekende barcode ID toegevoegd aan export
-- Toob update barcode dialoogscherm niet als de waarde gelijk us aan de kaart ID
-- Finse vertaling toegevoegd

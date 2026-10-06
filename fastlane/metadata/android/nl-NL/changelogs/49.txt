@@ -1,2 +1,0 @@
-- Verbeterde vertalingen
-- Kleine UI-fixes

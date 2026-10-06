@@ -1,3 +1,0 @@
-- Presuňte "Archívny režim" do "Display možnosti" (predtým "Zobraziť podrobnosti") menu
-- Podpora jazyka Android 13
-- Vloženie zásady ochrany osobných údajov, changelog a licencie v aplikácii

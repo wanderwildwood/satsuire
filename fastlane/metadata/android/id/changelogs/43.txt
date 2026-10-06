@@ -1,3 +1,0 @@
-- UI edit yang ditingkatkan
-- Opsi warna teks header yang dihapus (sekarang dihasilkan secara otomatis berdasarkan kecerahan)
-- Terjemahan yang diperbarui

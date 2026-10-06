@@ -1,2 +1,0 @@
-- Nascondi le icone di ricerca, espansione e ordinamento finché non c'è almeno una tessera
-- Varie correzioni sul tema

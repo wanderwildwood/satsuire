@@ -1,1 +1,0 @@
-- Corrigir gesto de voltar no ecrã principal descartando o teclado e a pesquisa no Android 13+

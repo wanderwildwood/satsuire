@@ -1,3 +1,0 @@
-- Ondersteuning voor het scannen van PDF-bestanden op barcodes
-- Ondersteuning voor afbeeldingsbestanden met meerdere barcodes
-- Kleine UI-fixes

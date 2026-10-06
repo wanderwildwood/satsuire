@@ -1,1 +1,0 @@
-- Oprava různých chyb souvisejících s TalkBack

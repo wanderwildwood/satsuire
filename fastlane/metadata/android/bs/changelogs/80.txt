@@ -1,2 +1,0 @@
-- Fix slike nisu uvezene iz sigurnosne kopije
-- Opcija za prevazilaženje jezika

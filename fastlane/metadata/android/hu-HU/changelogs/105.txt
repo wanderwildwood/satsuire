@@ -1,2 +1,0 @@
-- Az érvénytelen vonalkódok esetén megjelenő szürke blokkok megjelenésének javítása
-- Stocard importálási javítások

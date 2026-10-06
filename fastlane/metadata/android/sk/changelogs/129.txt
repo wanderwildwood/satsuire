@@ -1,3 +1,0 @@
-- Vylepšenie Catima importéru (opravený problém s chýbajúcimi kartami pri importe)
-- Oprava pádu aplikácie pri otáčaní obrazovky pri nastavení dátumu začiatku platnosti/exspirácie
-- Menšie vylepšenia UI

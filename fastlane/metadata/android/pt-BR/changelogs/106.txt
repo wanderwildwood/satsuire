@@ -1,1 +1,0 @@
-- Correção de algumas sequências de caracteres que eram exibidas como um único caractere

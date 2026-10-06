@@ -1,3 +1,0 @@
-- Interface de edição aprimorada
-- Removida a opção de cor do texto do cabeçalho (agora gerada automaticamente com base na luminosidade)
-- Traduções atualizadas

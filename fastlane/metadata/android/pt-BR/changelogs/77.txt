@@ -1,4 +1,0 @@
-- Melhorar o importador do Stocard
-- Corrigir a importação de arquivos do Catima com notas de múltiplas linhas
-- Ajustar o tamanho do título do cartão para um intervalo aceitável
-- Melhorias nas animações

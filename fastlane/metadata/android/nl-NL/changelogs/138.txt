@@ -1,1 +1,0 @@
-- Terugswipen sluit niet meer het toetsenbord en zoekveld af op Android 13 en nieuwer

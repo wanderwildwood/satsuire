@@ -1,1 +1,0 @@
--Umożliwienie wyboru szczegółów, które mają być wyświetlane w przeglądzie kart

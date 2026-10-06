@@ -1,1 +1,0 @@
-- Aktive Gruppenregisterkarte zwischen Bildschirmen und Sitzungen speichern

@@ -1,3 +1,0 @@
-- Melhoria na interface de edição
-- Remove a opção de cor do texto do cabeçalho (agora gera uma automaticamente com base no brilho)
-- Traduções atualizadas

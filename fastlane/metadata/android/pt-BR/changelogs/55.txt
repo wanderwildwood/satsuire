@@ -1,2 +1,0 @@
-- Separar a interface de edição em abas para proporcionar uma sensação de maior espaço
-- Adicionar suporte a campo de data de expiração

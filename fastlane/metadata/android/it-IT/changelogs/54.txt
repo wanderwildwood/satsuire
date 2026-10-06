@@ -1,1 +1,0 @@
-- Risolto il problema con il pulsante di modifica o il disegno del foglio inferiore per le ulteriori informazioni sull'ID del codice a barre

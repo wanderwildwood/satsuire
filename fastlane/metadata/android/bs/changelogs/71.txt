@@ -1,2 +1,0 @@
-- Nekoliko manjih prijevoda i korisničke funkcije
-- Popravi crash u uvoz/dijeljenje lojalnost karticu na Android 6

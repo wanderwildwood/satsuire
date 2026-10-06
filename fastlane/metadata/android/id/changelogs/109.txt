@@ -1,1 +1,0 @@
-- Memperbaiki warna teks yang salah pada tombol "Barcode"

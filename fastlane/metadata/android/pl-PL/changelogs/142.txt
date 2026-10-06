@@ -1,3 +1,0 @@
-- Dodano wsparcie dla Passbook (.pkpass)
-- Naprawiono importowanie przeźroczystych plików PDF
-- Ulepszono wyświetlanie przeźroczystych miniaturek

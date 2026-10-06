@@ -1,2 +1,0 @@
-- Menambahkan tepi bulat ke ikon kartu pada ikhtisar utama
-- Menambahkan dukungan untuk mengelompokkan entri

@@ -1,1 +1,0 @@
-- Correctif concernant le fond transparent du bas de la fiche

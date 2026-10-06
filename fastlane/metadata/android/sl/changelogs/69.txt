@@ -1,3 +1,0 @@
-- V izvoz dodana manjkajoča identifikacijska številka črtne kode
-- Ne prikaže pogovornega okna za posodobitev črtne kode, če je vrednost enaka identifikacijski številki kartice
-- Dodan finski prevod

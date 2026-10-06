@@ -1,2 +1,0 @@
-- Skrytie ikon vyhľadávania, rozbalenia a zoradenia, kým nie je k dispozícii aspoň jedna karta
-- Rôzne opravy tém

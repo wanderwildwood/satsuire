@@ -1,4 +1,0 @@
-- Ulepszono import ze Stocard
-- Naprawiono importowanie eksportu z Catimy z wielolinijkowymi notatkami
-- Dodano skalowanie tytułu karty w akceptowalnym zakresie
-- Usprawnienia dla animacji

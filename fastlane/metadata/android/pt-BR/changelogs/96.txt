@@ -1,2 +1,0 @@
-- Adicionado suporte ao CODE 93
-- Várias correções de bugs menores e melhorias

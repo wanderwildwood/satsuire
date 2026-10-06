@@ -1,2 +1,0 @@
-- Sửa một vài lỗi nhỏ
-- Sửa lỗi bị văng khi sử dụng công cụ dịch tiếng Na-uy

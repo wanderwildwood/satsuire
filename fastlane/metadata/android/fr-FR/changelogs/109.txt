@@ -1,1 +1,0 @@
-- Correction de la couleur de texte incorrecte sur le bouton "Pas de code-barres"

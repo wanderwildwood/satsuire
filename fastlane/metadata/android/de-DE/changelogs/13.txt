@@ -1,2 +1,0 @@
-- Änderung in v0.11: Barcode-Dimensionen beibehalten und gleichzeitig den Speicherverbrauch reduzieren. (Pull #126 (https://github.com/brarcher/loyalty-card-locker/pull/126))
-- Deutsche und französische Übersetzungen aktualisiert. (Pull #122 (https://github.com/brarcher/loyalty-card-locker/pull/122), Pull #124 (https://github.com/brarcher/loyalty-card-locker/pull/124), Pull #125 (https://github.com/brarcher/loyalty-card-locker/pull/125))

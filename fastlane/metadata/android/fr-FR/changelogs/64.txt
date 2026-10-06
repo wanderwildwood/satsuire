@@ -1,1 +1,0 @@
-- Correction de la régression empêchant la saisie manuelle du code-barres d'être enregistrée

@@ -1,3 +1,0 @@
-- Italų kalbos vertimai.
-- Palaikymas visiems 1D brūkšninių kodų tipams. (anksčiau palaikomi tik produktų 1D brūkšniniai kodai)
-- Pridėtas būtinas kameros leidimas, kuris iš pradžių trūko.

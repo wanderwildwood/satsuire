@@ -1,1 +1,0 @@
-- Corrigir o embrulho de texto na caixa de diálogo de adicionar

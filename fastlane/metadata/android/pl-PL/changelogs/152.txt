@@ -1,3 +1,0 @@
-- Dodanie wsparcia dla plików .pkpasses
-- Usunięcie importera Stocard (Stocard już nie istnieje)
-- Tymczasowe wyłączenie widżetów dla Androida poniżej 12L (obejście problemu awarii)

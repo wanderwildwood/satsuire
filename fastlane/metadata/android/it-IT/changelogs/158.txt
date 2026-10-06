@@ -1,1 +1,0 @@
-- Sistemato colore della barra di navigazione e di stato nella nuova schermata About

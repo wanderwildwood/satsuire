@@ -1,1 +1,0 @@
-- Correction de la couleur du statut et de la barre de navigation dans la nouvelle activé "A propos"

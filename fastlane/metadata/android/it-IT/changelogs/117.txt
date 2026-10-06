@@ -1,2 +1,0 @@
-- Rimossi permessi non necessari
-- Supporto ad Android 13

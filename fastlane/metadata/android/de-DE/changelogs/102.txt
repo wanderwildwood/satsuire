@@ -1,2 +1,0 @@
-- Verschiedene kleinere Korrekturen
-- Absturz bei Verwendung der norwegischen Übersetzung behoben

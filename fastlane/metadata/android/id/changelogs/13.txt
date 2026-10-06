@@ -1,2 +1,0 @@
-- Perubahan di v0.11 mengurangi penggunaan memori pembuatan barcode, tapi mengubah dimensinya. Sekarang diubah agar dimensinya tetap sekaligus mengurangi penggunaan memori. (pull #126 (https://github.com/brarcher/loyalty-card-locker/pull/126))
-- Pembaruan terjemahan Jerman dan Prancis. (pull #122 (https://github.com/brarcher/loyalty-card-locker/pull/122), pull #124 (https://github.com/brarcher/loyalty-card-locker/pull/124) , pull #125 (https://github.com/brarcher/loyalty-card-locker/pull/125))

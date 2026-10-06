@@ -1,3 +1,0 @@
-- Ondersteuning voor het tonen van de kaart ID in de kaartenlijst
-- Ondersteuning om te sorteren op recent toegevoegd
-- Interne beeldbewerker toegevoegd om de voor/achter/pictogramafbeeldingen te zoomen

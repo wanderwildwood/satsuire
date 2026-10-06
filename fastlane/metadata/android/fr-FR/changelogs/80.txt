@@ -1,2 +1,0 @@
-- Correction des images non importées depuis la sauvegarde
-- Option pour remplacer la langue

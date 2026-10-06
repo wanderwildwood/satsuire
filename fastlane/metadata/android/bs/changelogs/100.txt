@@ -1,2 +1,0 @@
-- Sakrivanje ikona za pretragu, proširivanje i sortiranje dok ne postoji barem jedna kartica
-- Razne ispravke tema

@@ -1,3 +1,0 @@
-- Kompletné prevedenie hlavných a lojalitu zobrazenie obrazoviek
-- Materiál Navrhujete pre obrazovku nastavení
-- Fix haváriu pri používaní "Vyberte si fotografiu" s aplikáciou bez kamery

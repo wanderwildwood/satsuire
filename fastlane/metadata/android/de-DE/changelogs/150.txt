@@ -1,2 +1,0 @@
-- Widget, das alle nichtarchvierten Karten anzeigt, hinzugefügt
-- Beugt dem Verdecken der „Speichern“-Taste durch die Tastatur in der Bearbeitungs- bzw. Gruppenansicht vor

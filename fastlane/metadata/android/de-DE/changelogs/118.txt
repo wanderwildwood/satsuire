@@ -1,2 +1,0 @@
-- Unterstützung bei der Eingabe des Gültigkeitsbeginns der Karte
-- Fehler beim Importieren von Stocard behoben (Stocard's Export Format hat sich verändert)

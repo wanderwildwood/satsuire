@@ -1,2 +1,0 @@
-- Dodano przesuwanie między grupami na ekranie głównym
-- Naprawiono awarię z kartami bez koloru nagłówka

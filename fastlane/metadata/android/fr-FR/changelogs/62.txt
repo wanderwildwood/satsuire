@@ -1,1 +1,0 @@
-- Correction de l'analyse du solde pour les pays utilisant un espace comme séparateur

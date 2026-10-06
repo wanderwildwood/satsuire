@@ -1,3 +1,0 @@
-- Korrektur des Zuschneidesystems, das die Farbe des Themas nicht berücksichtigt hat
-- Behebung kleinerer Fehler beim Farb-Thema
-- Rein schwarzes Dunkelthema für OLED-Bildschirme hinzugefügt

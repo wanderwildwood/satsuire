@@ -1,2 +1,0 @@
-- Dugim klikom na karticu otvara se opcija za kopiranje ID-a kartice u međuspremnik. (povucite #49 (https://github.com/brarcher/loyalty-card-locker/issues/49))
-- Dugme za nazad u prikazu za uvoz/izvoz sada radi, premještajući korisnika na glavni prikaz

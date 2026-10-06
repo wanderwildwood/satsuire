@@ -1,1 +1,0 @@
-- Naprawiono różne błędy związane z TalkBack

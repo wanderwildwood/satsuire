@@ -1,2 +1,0 @@
-- Nadaljnje spremljanje popravka v različici 2.41.2 za kartice, ki so izrecno nastavljene na ISO-8859-1
-- Prenos starih kartic na ISO-8859-1 za odpravo nenadnih razlik v delovanju obstoječih kartic

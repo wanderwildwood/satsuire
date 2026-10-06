@@ -1,1 +1,0 @@
-- Ulepszono wyświetlanie ikony archiwizacji oraz gwiazdki

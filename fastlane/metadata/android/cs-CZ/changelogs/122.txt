@@ -1,3 +1,0 @@
-- Změna ikony karty v pohledu aktivity dlouhým stisknutím ikony
-- Vylepšení stylu tlačítek na obrazovce Skupiny
-- Oprava dlouhých hodnot čárového kódu způsobující, že se čárový kód zmenšuje do ztracena

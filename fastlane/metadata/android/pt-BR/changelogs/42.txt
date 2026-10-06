@@ -1,1 +1,0 @@
-- Correção de falha na busca sem grupos

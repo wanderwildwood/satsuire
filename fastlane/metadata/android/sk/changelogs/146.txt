@@ -1,2 +1,0 @@
-- Možnosť zoradiť karty podľa začiatku platnosti
-- Dočasný návrat k zacieleniu na Android 14 kvôli oprave niektorých problémov s používateľským rozhraním

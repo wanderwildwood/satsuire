@@ -1,2 +1,0 @@
-- Tambahkan widget yang menampilkan semua kartu yang tidak diarsipkan
-- Cegah keyboard menimpa tombol simpan pada layar edit dan grup

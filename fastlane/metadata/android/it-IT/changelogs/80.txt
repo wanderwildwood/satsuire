@@ -1,2 +1,0 @@
-- Corrette immagini non importate dal backup
-- Aggiunta opzione per sovrascrivere la lingua

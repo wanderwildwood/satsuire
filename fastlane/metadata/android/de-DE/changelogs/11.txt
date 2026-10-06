@@ -1,5 +1,0 @@
-- Startet Bearbeiten bei Karten-ID (https://github.com/brarcher/loyalty-card-locker/pull/94)
-- Barcode-Breite begrenzt => keine Speicherproblem (https://github.com/brarcher/loyalty-card-locker/pull/103)
-- „Bearbeiten“ statt „Hinzufügen“ bei bekannter ID (https://github.com/brarcher/loyalty-card-locker/pull/104)
-- Farbschema + Layout überarbeitet (https://github.com/brarcher/loyalty-card-locker/pull/107)
-- Einführungsassistent hinzugefügt (https://github.com/brarcher/loyalty-card-locker/pull/108)

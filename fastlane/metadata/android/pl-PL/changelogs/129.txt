@@ -1,3 +1,0 @@
-- Poprawiony importer Catima (naprawia brakujące karty podczas importu)
-- Naprawa awarii przy obracaniu ekranu podczas ustawiania daty ważności
-- Drobne dostosowania interfejsu użytkownika

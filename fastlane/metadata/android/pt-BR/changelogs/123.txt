@@ -1,2 +1,0 @@
-- Pequenas melhorias na interface
-- Correção de problema que impedia o uso do novo design em dispositivos com telas quadradas

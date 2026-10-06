@@ -1,3 +1,0 @@
-- Pridať chýbajúce čiarový kód ID na export
-- Nezobrazujte dialógové okno, ak je hodnota rovnaká ako ID karty
-- Pridať fínsky preklad

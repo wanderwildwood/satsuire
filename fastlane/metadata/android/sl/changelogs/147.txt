@@ -1,3 +1,0 @@
-- Cilj Android 15
-- Popravek napake pri branju nepodprtih datotek pkpass
-- Izboljšana podpora za pkpass

@@ -1,4 +1,0 @@
-- Soporte para crear una tarjeta al compartir texto plano
-- Exhibir tipo de imagen en lugar de código de barras debajo de imágenes
-- Repara el accidente posible al intentar importar una copia de respaldo de la aplicación Nextcloud
-- Mejora del mantenimiento para dispositivos sin cámara

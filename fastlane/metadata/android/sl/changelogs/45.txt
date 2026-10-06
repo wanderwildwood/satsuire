@@ -1,1 +1,0 @@
-- Popravek, zaradi katerega se drsenje po začetnem zaslonu sproži tudi pri navpičnem drsenju

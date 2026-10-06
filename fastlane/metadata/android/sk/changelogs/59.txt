@@ -1,2 +1,0 @@
-- Pridať podporu rovnováhy
-- Zorganizujte kartu čiarového kódu editačného pohľadu

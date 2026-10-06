@@ -1,2 +1,0 @@
-- Podpora za nastavitev začetka veljavnosti kartice
-- Popravek uvoza Stocard (zaradi spremenjenega izvoznega formata Stocard)

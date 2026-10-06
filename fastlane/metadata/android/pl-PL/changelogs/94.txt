@@ -1,3 +1,0 @@
-- Naprawiono rozmycie ikon liter na ekranie głównym
-- Naprawiono ikony czasami znikające po wybraniu
-- Naprawiono ikony paska stanu, które mogły być niewidoczne w systemie Android 5

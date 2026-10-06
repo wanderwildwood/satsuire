@@ -1,1 +1,0 @@
-- Conserta carregamento das fotos quando editando cartões existentes

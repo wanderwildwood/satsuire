@@ -1,1 +1,0 @@
-- Zlepšení vyhledávání obsahující mezery

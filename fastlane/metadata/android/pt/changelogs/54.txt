@@ -1,1 +1,0 @@
-- Conserta botão de edição ou folha de fundo de mais informações sendo desenhado sobre o ID do código de barras

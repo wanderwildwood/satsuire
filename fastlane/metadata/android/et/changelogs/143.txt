@@ -1,1 +1,0 @@
-- Parandasime rakenduse kokkujooksmise vigase pkpass-faili avamisel

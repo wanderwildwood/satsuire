@@ -1,3 +1,0 @@
-- Move O obrazovke do vlastnej činnosti
-- Opýtajte sa užívateľa, ak chcú používať svoju kameru alebo manuálne zadať ID na karte add/edit
-- Urobte si skupinovú objednávku namiesto nútenej abecedy

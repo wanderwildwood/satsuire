@@ -1,2 +1,0 @@
-- Nuova disposizione della schermata principale
-- Corregge i problemi di dimensionamento del "bottomsheet" quando si passa dalla modalità a schermo intero e viceversa

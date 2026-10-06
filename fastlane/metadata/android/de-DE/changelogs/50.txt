@@ -1,2 +1,0 @@
-- Verbessern Sie den Kontrast, indem Sie immer weißen Text auf roten Schaltflächen verwenden
-- Verschiebbares unteres Blatt in der Treuekartenansicht

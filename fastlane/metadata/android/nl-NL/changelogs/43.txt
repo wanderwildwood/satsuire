@@ -1,3 +1,0 @@
-- Aanpassings UI verbeterd
-- Koptekstkleuroptie verwijderd (wordt nu automatisch gegenereerd op basis van de helderheid)
-- Vertalingen bijgewerkt

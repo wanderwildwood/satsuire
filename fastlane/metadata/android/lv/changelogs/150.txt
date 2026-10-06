@@ -1,2 +1,0 @@
-- Pievienots logrīks, kurā ir parādītas visas nearhivētās kartes
-- Labošanas un kopu skatos novērsta saglabāšanas pogas aizklāšana ar tastatūru

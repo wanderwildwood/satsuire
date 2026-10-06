@@ -1,3 +1,0 @@
-- Angepasst für Android 15
-- Kein Absturz mehr beim Lesen nicht unterstützter pkpass-Dateien
-- Verbesserte Unterstützung des pkpass Imports

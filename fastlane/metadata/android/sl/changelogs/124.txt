@@ -1,1 +1,0 @@
-- Podpora pri izbiri podrobnosti, ki jih želiš prikazati v pregledu kartice

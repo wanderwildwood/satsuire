@@ -1,1 +1,0 @@
-- Corrigir a cor incorreta do texto no botão "Sem código de barras"

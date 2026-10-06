@@ -1,2 +1,0 @@
-- Rôzne drobné opravy
-- Opravené zlyhanie pri použití nórskeho prekladu

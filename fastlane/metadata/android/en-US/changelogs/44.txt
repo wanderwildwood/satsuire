@@ -1,2 +1,0 @@
-- Add swiping between groups on the home screen
-- Fix crash with cards lacking header colour

@@ -1,3 +1,0 @@
-- Mendukung pemindaian berkas PDF untuk barcode
-- Mendukung berkas gambar dengan beberapa barcode
-- Perbaikan kecil antarmuka

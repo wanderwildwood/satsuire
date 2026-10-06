@@ -1,2 +1,0 @@
-- La cerca s'amaga, els botons expandir i ordenar només es mostren quan hi ha contingut
-- Arreglos en els temes

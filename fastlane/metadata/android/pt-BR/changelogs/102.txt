@@ -1,2 +1,0 @@
-- Várias correções menores
-- Correção de falha ao usar a tradução para norueguês

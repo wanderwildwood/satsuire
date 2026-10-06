@@ -1,2 +1,0 @@
-- Kemampuan untuk mengurutkan kartu berdasarkan awal masa berlaku
-- Untuk sementara kembali menargetkan Android 14 untuk memperbaiki beberapa masalah UI

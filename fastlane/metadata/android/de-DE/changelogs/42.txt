@@ -1,1 +1,0 @@
-- Absturz bei der Suche ohne Gruppen behoben

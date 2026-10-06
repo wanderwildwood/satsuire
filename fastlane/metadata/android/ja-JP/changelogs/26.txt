@@ -1,1 +1,0 @@
-- バーコード描画でアプリケーションのメモリが枯渇した際のクラッシュを防止。(pull #219 (https://github.com/brarcher/loyalty-card-locker/pull/219))

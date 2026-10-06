@@ -1,3 +1,0 @@
-- Oprava rozmazanosti ikon písmen na hlavní obrazovce
-- Oprava ikon, které někdy po výběru zmizí
-- Oprava možného zneviditelnění ikon na stavovém řádku v systému Android 5

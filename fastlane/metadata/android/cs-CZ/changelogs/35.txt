@@ -1,2 +1,0 @@
-- Povolení zálohování aplikace
-- Aktualizace překladů do francouzštiny a slovinštiny

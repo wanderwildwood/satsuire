@@ -1,2 +1,0 @@
-- Pridaná zaoblené hrany na ikony kariet na hlavnom prehľade
-- Pridaná podpora pre skupinové záznamy

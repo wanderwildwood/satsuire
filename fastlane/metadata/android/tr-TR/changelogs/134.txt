@@ -1,3 +1,0 @@
-- Barkodlar için PDF dosyalarını tarama desteği
-- Birden fazla barkod içeren resim dosyaları desteği
-- Küçük kullanıcı arayüzü düzeltmeleri

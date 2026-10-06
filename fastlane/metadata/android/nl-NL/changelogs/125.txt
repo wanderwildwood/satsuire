@@ -1,1 +1,0 @@
-- Beter omgaan met ontbrekende koptekstkleur

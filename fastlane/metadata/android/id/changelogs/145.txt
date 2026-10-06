@@ -1,3 +1,0 @@
-- Targetkan Android 15
-- Perbaiki keyboard yang menutupi tombol simpan pada layar edit
-- Perbaiki beberapa berkas pkpass yang tidak terdeteksi sebagai pkpass (dukungan tipe MIME application/vnd-com.apple.pkpass)

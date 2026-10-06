@@ -1,4 +1,0 @@
-- Kisebb UI javítások
-- A képernyő elforgatásnál beírt érvényességi dátumoknál való törlés javítása
-- A képernyő elforgatásnál való szín választásnál történő fagyás javítása
-- Stocard import javítása

@@ -1,1 +1,0 @@
-- Naprawiono gest cofnięcia na głównym ekranie, które ma powodować schowanie się klawiatury i wyszukiwania na systemach Android 13+

@@ -1,2 +1,0 @@
-- Różne pomniejsze poprawki
-- Naprawiono awarię aplikacji podczas używania języka norweskiego

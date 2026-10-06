@@ -1,2 +1,0 @@
-- Pridať CODE 93 podpora
-- Rôzne drobné opravy a vylepšenia

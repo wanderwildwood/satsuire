@@ -1,2 +1,0 @@
-- Podpora za spreminjanje vrstnega reda
-- Preprečevanje napake v pomnilniku pri skeniranju velikih slik za črtne kode

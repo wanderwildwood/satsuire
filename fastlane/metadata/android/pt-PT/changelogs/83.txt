@@ -1,2 +1,0 @@
-- Funcionalidade a alterar a ordenação
-- Evita falta de memória ao escanear fotos grandes por código de barras

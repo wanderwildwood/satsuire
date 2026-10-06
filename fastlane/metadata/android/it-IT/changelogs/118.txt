@@ -1,2 +1,0 @@
-- Supporto alla validità della carta
-- Sistemata l'importazione da Stocard (è cambiato il formato di esportazione di Stocard)

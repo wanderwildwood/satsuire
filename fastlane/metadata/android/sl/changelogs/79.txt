@@ -1,2 +1,0 @@
-- Popravek gradnika, ki ustvarja bližnjice, ki se vizualno razlikujejo od bližnjic aplikacij
-- Zamenjava privzetega črnega zaslona sistema Android z uvodnim zaslonom

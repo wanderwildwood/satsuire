@@ -1,2 +1,0 @@
-- Kártya részleteinek kibontási állapotának mentése
-- Apró felületi javítások

@@ -1,3 +1,0 @@
-- Dodana enobarvna ikona za Android 13
-- Izboljšano začetno okno ob prvem zagonu
-- Popravki pri uvozu iz Fidme

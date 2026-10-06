@@ -1,1 +1,0 @@
-- Popravek nalaganja fotografij pri urejanju obstoječe kartice

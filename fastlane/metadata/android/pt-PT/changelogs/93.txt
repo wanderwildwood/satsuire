@@ -1,2 +1,0 @@
-- Adiciona Catima aos controles de dispositivo do acesso rápido (https://developer.android.com/guide/topics/ui/device-control)
-- Conserta alguns grupos não aparecendo corretamente na tela de gerenciamento de grupos

@@ -1,1 +1,0 @@
-- Corretto il caricamento delle foto nella modifica una carta esistente

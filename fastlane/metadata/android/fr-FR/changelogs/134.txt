@@ -1,3 +1,0 @@
-- Prise en charge de la numérisation des fichiers PDF pour les codes-barres
-- Prise en charge des fichiers d'image avec plusieurs codes-barres
-- Corrections mineures de l'interface utilisateur

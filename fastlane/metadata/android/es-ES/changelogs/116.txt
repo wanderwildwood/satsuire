@@ -1,2 +1,0 @@
-- Corrección de mensaje que no permitía el separador , en los gastos rápidos
-- Soporte para cargar una imagen desde el gestor de archivos

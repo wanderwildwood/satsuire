@@ -1,2 +1,0 @@
-- Felesleges engedélyek eltávolítása
-- Android 13 célzása

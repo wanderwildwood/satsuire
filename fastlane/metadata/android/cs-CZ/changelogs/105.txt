@@ -1,2 +1,0 @@
-- Oprava zobrazení šedého bloku při neplatné hodnotě čárového kódu
-- Opravy importu Stocard

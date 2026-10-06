@@ -1,1 +1,0 @@
-- Un manejo más elegante de colores de encabezado faltantes

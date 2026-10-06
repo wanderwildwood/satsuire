@@ -1,4 +1,0 @@
-- Target Android 14
-- Buka ikon kartu pada galeri dengan menyentuh
-- Meningkatkan desain tab Foto pada tampilan sunting
-- Perbarui layar pengeluaran untuk juga mendukung penerimaan

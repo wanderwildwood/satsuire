@@ -1,1 +1,0 @@
-- Popravek zavijanja besedila v pogovornem oknu za dodajanje

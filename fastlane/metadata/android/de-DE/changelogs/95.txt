@@ -1,1 +1,0 @@
-- Absturz beim Teilen von Karten behoben

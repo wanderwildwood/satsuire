@@ -1,2 +1,0 @@
-- Remove unnecessary permissions
-- Target Android 13

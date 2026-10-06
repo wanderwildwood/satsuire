@@ -1,3 +1,0 @@
-- Lisasime Passbooki failide (.pkpass) toe
-- Parandasime läbipaistvate pdf-failide importimise
-- Parandasime läbipaistvate pisipiltide kuvamist

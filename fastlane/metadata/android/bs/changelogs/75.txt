@@ -1,4 +1,0 @@
-- Izmijeni izabrani boju u dijalogu za mijenjanje boja
-- Podrška za brisanje više kartica odjednom
-- Popravi moguću Aritmeticexcepciju pri mijenjanju slike
-- Fiksiraj cijeli ekran je zatvoren kada rotirajući uređaj

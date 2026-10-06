@@ -1,2 +1,0 @@
-- Přidán Bluetooth server pro podporu doprovodných aplikací Wear OS
-- Odstraněn vložený CHANGELOG (seznam změn)

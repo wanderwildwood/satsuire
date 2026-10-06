@@ -1,1 +1,0 @@
-- Izboljšanje prikaza ikone arhiva/označenih elementov

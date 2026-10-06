@@ -1,1 +1,0 @@
-- Correction de l'import de Stocard

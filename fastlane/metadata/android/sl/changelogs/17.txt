@@ -1,2 +1,0 @@
-- Dodana podporo za dodajanje bližnjic za kartice zvestobe iz zaganjalnika/začetnega zaslona. (pull #161 (https://github.com/brarcher/loyalty-card-locker/pull/161))
-- Odstranjena podporo za dodajanje bližnjic za kartice zvestobe iz same aplikacije. S tem odpade potreba po dovoljenju za bližnjice. (pull #163 (https://github.com/brarcher/loyalty-card-locker/pull/163))

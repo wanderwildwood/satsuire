@@ -1,4 +1,0 @@
-- Naprawiono wielokrotne naciskanie przycisku zapisywania, co powodowało tworzenie wielu wpisów
-- Zmniejszenie rozmiaru nagłówka karty podczas ukrywania szczegółów, aby zmieścić jeszcze więcej kart
-- Zmiana struktury ekranu edycji
-- Poprawa kontrastu ikony gwiazdki w widoku głównym

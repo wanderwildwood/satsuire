@@ -1,3 +1,0 @@
-- Zlepšená editácia UI
-- Odstráňte hlavičku textovú farbu (teraz automaticky generované na základe jasu)
-- Aktualizované preklady

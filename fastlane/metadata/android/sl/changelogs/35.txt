@@ -1,2 +1,0 @@
-- Omogoči varnostno kopiranje aplikacij
-- Posodobljena francoski in slovenski prevod

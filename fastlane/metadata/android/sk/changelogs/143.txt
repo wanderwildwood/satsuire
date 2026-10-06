@@ -1,1 +1,0 @@
-- Opravené zlyhanie pri otváraní neplatných súborov pkpass

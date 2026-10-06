@@ -1,1 +1,0 @@
-- Correzione dello scorrimento della schermata iniziale causato dallo scorrimento verticale

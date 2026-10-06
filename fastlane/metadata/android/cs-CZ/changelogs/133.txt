@@ -1,4 +1,0 @@
-- Cílový systém Android 14
-- Otevření ikony karty v galerii na dotykovém displeji
-- Vylepšení designu karty Fotografie ve zobrazení úprav
-- Aktualizována obrazovka výdajů s podporou příjmů

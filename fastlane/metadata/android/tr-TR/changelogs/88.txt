@@ -1,1 +1,0 @@
-- İlk kartın görünmez hale gelmesine neden olan yanlış taşıma düzeltildi

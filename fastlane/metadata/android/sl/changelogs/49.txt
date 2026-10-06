@@ -1,2 +1,0 @@
-- Izboljšani prevodi
-- Manjši popravki v uporabniškem vmesniku

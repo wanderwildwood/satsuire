@@ -1,1 +1,0 @@
-- Fix problém s zdieľanie kariet bez farby pozadia (#343 (https://github.com/brarcher/loyalty-card-locker/pull/343)

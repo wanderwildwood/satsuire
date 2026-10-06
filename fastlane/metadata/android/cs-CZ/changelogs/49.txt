@@ -1,2 +1,0 @@
-- Vylepšené překlady
-- Drobné opravy uživatelského rozhraní

@@ -1,1 +1,0 @@
-- Crash in versies vóór Android 7 verholpen

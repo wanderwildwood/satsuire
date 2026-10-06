@@ -1,2 +1,0 @@
-- Novo layout da tela principal
-- Correção de problemas de dimensionamento do painel inferior (bottom sheet) ao alternar entre o modo de tela cheia e o modo normal

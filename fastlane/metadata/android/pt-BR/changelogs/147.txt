@@ -1,3 +1,0 @@
-- Direcionar para o Android 15
-- Corrigir falha ao ler arquivos pkpass não suportados
-- Melhorar o suporte a pkpass

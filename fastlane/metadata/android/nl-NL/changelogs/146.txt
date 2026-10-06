@@ -1,2 +1,0 @@
-- Kaarten kunnen nu ook op startdatum gesorteerd worden
-- Schakel doelversie tijdelijk terug naar Android 14 om enkele gebruikersinterfaceissues op te lossen

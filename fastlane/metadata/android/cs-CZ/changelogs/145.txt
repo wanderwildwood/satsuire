@@ -1,3 +1,0 @@
-- Cíl Android 15
-- Oprava klávesnice zakrývající tlačítko pro uložení na obrazovce úprav
-- Oprava některých souborů pkpass, které nejsou detekovány jako pkpass (podpora typu mime application/vnd-com.apple.pkpass)

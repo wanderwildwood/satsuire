@@ -1,1 +1,0 @@
-- Корекция по създаване на нова карта чрез ръчно въвеждане на щрих код (issue #272 (https://github.com/brarcher/loyalty-card-locker/issues/272))

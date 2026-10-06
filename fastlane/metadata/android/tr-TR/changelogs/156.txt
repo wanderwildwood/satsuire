@@ -1,2 +1,0 @@
-- Kart kimliğini iletişim penceresinden veya uzun basarak panoya kopyalayın
-- İstenmeyen yuvarlama işlemlerini azaltmak için bakiye ve para birimi alanlarını değiştirin

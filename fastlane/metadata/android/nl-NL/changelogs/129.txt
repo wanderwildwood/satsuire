@@ -1,3 +1,0 @@
-- Verbeterde Catima-importer (lost ontbrekende kaarten op bij importeren)
-- Oplossing voor crash bij schermrotatie tijdens het instellen van geldigheid/expiratiedatum
-- Kleine UI-aanpassingen

@@ -1,1 +1,0 @@
-- Sortie initiale de l'appli compagnon Wear OS

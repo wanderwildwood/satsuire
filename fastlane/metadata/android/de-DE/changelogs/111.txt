@@ -1,7 +1,0 @@
-- Arabisch hinzugefügt
-- Archivierte Kartenanzahl anzeigen
-- Fehler beim Parsen der Salden behoben
-- Theme auf Hauptbildschirm korrigiert
-- Anzeige der ausgewählten Karten verbessert
-- Absturz bei RTL-Layouts behoben
-- Zurück-Pfeil in RTL-Layouts korrigiert

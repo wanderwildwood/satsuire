@@ -1,1 +1,0 @@
--Risolto il problema del crash quando si cambia il tipo di codice a barre senza avere un valore impostato

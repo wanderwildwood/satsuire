@@ -1,2 +1,0 @@
-- İspanyolca çeviriler düzeltildi (https://github.com/brarcher/loyalty-card-locker/pull/244)
-- Çeviriler güncellendi (https://github.com/brarcher/loyalty-card-locker/pull/244)

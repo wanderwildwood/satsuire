@@ -1,3 +1,0 @@
-- Monokróm ikon hozzáadása az Android 13-hoz
-- Az első indítási képernyő fejlesztése
-- Fidme importálási javítások

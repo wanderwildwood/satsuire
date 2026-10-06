@@ -1,1 +1,0 @@
-- Correction du plantage lors du partage de carte

@@ -1,2 +1,0 @@
-- Eliminados permisos innecesarios
-- Objetivo Android 13

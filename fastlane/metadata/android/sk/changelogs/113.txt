@@ -1,3 +1,0 @@
-- Pridajte predchádzajúce a ďalšie tlačidlá na zobrazenie vernostnej karty
-- Fix foreground farba na úpravu tlačidla
-- Nahradiť floppy disk uložiť ikonu s záložkou

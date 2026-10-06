@@ -1,4 +1,0 @@
-- Vonalkód-megjelenítési javítások
-- Alapvető együttműködési lehetőség külső alkalmazásokkal (Android 6.0+)
-- Átszervezett beállítási képernyő
-- Az olyan böngészőkből történő importálás javítása, amelyek záró / jelet adnak hozzá a megosztott webcímekhez

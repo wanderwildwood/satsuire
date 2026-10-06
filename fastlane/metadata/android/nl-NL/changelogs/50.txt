@@ -1,2 +1,0 @@
-- Verbeyerd contrast door altijd witte tekst te gebruiken op rode knoppen
-- Versleepbaar onderste plaat in spaarkaart weergave

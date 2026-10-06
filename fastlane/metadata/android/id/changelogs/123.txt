@@ -1,2 +1,0 @@
-- Perbaikan UI kecil
-- Perbaiki desain baru yang tidak dapat digunakan pada perangkat dengan layar persegi

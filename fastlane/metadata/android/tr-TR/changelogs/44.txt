@@ -1,2 +1,0 @@
-- Ana ekranda gruplar arasında kaydırma eklendi
-- Başlık rengi olmayan kartlarda çökme düzeltildi

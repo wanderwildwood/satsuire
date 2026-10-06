@@ -1,4 +1,0 @@
-- Add scroll bar to card list
-- Add splash screen
-- Fix some padding issues
-- Remove barcode value from card view

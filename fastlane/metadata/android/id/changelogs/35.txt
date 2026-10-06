@@ -1,2 +1,0 @@
-- Aktifkan cadangan aplikasi
-- Perbarui terjemahan Prancis dan Slovenia

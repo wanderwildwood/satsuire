@@ -1,3 +1,0 @@
-- Afegir botons anterior i següent a la vista de la targeta de fidelització
-- Corregir el color de primer pla del botó d'edició
-- Substituir la icona de desar al disquet per una marca de verificació

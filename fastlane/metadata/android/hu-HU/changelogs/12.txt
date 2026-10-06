@@ -1,1 +1,0 @@
-- Megelőzni egy összeomlást ami a varázsló közbeni kép orientáció váltáskor lép fel.

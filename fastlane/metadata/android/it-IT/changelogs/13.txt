@@ -1,2 +1,0 @@
-- Una precedente modifica alla versione 0.11 riduceva l'utilizzo della memoria generando codici a barre più corti. La nuova modifica mantiene la lunghezza del codice a barre riducendo l'utilizzo della memoria. (pull #126)
-- Aggiornamento delle traduzioni in tedesco e francese. (pull #122, pull #124, pull #125)

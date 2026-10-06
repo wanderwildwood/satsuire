@@ -1,2 +1,0 @@
-- Pridajte swiping medzi skupinami na domovskej obrazovke
-- Fix havária s kartami chýba farba hlavičky

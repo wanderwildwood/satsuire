@@ -1,3 +1,0 @@
-- Adicionar ID de código de barras ausente à exportação
-- Não exibir a caixa de diálogo de atualização de código de barras se o valor for igual ao ID do cartão
-- Adicionar tradução para finlandês

@@ -1,3 +1,0 @@
-- Target Android 15
-- Corregeix un error en llegir fitxers pkpass no compatibles
-- Millora la compatibilitat amb pkpass

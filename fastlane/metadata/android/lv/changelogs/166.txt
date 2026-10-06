@@ -1,1 +1,0 @@
-- Novērsta avārija ierīcēs ar NFC, kas nedarbojas kā nākas

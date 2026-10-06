@@ -1,1 +1,0 @@
-- Novērsta iespējama avārija, kas varēja atgadīties ar kartēm, kurām datubāzē nav informācijas par krāsām

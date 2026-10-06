@@ -1,3 +1,0 @@
-- Dodata monohromatska ikona za Android 13
-- Poboljšan prvi ekran za pokretanje
-- Ispravke uvoza iz Fidme-a

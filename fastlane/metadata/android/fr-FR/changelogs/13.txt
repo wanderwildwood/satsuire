@@ -1,2 +1,0 @@
-- Un changement dans la v0.11 a réduit l'utilisation de la mémoire pour le dessin du code barre, mais a affecté les dimensions du code barre. Ceci est maintenant modifié pour maintenir les dimensions du code barre tout en réduisant l'utilisation de la mémoire
-- Mise à jour des traductions allemande et française

@@ -1,2 +1,0 @@
-- Kurangi ruang di header saat melihat kartu. (pull #213 (https://github.com/brarcher/loyalty-card-locker/pull/213))
-- Nonaktifkan bip saat memindai kode batang. (pull #216 (https://github.com/brarcher/loyalty-card-locker/pull/216))

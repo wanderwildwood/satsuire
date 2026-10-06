@@ -1,2 +1,0 @@
-- Yeni ana ekran düzeni
-- Tam ekrana girip çıkarken alt sayfa boyutlandırma sorunları düzeltildi

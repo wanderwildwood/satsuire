@@ -1,3 +1,0 @@
-- Targetkan Android 15
-- Perbaiki crash saat membaca berkas pkpass yang tidak didukung
-- Tingkatkan dukungan pkpass

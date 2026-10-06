@@ -1,2 +1,0 @@
-- Hide search, expand and sort icons until there is at least 1 card
-- Various theming fixes

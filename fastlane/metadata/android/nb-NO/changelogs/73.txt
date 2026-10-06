@@ -1,1 +1,0 @@
-- Fiks innlasting av bilder ved redigering av et eksisterende kort

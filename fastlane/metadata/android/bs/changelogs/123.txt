@@ -1,2 +1,0 @@
-- Manja poboljšanja korisničkog interfejsa
-- Ispravljena je greška zbog koje novi dizajn nije upotrebljiv na uređajima sa kvadratnim ekranima

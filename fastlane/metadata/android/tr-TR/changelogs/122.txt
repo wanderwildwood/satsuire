@@ -1,3 +1,0 @@
-- Değiştirmek için görünüm etkinliğindeki kart simgesine uzun basın
-- Gruplar ekranındaki düğme biçimi iyileştirildi
-- Barkodun sıfıra ölçeklenmesine neden olan uzun barkod değerleri düzeltildi

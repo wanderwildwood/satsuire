@@ -1,3 +1,0 @@
-- Afegeix una icona monocroma per a Android 13
-- Millora la primera pantalla d'inici
-- Correccions d'importació de Fidme

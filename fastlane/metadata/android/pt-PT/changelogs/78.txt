@@ -1,1 +1,0 @@
-- Conserta falha na rotação da tela em atividade de edição de cartão

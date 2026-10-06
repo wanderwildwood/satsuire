@@ -1,3 +1,0 @@
-- Add Monochrome icon for Android 13
-- Improve first launch screen
-- Fidme import fixes

@@ -1,2 +1,0 @@
-- Přidán widget zobrazující všechny nearchivované karty
-- Zabránění překrytí tlačítka uložení klávesnicí na stránkách úpravy a skupin

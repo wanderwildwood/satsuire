@@ -1,2 +1,0 @@
-- Ascunde căutare, mărire și sortare pună ce va exista cel putin 1 card
-- rectificare erori temă

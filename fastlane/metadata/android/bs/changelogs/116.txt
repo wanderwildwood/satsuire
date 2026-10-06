@@ -1,2 +1,0 @@
-- Ispravljen dijalog za brzu potrošnju koji ne dozvoljava , separator
-- Podrška za učitavanje slike iz upravitelja datoteka

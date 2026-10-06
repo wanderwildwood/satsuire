@@ -1,2 +1,0 @@
-- Dodaj Catima do Kontroli urządzeń szybkiego dostępu (https://developer.android.com/guide/topics/ui/device-control)
-- Naprawiono niektóre grupy, które nie wyświetlały się poprawnie na ekranie zarządzania grupami

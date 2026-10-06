@@ -1,1 +1,0 @@
-- Ön izlemedeki uzun mağaza adlarının birden fazla satıra bölünmesine izin verildi

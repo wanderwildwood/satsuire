@@ -1,2 +1,0 @@
-- Popravek pojave sivega bloka na neveljavni vrednosti črtne kode
-- Popravki uvoza podatkov Stocard

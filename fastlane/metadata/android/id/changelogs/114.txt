@@ -1,3 +1,0 @@
-- Menambahkan ikon Monokrom untuk Android 13
-- Meningkatkan layar peluncuran pertama
-- Memperbaiki impor Fidme

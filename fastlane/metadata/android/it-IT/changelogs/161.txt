@@ -1,1 +1,0 @@
-- Disabilitata per ora la codifica automatica del rilevamento barcode (rompe troppe carte)

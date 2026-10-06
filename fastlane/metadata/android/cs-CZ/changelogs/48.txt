@@ -1,3 +1,0 @@
-- Přesunutí obrazovky Informace do vlastní aktivity
-- Zeptat se uživatele, zda chce použít fotoaparát, nebo ručně zadat ID při přidání/úpravě karty
-- Vytvoření ručního řazení skupin namísto nuceného abecedního řazení

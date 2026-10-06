@@ -1,2 +1,0 @@
-- Corrige a seleção manual de idioma não sendo aplicada em todos os lugares
-- Corrige falha na tela de edição quando em localização sem região

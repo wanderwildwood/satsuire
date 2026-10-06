@@ -1,2 +1,0 @@
-- Dodano kopiowanie identyfikatora karty z „okna dialogowego widoku” lub poprzez „długie kliknięcie” do schowka
-- Zamieniono pola salda i waluty, aby zmniejszyć ryzyko niezamierzonego zaokrąglenia

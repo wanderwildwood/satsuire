@@ -1,1 +1,0 @@
-- Meilleure gestion des couleurs d'en-tête manquantes

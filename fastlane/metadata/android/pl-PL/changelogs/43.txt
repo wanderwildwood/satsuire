@@ -1,3 +1,0 @@
-- Ulepszony interfejs edycji
-- Usunięto opcję koloru tekstu nagłówka (teraz jest generowany automatycznie na podstawie jasności).
-- Zaktualizowano tłumaczenia

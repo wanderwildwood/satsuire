@@ -1,3 +1,0 @@
-- Pievienots Passbook (.pkpass) atbalsts
-- Salabota caurspīdīgu PDF datņu ievietošana
-- Uzlabota caurspīdīgu sīktēlu attēlošana

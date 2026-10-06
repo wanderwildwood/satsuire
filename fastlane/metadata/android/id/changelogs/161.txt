@@ -1,1 +1,0 @@
-- Nonaktifkan deteksi pengodean barcode otomatis untuk sementara (merusak terlalu banyak kartu)

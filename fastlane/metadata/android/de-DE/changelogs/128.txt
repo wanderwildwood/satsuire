@@ -1,1 +1,0 @@
-- Behebung seltener Abstürze

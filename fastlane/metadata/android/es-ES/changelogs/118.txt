@@ -1,2 +1,0 @@
-- Soporte para establecer el inicio de la validez de la tarjeta
-- Corrección de importación Stocard (cambio en el formato de exportación de Stocard)

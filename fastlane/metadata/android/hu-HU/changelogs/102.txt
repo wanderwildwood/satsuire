@@ -1,2 +1,0 @@
-- Különböző apró javítása
-- A norvég fordítás használata esetén történő összeomlás javítása

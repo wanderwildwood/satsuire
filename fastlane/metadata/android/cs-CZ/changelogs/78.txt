@@ -1,1 +1,0 @@
-- Oprava pádu při otáčení v činnosti úprav věrnostní karty

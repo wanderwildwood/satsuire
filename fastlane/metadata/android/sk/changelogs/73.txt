@@ -1,1 +1,0 @@
-- Fix nakladanie fotografií pri editácii existujúcej karty

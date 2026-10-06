@@ -1,3 +1,0 @@
-- Oplossing voor crop functie die geen themakleur gebruikt
-- Verschillende kleine thema verbeteringen 
-- Er is een puur zwart thema toegevoegd voor OLED-schermen

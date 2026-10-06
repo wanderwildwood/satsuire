@@ -1,2 +1,0 @@
-- Javítás, hogy a kézileg kiválasztott nyelv mindenhol alkalmazva legyen
-- A régiót nem tartalmazó területi beállítása esetén a szerkesztő nézetben történő összeomlás javítása

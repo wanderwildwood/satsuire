@@ -1,3 +1,0 @@
-- Tłumaczenia dla j. włoskiego
-- Wsparcie dla wszystkich typów kodów kreskowych 1D. (Oryginalnie wspierano tylko kody kreskowe 1D dla produktu)
-- Dodano wymóg zezwolenia dla kamery, którego pierwotnie nie było.

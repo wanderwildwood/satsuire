@@ -1,7 +1,0 @@
-- Support de la langue arabe
-- Affichage du nombre de cartes archivées dans l'aperçu du groupe
-- Bugs empêchant l'enregistrement des cartes en Arabe en cas de chiffres d'origine non occidentale corrigés
-- Thème personnalisé sur l'écran principal corrigé
-- Affichage des cartes sélectionnées amélioré
-- Réparation du bug en quittant la vue des cartes (mises en page RTL) pour certaines cartes
-- La flèche de retour dans la vue des cartes pointe dans le bon sens (mises en page RTL)

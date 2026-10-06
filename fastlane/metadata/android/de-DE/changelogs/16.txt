@@ -1,5 +1,0 @@
-- Hinzufügen oder Bearbeiten einer Karte ermöglicht nun Shortcuts. (https://github.com/brarcher/loyalty-card-locker/pull/155)
-- Widget entfernt, da durch Shortcuts ersetzt. (same link as above)
-- Fehlerbehebung bei nicht erfolgreicher Kartenbearbeitung. (same link as above)
-- Exportfehler bei Backups ab Android 7 behoben. (https://github.com/brarcher/loyalty-card-locker/pull/153)
-- MIME-Typ bei Datenexport ist nun genauer. (https://github.com/brarcher/loyalty-card-locker/pull/156)

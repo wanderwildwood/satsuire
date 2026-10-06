@@ -1,1 +1,0 @@
-- Previene i crash sui dispositivi con NFC che non funzionano correttamente

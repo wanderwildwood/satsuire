@@ -1,2 +1,0 @@
-- Ispravljeno pojavljivanje sive kocke na nevažećoj vrijednosti za barkod
-- Ispravke uvoza Stocard-a

@@ -1,3 +1,0 @@
-- Möglichkeit, mit den Lautstärketasten durch die Karten zu navigieren
-- Korrigiert Stocard Import
-- Behebt die Meldung „Import abgebrochen“ nach erfolgreichem Import

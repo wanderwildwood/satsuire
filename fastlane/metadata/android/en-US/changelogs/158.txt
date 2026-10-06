@@ -1,1 +1,0 @@
-- Fix status and navigation bar colour in new About activity

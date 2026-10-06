@@ -1,2 +1,0 @@
-- Suppression des autorisations inutiles
-- Cible Android 13

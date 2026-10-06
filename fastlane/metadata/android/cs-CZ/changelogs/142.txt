@@ -1,3 +1,0 @@
-- Přidejte podporu Passbook (.pkpass).
- - Oprava importu transparentních souborů PDF
- - Zlepšení zobrazení průhledných miniatur

@@ -1,3 +1,0 @@
-- „Arhiveerimisviis“ on nüüd menüüvalikus „Ekraanieadistused“ (varem „Näita üksikasju“)
-- lisandus Android 13 rakendusekohane keeletugi
-- lisandusid rakendusse lõimitud andmekaitsepõhimõtted, muudatuste logi ja litsentsiteave

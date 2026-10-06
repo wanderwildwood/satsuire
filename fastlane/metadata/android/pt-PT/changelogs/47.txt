@@ -1,2 +1,0 @@
-- Sempre mostrar todas as opções de importação/exportação e mostrar um toast com o problema (melhora compatibilidade com XPrivacyLua)
-- Pede por confirmação ao sair da tela de dição sem salvar

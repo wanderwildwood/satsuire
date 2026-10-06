@@ -1,2 +1,0 @@
-- Ocultar ícones de busca, expansão e ordenação até que haja pelo menos 1 cartão
-- Várias correções de temas

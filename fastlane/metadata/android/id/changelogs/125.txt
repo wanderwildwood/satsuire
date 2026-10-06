@@ -1,1 +1,0 @@
-- Menangani warna header yang hilang dengan lebih anggun

@@ -1,3 +1,0 @@
-- Pole tekstowe automatycznie jest skupiane podczas tworzenia lub edycji grupy
-- Rozmyte ikony zostają naprawione (format SVG jest używany wszędzie)
-- Aparat jest zawsze otwierany, ale dodano przycisk ręcznego skanowania w widoku kamery

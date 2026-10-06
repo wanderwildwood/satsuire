@@ -1,2 +1,0 @@
-- Kleine UI-verbeteringen
-- Oplossen van problemen met het nieuwe ontwerp op vierkante schermen

@@ -1,2 +1,0 @@
-- به‌روزرسانی ترجمه‌ها. (pull #208 (https://github.com/brarcher/loyalty-card-locker/pull/208))
-- به‌روزرسانی‌های رندر بارکد: (pull #209 (https://github.com/brarcher/loyalty-card-locker/pull/209))

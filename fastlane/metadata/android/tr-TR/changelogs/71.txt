@@ -1,2 +1,0 @@
-- Birkaç küçük çeviri ve kullanıcı arayüzü düzeltmesi
-- Android 6'da kart içe aktarma/paylaşmada çökme düzeltildi

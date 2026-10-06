@@ -1,4 +1,0 @@
-- Meningkatkan importir Stocard
-- Perbaiki mengimpor ekspor Catima dengan catatan multiline
-- Skala judul kartu dalam rentang yang dapat diterima
-- Peningkatan animasi

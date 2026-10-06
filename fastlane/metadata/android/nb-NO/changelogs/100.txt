@@ -1,2 +1,0 @@
-- Skjul søk, utvid og sorter ikoner til det finnes minst ett kort.
-- Forskjellige draktfikser.

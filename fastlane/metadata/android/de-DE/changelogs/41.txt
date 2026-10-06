@@ -1,2 +1,0 @@
-- Abgerundete Kanten für Kartensymbole in der Hauptübersicht hinzugefügt
-- Unterstützung für gruppierte Einträge hinzugefügt

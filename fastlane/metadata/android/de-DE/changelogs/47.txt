@@ -1,2 +1,0 @@
-- Zeige immer alle Import/Export-Optionen an und zeige einen Toast auf die aktuellen Ausgaben (verbessert die Kompatibilität mit XPrivacyLua)
-- Frage nach Bestätigung beim Verlassen der Bearbeitungsansicht nach Änderungen ohne zu speichern

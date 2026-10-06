@@ -1,2 +1,0 @@
-- Verwijder onnodige machtigingen
-- Ondersteun Android 13

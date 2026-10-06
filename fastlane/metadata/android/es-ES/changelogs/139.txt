@@ -1,3 +1,0 @@
-- Opción para navegar por las tarjetas usando los botones de volumen
-- Corregir la importación de Stocard
-- Corregir el mensaje «Importación cancelada» que aparece después de una importación correcta

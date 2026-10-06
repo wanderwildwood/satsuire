@@ -1,1 +1,0 @@
-- Correção de falha em versões anteriores ao Android 7

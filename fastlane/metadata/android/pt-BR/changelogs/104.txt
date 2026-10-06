@@ -1,2 +1,0 @@
-- Salvar estado de expansão dos detalhes do cartão
-- Pequenas correções na interface

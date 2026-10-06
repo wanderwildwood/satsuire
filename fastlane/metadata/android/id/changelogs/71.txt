@@ -1,2 +1,0 @@
-- Beberapa terjemahan kecil dan perbaikan UI
-- Perbaiki kerusakan pada kartu loyalitas impor/berbagi di Android 6

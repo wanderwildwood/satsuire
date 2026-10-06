@@ -1,2 +1,0 @@
-- Dodajanje Catime v "Nadzor naprav za hitri dostop" (https://developer.android.com/guide/topics/ui/device-control)
-- Popravek nepravilnega prikaza nekaterih skupin na zaslonu upravljanja skupin

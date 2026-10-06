@@ -1,2 +1,0 @@
-- Исправлены испанские переводы (pull #244 (https://github.com/brarcher/loyalty-card-locker/pull/244))
-- Обновление переводов (pull #244 (https://github.com/brarcher/loyalty-card-locker/pull/244))

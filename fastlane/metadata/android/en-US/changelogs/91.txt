@@ -1,4 +1,0 @@
-- Improved group management support
-- Support cropping images
-- Fix image data loss when saving after rotating in edit view
-- Ability to set a custom image as card icon

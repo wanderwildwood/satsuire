@@ -1,2 +1,0 @@
-- Zlepšiť rovnováhu parsing logiky
-- Fix menu desatinné displej na hlavnej obrazovke

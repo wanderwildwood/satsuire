@@ -1,3 +1,0 @@
-- Lisasime võimaluse liikuda kaartide vahel helivaljuse nuppudega
-- Parandasime Stocardi impordi vead
-- Parandasime "Import on katkestatud" vea peale õnnestunud importi

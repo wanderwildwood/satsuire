@@ -1,3 +1,0 @@
-- Amélioration de l'UI d'édition
-- Suprresion de l'option de la couleur du texte du header (maintenant généré automatiquement selon la luminiosité)
-- Mise à jour des traductions

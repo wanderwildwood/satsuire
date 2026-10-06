@@ -1,5 +1,0 @@
-- Pré-remplissage de l'ID existant à l'édition de l'ID d'une carte
-- Largeur des codes-barres générés limitée pour l’amélioration de la mémoire
-- Modification du texte du bouton d'action lors de la modification d'une carte si un ID de carte existe déjà
-- Schéma de couleurs plus doux et compatible avec l'icône de l'application et la mise en page à l'affichage d'une carte est plus propre
-- Ajout d'un assistant d'introduction qui se lance lors du premier lancement de l'application

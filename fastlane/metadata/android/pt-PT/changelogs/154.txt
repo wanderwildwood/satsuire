@@ -1,1 +1,0 @@
-- Corrigir possível falhas que podiam ocorrer para cartões em que faltam informações de cores na base de dados

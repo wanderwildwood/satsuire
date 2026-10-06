@@ -1,2 +1,0 @@
-- Várias correções pequenas
-- Corrige falha ao usar tradução em Norueguês

@@ -1,1 +1,0 @@
-- Ispravljen mogući pad sistema koji se mogao dogoditi kod kartica kojima nedostaju informacije o boji u bazi podataka

@@ -1,3 +1,0 @@
-- Ištaisyta klaida, dėl kurios apkirpimo funkcija nenaudojo temos spalvos.
-- Ištaisytos nedidelės temos problemos.
-- Pridėta grynai juoda tamsi tema OLED ekranams

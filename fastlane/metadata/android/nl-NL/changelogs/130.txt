@@ -1,4 +1,0 @@
-- Kleine UI-fixes
-- Voorkom dat datums gereset worden bij roteren van het kaartbewerkingsscherm
-- Oplossen van crashes bij roteren met kleurkiezer zichtbaar
-- Stocard-importfouten opgelost

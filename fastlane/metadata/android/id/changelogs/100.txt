@@ -1,2 +1,0 @@
-- Sembunyikan pencarian, perluas dan urutkan ikon hingga setidaknya ada 1 kartu
-- Berbagai perbaikan tema

@@ -1,2 +1,0 @@
-- Zapisywanie stanu rozwinięcia szczegółów karty 
-- Małe poprawki UI

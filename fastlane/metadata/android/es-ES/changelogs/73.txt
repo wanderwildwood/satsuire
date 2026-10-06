@@ -1,1 +1,0 @@
-- Repara fotos de carga al editar la tarjeta existente

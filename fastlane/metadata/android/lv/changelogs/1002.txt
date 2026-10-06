@@ -1,2 +1,0 @@
-- Pievienots Bluetooth serveris Wear OS palīglietotnes atbalstam
-- Noņemts iegultais CHANGELOG

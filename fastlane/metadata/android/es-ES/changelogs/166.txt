@@ -1,1 +1,0 @@
-- Evitar el choque en dispositivos con mala conducta de NFC

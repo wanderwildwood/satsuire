@@ -1,3 +1,0 @@
-- Aggiunta della scansione di codici a barre, da file in formato PDF
-- Aggiunta della scansione di più codici a barre dalla stessa immagine
-- Correzioni minori dell'interfaccia grafica

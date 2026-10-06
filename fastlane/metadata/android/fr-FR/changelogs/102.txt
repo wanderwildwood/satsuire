@@ -1,2 +1,0 @@
-- Plusieurs corrections mineures
-- Correction des plantages en langue norvégienne

@@ -1,4 +1,0 @@
-– Brillo de pantalla aumentó a su máximo cuándo mostrando una carta, para ayudar barcode los escáneres logrados captan el barcode.
-– Agrega un eliminar confirmación cuándo eliminando una carta.
-– Agrega traducciones para alemanes y checo
-– Cambio de aclaración para traducción italiana

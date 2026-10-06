@@ -1,1 +1,0 @@
-- Naprawiono przezroczyste tło arkusza na dole

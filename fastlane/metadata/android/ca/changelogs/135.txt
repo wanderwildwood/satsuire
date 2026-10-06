@@ -1,1 +1,0 @@
-- Diverses correccions i millores en la gestió de l'equilibri

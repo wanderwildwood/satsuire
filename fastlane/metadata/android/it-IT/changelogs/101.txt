@@ -1,3 +1,0 @@
-- Sistemato lo strumento di ritaglio, che non usava i colori del tema
-- Sistemati problemi secondari sul tema
-- Aggiunto il tema scuro con sfondo nero puro per schermi OLED

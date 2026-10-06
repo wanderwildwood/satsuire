@@ -1,2 +1,0 @@
-- Dodano widget pokazujący wszystkie niezarchiwizowane karty
-- Zaprzestanie zasłaniania przez klawiaturę przycisku Zapisz w ekranach edycji i grupowania

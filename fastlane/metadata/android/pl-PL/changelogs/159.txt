@@ -1,1 +1,0 @@
-- Naprawiono zmianę wprowadzoną w wersji 2.41.0, która spowodowała brak obsługi niektórych skanerów kodów innych niż UTF-8

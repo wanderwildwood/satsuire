@@ -1,2 +1,0 @@
-- Ajout du support d'équilibre
-- Réorganisation de l'onglet code-barres de la vue d'édition

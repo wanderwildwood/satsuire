@@ -1,1 +1,0 @@
-- Sistemato il colore incorretto del testo sul bottone "Non c'è un codice a barre"

@@ -1,1 +1,0 @@
-- TalkBack ile ilgili çeşitli hatalar düzeltildi

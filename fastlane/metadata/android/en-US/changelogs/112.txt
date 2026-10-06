@@ -1,1 +1,0 @@
-- Make the possibility to set a custom header more visible

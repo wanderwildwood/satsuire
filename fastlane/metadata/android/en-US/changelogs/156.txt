@@ -1,2 +1,0 @@
-- Copy card ID to clipboard from view dialog or long press
-- Swap balance and currency fields to hopefully reduce unintended rounding

@@ -1,1 +1,0 @@
-- Naprawiono awarię aplikacji przy otworzeniu nieprawidłowego pliku pkpass

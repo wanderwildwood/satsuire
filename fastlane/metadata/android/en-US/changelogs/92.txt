@@ -1,2 +1,0 @@
-- New main screen layout
-- Fix bottomsheet sizing issues when switching in and out of fullscreen

@@ -1,3 +1,0 @@
-- Option to navigate cards using the volume buttons
-- Fix Stocard import
-- Fix "Import cancelled" message appearing after successful import

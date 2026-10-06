@@ -1,2 +1,0 @@
-- Přidání podpory zůstatku
-- Přeuspořádání karty čárového kódu v pohledu úprav

@@ -1,3 +1,0 @@
-- Mogućnost navigacije karticama pomoću dugmadi za jačinu zvuka
-- Ispravljen uvoz Stocarda
-- Ispravljena poruka "Uvoz otkazan" koja se pojavljuje nakon uspješnog uvoza

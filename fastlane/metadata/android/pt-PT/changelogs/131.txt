@@ -1,3 +1,0 @@
-- Mova o "Modo de arquivo" para o menu "Opções de exibição" (anteriormente "Mostrar detalhes")
-- Suporte a idiomas por aplicativo no Android 13
-- Incorporar política de privacidade, changelog e licença no aplicativo

@@ -1,1 +1,0 @@
-- Perbaiki keseimbangan parsing untuk negara yang menggunakan spasi sebagai pemisah

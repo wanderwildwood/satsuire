@@ -1,1 +1,0 @@
-- Evita que es bloquegi la pantalla en girar l'assistent d'introducció per primera vegada.

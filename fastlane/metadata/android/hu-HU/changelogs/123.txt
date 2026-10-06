@@ -1,2 +1,0 @@
-- Kisebb UI javítások
-- Az új design nem használható a négyzet alakú képernyőkkel rendelkező eszközökön

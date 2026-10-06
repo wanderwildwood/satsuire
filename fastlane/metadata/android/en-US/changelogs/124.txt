@@ -1,1 +1,0 @@
-- Support selecting exactly which details to view in card overview

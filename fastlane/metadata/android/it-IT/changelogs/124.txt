@@ -1,1 +1,0 @@
-- Supporto per la selezione esatta dei dettagli da visualizzare nella panoramica delle schede

@@ -1,2 +1,0 @@
-- Corrigir widget que criava um atalho com aparência diferente dos atalhos do aplicativo
-- Substituir a tela preta padrão do Android por uma tela de abertura (splash screen)

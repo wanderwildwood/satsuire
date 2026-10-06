@@ -1,2 +1,0 @@
-- Izboljšan kontrast tako, da je na rdečih gumbih vedno uporabljeno belo besedilo
-- Spodnji list v pogledu kartice zvestobe je mogoče premikati

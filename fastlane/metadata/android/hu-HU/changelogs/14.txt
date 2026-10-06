@@ -1,3 +1,0 @@
-- Képernyőforgatás zárolása menüelem a kártya megjelenítésénél. Zárolás esetén a „természetes” tájolásában fog megjelenni. (pull #128 (https://github.com/brarcher/loyalty-card-locker/pull/128))
-- Ha egy kiválasztott kártya nem tölthető be, akkor az alkalmazás hibaüzenetet jelenít meg. (pull #132 (https://github.com/brarcher/loyalty-card-locker/pull/132))
-- A varázslóban fellépő, hiányzó elrendezésazonosító hibájának javítása. (pull #128 (https://github.com/brarcher/loyalty-card-locker/pull/128))

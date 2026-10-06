@@ -1,1 +1,0 @@
-- Correction de changements introduits dans la 2.41.0 qui ont cassé le support pour certains scanners des codes-barres non UTF-8

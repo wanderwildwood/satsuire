@@ -1,1 +1,0 @@
-- Oprava některých sekvencí znaků, které se zobrazují jako jeden znak

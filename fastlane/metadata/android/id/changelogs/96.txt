@@ -1,2 +1,0 @@
-- Tambahkan dukungan KODE 93
-- Berbagai perbaikan dan perbaikan bug kecil

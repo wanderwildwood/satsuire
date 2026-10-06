@@ -1,4 +1,0 @@
-- Vylepšená podpora pre čitateľov obrazovky
-- Nefungujte pri pokuse o otvorenie videa z galérie
-- Swipe podporu na zobrazenie vernostnej karty obrazovky
-- Nevystavujte skupinu na tlačidiel chrbta

@@ -1,2 +1,0 @@
-- Sıralama düzenini değiştirme desteği
-- Barkod için büyük resimleri tararken yetersiz bellek durumunu önle

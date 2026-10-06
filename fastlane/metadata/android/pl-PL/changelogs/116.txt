@@ -1,2 +1,0 @@
-- Naprawiono okno dialogowe szybkiego wydawania nie zezwalające na , separator
-- Obsługa ładowania obrazu z menedżera plików

@@ -1,1 +1,0 @@
-- Bearbeiten-Button oder mehr Info-Bottom-Sheet-Zeichnung über Barcode-ID wurde korrigiert

@@ -1,4 +1,0 @@
-- Toon standaard 4 kolommen op brede schermen
-- Laat toe het aantal kolommen in portret- en landschapmodus te veranderen in de instellingen
-- Zoektekst verdwijnt niet langer bij het roteren van het hoofdscherm of openen van een kaart
-- Limitier de maximale lengte van een notitie op het hoofdscherm

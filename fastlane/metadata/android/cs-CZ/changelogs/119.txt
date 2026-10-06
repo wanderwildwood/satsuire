@@ -1,1 +1,0 @@
-- Použít barvy motivu Material You na více zařízeních (aktualizace knihovny Google)

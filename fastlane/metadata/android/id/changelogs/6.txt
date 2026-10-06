@@ -1,2 +1,0 @@
-- Izinkan pengguna memasukkan barcode secara manual. Jika pengguna memilih memasukkan barcode secara manual, tampilkan daftar gambar barcode yang valid dan didukung. Pengguna dapat memilih gambar barcode yang sesuai dengan keinginannya. issue #33 (https://github.com/brarcher/loyalty-card-locker/issues/33), pull #44 (https://github.com/brarcher/loyalty-card-locker/pull/44)
-- Mengatasi masalah barcode yang ditampilkan buram. (issue #37 (https://github.com/brarcher/loyalty-card-locker/issues/37))

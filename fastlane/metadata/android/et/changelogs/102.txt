@@ -1,2 +1,0 @@
-- väiksemad veaparandused
-- norra keele tõlke kasutamisel ei jookse rakendus enam kokku

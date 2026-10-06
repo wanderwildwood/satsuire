@@ -1,3 +1,0 @@
-- Afegir compatibilitat amb fitxers .pkpasses
-- Eliminar l'importador de Stocard (ja no existeix)
-- Desactivar temporalment les imatges dels widgets a Android 12L (solució alternativa per a un problema de bloqueig)

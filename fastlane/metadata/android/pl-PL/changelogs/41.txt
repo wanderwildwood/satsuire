@@ -1,2 +1,0 @@
-- Dodano zaokrąglone brzegi do ikon kart na głównym przeglądzie
-- Dodano wsparcie dla grupowania wpisów

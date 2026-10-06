@@ -1,3 +1,0 @@
-- Monochrom-Symbol für Android 13 hinzufügen
-- Verbesserung des Willkommensbildschirms
-- Korrekturen beim Fidme-Import

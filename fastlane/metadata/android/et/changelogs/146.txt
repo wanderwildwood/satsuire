@@ -1,2 +1,0 @@
-- Võimalus järjestada kaarte kehtivuse alguse alusel
-- Mõnede vigade parandamiseks on ajutiselt alusplatvormiks tagasi Android

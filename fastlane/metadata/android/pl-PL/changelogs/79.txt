@@ -1,2 +1,0 @@
-- Naprawiono widżet tworzący skróty wyglądające inaczej niż skróty aplikacji
-- Zastąpienie domyślnego czarnego ekranu Androida ekranem powitalnym

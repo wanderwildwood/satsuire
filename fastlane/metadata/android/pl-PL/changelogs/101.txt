@@ -1,3 +1,0 @@
-- Naprawiono błąd wycinacza przez którego nie używał on koloru motywu
-- Naprawiono błędy motywów
-- Dodano mocno czarny motyw dla ekranów OLED

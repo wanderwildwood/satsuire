@@ -1,2 +1,0 @@
-- Oprava obrázků neimportovaných ze zálohy
-- Možnost přepsat jazyk

@@ -1,2 +1,0 @@
-- Pisahkan UI edit di tab agar terasa lebih luas
-- Tambahkan dukungan bidang kedaluwarsa

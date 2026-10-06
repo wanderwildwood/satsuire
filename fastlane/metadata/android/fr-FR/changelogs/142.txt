@@ -1,3 +1,0 @@
-- Ajoute le support des fichiers Cartes / Passbook (.pkpass)
-- Corrige l'import des fiches PDF transparents
-- Améliorer l'affichage des miniatures transparentes

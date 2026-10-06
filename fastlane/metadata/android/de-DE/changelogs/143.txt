@@ -1,1 +1,0 @@
-- Behebt Absturz beim Öffnen ungültiger pkpass-Dateien

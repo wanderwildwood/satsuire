@@ -1,2 +1,0 @@
-- En az 1 kart olana kadar ara, genişlet ve sırala simgelerini gizle
-- Çeşitli tema düzeltmeleri

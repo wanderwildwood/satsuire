@@ -1,3 +1,0 @@
--Android 13 için Monochrome iconu ekleme
--İlk açılış ekranı iyileştirme
--Fidme içeri aktarma düzeltmeleri

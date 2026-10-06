@@ -1,1 +1,0 @@
-- Naprawiono zawieszanie się aplikacji dla wersji sprzed Androida 7

@@ -1,3 +1,0 @@
-- Perbaiki keburaman ikon huruf layar utama
-- Perbaiki ikon yang terkadang menghilang setelah pemilihan
-- Perbaiki ikon bilah status yang mungkin tidak terlihat di Android 5

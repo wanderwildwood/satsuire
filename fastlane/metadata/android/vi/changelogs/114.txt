@@ -1,3 +1,0 @@
-- Thêm biểu tượng đơn sắc cho Android 13
-- Cải thiện màn hình khởi động lần đầu
-- Sửa lỗi nhập Fidme

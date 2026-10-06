@@ -1,2 +1,0 @@
-- Aggiunta scorrimento da un gruppo all'altro nella schermata iniziale
-- Correzione del crash dovuto alle carte prive del colore dell'intestazione

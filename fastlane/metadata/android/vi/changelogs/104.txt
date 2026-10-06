@@ -1,2 +1,0 @@
-- Lưu chi tiết trạng thái mở rộng của thẻ
-- Sửa vài lỗi nhỏ trong giao diện người dùng

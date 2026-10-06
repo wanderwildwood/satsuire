@@ -1,2 +1,0 @@
-- Abilitazione dei backup dell'app
-- Aggiornamento delle traduzioni in francese e sloveno

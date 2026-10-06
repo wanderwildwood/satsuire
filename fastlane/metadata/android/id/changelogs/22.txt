@@ -1,1 +1,0 @@
-- Perubahan pada tampilan Kartu untuk menampilkan catatan, mengizinkan ID kartu mengambil beberapa baris, dan menampilkan nama toko. (pull #197 (https://github.com/brarcher/loyalty-card-locker/pull/197))

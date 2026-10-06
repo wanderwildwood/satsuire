@@ -1,4 +1,0 @@
-- Holandský preklad
-- Umožniť názov pole byť editovateľný po pridanie vernostnej karty
-- Pridať voliteľný poznámka pole
-- Vyriešiť všetky problémy identifikované NBugs a vyžadujú všetky problémy NBugs vyriešiť pred natiahnutím žiadosti

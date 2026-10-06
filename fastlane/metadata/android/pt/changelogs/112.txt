@@ -1,1 +1,0 @@
-- Torna possível definir um cabeçalho personalizado mais visível

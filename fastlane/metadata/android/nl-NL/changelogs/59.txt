@@ -1,2 +1,0 @@
-- Balansondersteuning toegevoegd
-- Barcode tab van de "Aanpassen" weergave gereorganizeerd

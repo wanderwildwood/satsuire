@@ -1,1 +1,0 @@
-- "Barkod yok" düğmesindeki yanlış metin rengi düzeltildi

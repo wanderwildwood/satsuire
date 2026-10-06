@@ -1,3 +1,0 @@
-- NFC standardmäßig deaktivieren während eine Karte gezeigt wird
-- Jedes Wort des Namens einer Karte im Bearbeitungsbildschirm in Kapitälchen speichern
-- Datum dem Namen der Exportdatei hinzufügen

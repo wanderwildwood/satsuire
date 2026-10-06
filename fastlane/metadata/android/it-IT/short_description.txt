@@ -1,1 +1,0 @@
-Per gestire codici a barre, iscrizioni, programmi fedeltà, coupon e biglietti.

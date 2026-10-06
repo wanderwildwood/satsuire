@@ -1,2 +1,0 @@
-- Afgerondde randen van kaartpictogrammen toegevoegd aan het hoofdoverzicht
-- Ondersteuning toegevoegd voor groepering van items

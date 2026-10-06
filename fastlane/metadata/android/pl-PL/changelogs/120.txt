@@ -1,3 +1,0 @@
-- Całkowite przeprojektowanie ekranu głównego i ekranu karty lojalnościowej
-- Projekt Material You dla ekranu ustawień
-- Naprawiono awarię podczas korzystania z opcji "Zrób zdjęcie" z wyłączoną aplikacją aparatu

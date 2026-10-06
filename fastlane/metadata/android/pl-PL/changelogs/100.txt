@@ -1,2 +1,0 @@
-- Ukryto ikony szukania, poszerzania i sortowania jeśli nie ma przynajmniej 1 karty
-- Różne poprawki graficzne

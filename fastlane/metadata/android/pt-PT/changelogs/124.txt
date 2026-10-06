@@ -1,1 +1,0 @@
-- Suporte para selecionar exatamente quais detalhes visualizar na visão geral do cartão

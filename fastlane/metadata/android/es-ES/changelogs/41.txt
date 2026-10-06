@@ -1,2 +1,0 @@
-– Bordes redondeados a los iconos de tarjetas en vista principal añadido
-– Soporte a entradas de agrupación añadido

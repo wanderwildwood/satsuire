@@ -1,1 +1,0 @@
-- Ištaisyta klaida kai kurios simbolių sekos buvo rodomos kaip vienas simbolis

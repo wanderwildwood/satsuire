@@ -1,3 +1,0 @@
-- Cible Android 15
-- Correction d'un plantage lors de la lecture de fichiers pkpass non supportés
-- Amélioration du support pkpass

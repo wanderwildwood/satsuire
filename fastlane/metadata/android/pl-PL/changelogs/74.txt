@@ -1,3 +1,0 @@
-- Naprawiono tworzenie skrótów
-- Wygenerowano ikonę skrótu specyficzną dla karty
-- Naprawiono możliwość zmiany koloru karty lojalnościowej

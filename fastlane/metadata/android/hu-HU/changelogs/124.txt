@@ -1,1 +1,0 @@
-- A kártyaáttekintőben megjelenítendő pontos részletek kiválasztása

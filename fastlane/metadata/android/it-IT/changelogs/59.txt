@@ -1,2 +1,0 @@
-- Aggiunto il supporto per il bilanciamento
-- Riorganizzata la scheda codice a barre durante la modifica

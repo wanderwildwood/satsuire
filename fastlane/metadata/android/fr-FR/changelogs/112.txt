@@ -1,1 +1,0 @@
-- Rendre plus visible la possibilité de définir un en-tête personnalisé

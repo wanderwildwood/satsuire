@@ -1,3 +1,0 @@
-- Mantener presionado el icono de la tarjeta en la vista de actividades para cambiarlo.
-- Mejorado el estilo de los botones en la pantalla de Grupos.
-- Se arregló que aparecieran códigos de barras largos causando que escalen a nada.

@@ -1,3 +1,0 @@
-- Přidání chybějícího ID čárového kódu do exportu
-- Nezobrazovat dialogové okno aktualizace čárového kódu, pokud je hodnota stejná jako ID karty
-- Přidán překlad do finštiny

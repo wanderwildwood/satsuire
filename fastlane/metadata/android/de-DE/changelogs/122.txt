@@ -1,3 +1,0 @@
-- Langes Drücken auf das Kartensymbol in der Aktivitätsansicht, um es zu ändern
-- Verbessertes Styling der Knöpfe im Gruppenbildschirm
-- Behebung des Problems, dass lange Barcodewerte dazu führen, dass der Barcode winzig skaliert wird

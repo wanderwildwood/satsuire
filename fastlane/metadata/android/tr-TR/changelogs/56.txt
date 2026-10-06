@@ -1,1 +1,0 @@
-- Düzenleme görünümünden barkod sekmesine geçerken barkod olmadığında oluşan çökme düzeltildi

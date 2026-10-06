@@ -1,2 +1,0 @@
-- Fix manual language selection not applying everywhere
-- Fix crash in edit view on regionless locale

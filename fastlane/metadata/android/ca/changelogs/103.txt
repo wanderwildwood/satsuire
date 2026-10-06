@@ -1,2 +1,0 @@
-- Corregeix la selecció d'idioma manual que no s'aplica a tot arreu
-- Corregeix el bloqueig a la vista d'edició en la configuració regional sense regió

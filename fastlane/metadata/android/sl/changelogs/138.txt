@@ -1,1 +1,0 @@
-- Popravek geste »nazaj« na glavnem zaslonu, s katero se zapre tipkovnica in iskanje v sistemu Android 13 in novejših različicah

@@ -1,2 +1,0 @@
-- Opravena neaktualizace seznamu widgetu při otevření karty z něj
-- Oprava občasného selhání otevírání souborů pkpass/pdf ze síťových lokací

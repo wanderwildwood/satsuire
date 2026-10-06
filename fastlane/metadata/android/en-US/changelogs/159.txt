@@ -1,1 +1,0 @@
-- Fix change introduced in 2.41.0 that broke support for some scanners for non-UTF-8 barcodes

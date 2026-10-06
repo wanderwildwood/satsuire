@@ -1,1 +1,0 @@
-- Zapobieganie awariom na urządzeniach z nieprawidłowo działającym modułem NFC

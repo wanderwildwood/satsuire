@@ -1,2 +1,0 @@
-- Ativar backups de aplicativos
-- Atualizar traduções para francês e esloveno

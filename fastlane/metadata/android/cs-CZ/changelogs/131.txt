@@ -1,3 +1,0 @@
-- Přesunutí „Režim archivu“ do „Možnosti zobrazení“ (původně nabídka „Zobrazit podrobnosti“)
-- Podpora nastavení jazyka podle aplikace od Android 13
-- Vložení zásad ochrany osobních údajů, seznamu změn a licence do aplikace

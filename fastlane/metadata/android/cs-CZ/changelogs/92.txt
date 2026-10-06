@@ -1,2 +1,0 @@
-- Nové rozvržení hlavní obrazovky
-- Oprava problémů s velikostí spodního panelu při přepínání na celou obrazovku a z ní

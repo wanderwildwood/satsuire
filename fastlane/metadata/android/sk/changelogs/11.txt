@@ -1,5 +1,0 @@
-- Vyplnenie existujúceho ID pri úprave ID karty. (Github pull #94)
-- Obmedzenie šírku čiarových kódov kvôli pamäti. (Github pull #103)
-- Zmena tlačidla „Zadať kartu“ na „Upraviť kartu“, ak už ID karty existuje, pri úprave. (Github pull #104)
-- Zmena farebnej schémy na jemnejšiu a kompatibilnú s ikonou aplikácie a zmena rozloženia pri zobrazení karty, aby bolo prehľadnejšie. (Github pull #107)
-- Pridanie sprievodcu, ktorý sa spustí pri prvom spustení aplikácie. (Github pull #108)

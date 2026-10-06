@@ -1,1 +1,0 @@
-- Conserta regressão que causava com que entrada manual de código de barras não fosse salva

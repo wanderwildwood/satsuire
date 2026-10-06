@@ -1,3 +1,0 @@
-- Olasz fordítás
-- Az összes 1D vonalkódtípus támogatása (Eredetileg csak a termékek 1D-s vonalkódja volt támogatott)
-- A szükséges kamera engedély hozzáadása, amely eredetileg hiányzott.

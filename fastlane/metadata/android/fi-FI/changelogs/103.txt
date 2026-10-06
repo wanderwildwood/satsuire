@@ -1,2 +1,0 @@
-- Korjaa kielivalintaa ei otettu käyttöön kaikkialla
-- Korjaa kaatumisen Muokkaus-näkymässä, jos käytössä oli alueeton 'locale'

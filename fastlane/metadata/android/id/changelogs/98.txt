@@ -1,1 +1,0 @@
-- Perbaiki berbagai bug terkait TalkBack

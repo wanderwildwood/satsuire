@@ -1,2 +1,0 @@
-- Useita pieniä korjauksia
-- Korjattu norjan kielen aiheuttama kaatuminen

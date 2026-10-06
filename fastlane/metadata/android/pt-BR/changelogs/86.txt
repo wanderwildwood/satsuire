@@ -1,1 +1,0 @@
-- Melhorar a busca com espaços

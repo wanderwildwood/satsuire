@@ -1,1 +1,0 @@
-- Correction d'un bug sur l'écran d'accueil où le scroll vertical déclenchait le swipe horizontal

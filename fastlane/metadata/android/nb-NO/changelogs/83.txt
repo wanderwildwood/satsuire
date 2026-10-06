@@ -1,2 +1,0 @@
-- Støtte for endring av sorteringsrekkefølge
-- Forhindring av «Fri for minne» ved skanning av store bilder for strekkode

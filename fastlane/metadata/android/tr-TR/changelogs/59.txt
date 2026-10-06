@@ -1,2 +1,0 @@
-- Bakiye desteği eklendi
-- Düzenleme görünümünün barkod sekmesi yeniden düzenlendi

@@ -1,2 +1,0 @@
-- Miglioramento della logica di analisi del bilancio
-- Corretta la visualizzazione dei decimali nella schermata principale
