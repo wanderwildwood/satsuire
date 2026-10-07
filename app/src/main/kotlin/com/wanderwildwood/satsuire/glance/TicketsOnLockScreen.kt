@@ -17,13 +17,17 @@ class TicketsOnLockScreen : GlanceProvider() {
 
     override fun enabled(context: Context): Boolean = Prefs.onLockScreen(context)
 
-    override fun lines(context: Context): List<Line> {
-        val today = LocalDate.now()
-        val names = Wallet.rows(context, archived = false)
-            .filter { Validity.of(it.validFrom?.time, it.expiry?.time, today).isToday(today) }
-            .map { it.name }
-        if (names.isEmpty()) return emptyList()
-        val heading = context.getString(R.string.glance_heading)
-        return names.mapIndexed { i, name -> Line(text = name, heading = if (i == 0) heading else null) }
+    override fun lines(context: Context): List<Line> = tickets(context, LocalDate.now())
+
+    companion object {
+        /** The names of the cards that are tickets for [today], the first carrying the heading. */
+        internal fun tickets(context: Context, today: LocalDate): List<Line> {
+            val names = Wallet.rows(context, archived = false)
+                .filter { Validity.of(it.validFrom?.time, it.expiry?.time, today).isToday(today) }
+                .map { it.name }
+            if (names.isEmpty()) return emptyList()
+            val heading = context.getString(R.string.glance_heading)
+            return names.mapIndexed { i, name -> Line(text = name, heading = if (i == 0) heading else null) }
+        }
     }
 }
