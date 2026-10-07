@@ -31,7 +31,8 @@ sixteen greys, a slow redraw, and is read outdoors as often as indoors.
   group. **Order** is by name, last used, last added, or soonest to expire or to start.
 - **Put away** a card that is finished with; it leaves the list and waits at the bottom of it.
 - **Bring cards in** from an export made by [Catima](https://catima.app), FidMe or Voucher
-  Vault, and **save every card** to a Catima file, which Catima reads back.
+  Vault, and **save every card** to a Catima file, which Catima reads back. Give the file a
+  password and it is locked the way Catima locks its own; leave it empty for a plain zip.
 
 Barcode kinds: Aztec, Codabar, Code 39, Code 93, Code 128, Data Matrix, EAN-8, EAN-13, ITF,
 PDF417, QR Code, UPC-A and UPC-E.

@@ -52,10 +52,15 @@ object Transfer {
         return if (locked) Result.NeedsPassword else Result.NotACardFile
     }
 
-    /** Every card, in Catima's own zip, which Catima and this app both read back. */
-    fun sendOut(context: Context, uri: Uri): Boolean {
+    /**
+     * Every card, in Catima's own zip, which Catima and this app both read back. With a
+     * [password] the zip is locked the way Catima locks its own (AES inside the zip), so
+     * Catima opens it with the same password; without one it is a plain zip.
+     */
+    fun sendOut(context: Context, uri: Uri, password: CharArray? = null): Boolean {
         val out = context.contentResolver.openOutputStream(uri, "wt") ?: return false
-        val result = out.use { MultiFormatExporter.exportData(context, Wallet.db(context), it, DataFormat.Catima, null) }
+        val key = password?.takeIf { it.isNotEmpty() }
+        val result = out.use { MultiFormatExporter.exportData(context, Wallet.db(context), it, DataFormat.Catima, key) }
         return result.resultType() == ImportExportResultType.Success
     }
 }

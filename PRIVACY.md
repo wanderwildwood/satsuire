@@ -32,8 +32,9 @@ The app is excluded from Android backups (`allowBackup="false"`).
 
 - **Share** hands one card's name, number and a picture of its barcode to the app you choose.
   The picture is written to the app's cache and that app is allowed to read that one file.
-- **Save every card to a file** writes a Catima export where you choose. It has no password:
-  anyone holding the file can read the cards in it.
+- **Save every card to a file** writes a Catima export where you choose. Given a password it
+  is locked with AES inside the zip, as Catima locks its own, and only that password opens it;
+  given none, it is a plain file anyone holding it can read.
 - **Add to calendar** hands the card's name, days, number and note to your calendar app, which
   shows you the event before anything is saved.
 - **Glance**, when it is installed and the switch in settings is on, is told the names of

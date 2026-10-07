@@ -144,7 +144,9 @@
     <string name="settings_bring_in">Bring in cards</string>
     <string name="settings_bring_in_value">From a Catima, FidMe or Voucher Vault export</string>
     <string name="settings_send_out">Save every card to a file</string>
-    <string name="settings_send_out_value">A Catima file, without a password: anyone holding it can read the cards</string>
+    <string name="settings_send_out_value">A Catima file, locked with a password if you give one</string>
+    <string name="export_password">A password locks the file; Catima opens it with the same one. Leave it empty for a plain file anyone can read.</string>
+    <string name="export_password_note">There is no way to recover a forgotten password.</string>
 
     <string name="transfer_reading">Reading the file…</string>
     <plurals name="transfer_brought">

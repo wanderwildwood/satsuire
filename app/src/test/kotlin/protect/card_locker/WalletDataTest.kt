@@ -68,6 +68,25 @@ class WalletDataTest {
      * stray text file reads as "nothing came in" rather than "not a card file", which is why
      * the app says it the first way. A file no importer opens at all is refused.
      */
+    /** A locked export refuses without its password, says so, and opens with it. */
+    @Test
+    fun lockedExportComesBackWithItsPassword() {
+        Wallet.save(activity, Draft(name = "Ferry", number = "FERRY-0042", format = "AZTEC"))
+        val file = File(activity.cacheDir, "locked.zip")
+        assertTrue(Transfer.sendOut(activity, Uri.fromFile(file), "correct horse".toCharArray()))
+        TestHelpers.getEmptyDb(activity)
+        assertEquals(Transfer.Result.NeedsPassword, Transfer.bringIn(activity, Uri.fromFile(file)))
+        assertEquals(Transfer.Result.NeedsPassword, Transfer.bringIn(activity, Uri.fromFile(file), "wrong".toCharArray()))
+        assertEquals(0, DBHelper.getLoyaltyCardCount(Wallet.db(activity)))
+        assertEquals(Transfer.Result.Brought(1, DataFormat.Catima), Transfer.bringIn(activity, Uri.fromFile(file), "correct horse".toCharArray()))
+        assertEquals("Ferry", Wallet.rows(activity, archived = false).single().name)
+        // An empty password is no password: a plain zip, as before.
+        val plain = File(activity.cacheDir, "plain.zip")
+        assertTrue(Transfer.sendOut(activity, Uri.fromFile(plain), CharArray(0)))
+        TestHelpers.getEmptyDb(activity)
+        assertEquals(Transfer.Result.Brought(1, DataFormat.Catima), Transfer.bringIn(activity, Uri.fromFile(plain)))
+    }
+
     @Test
     fun somethingElseBringsNothing() {
         val text = File(activity.cacheDir, "notes.txt").apply { writeText("Buy milk\n") }

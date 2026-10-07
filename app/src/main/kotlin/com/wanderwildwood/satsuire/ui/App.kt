@@ -170,11 +170,15 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit) {
     val importFile = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (uri != null) bringIn(uri, null)
     }
+    // Where to save, asked first; then whether to lock it, asked over the list.
+    var exporting by remember { mutableStateOf<Uri?>(null) }
     val exportFile = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/zip")) { uri ->
-        if (uri == null) return@rememberLauncherForActivityResult
+        if (uri != null) exporting = uri
+    }
+    fun sendOut(uri: Uri, password: CharArray?) {
         scope.launch {
             val ok = withContext(Dispatchers.IO) {
-                runCatching { Transfer.sendOut(context, uri) }
+                runCatching { Transfer.sendOut(context, uri, password) }
                     .onFailure { Log.w(TAG, "Saving cards out failed", it) }
                     .getOrDefault(false)
             }
@@ -417,6 +421,33 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit) {
                     startEditing(result)
                 }
             }
+        }
+    }
+
+    exporting?.let { uri ->
+        var password by remember { mutableStateOf("") }
+        EInkDialog(onDismiss = { exporting = null }) {
+            TextMMD(text = stringResource(R.string.export_password), style = MaterialTheme.typography.bodyMedium)
+            Spacer(Modifier.height(8.dp))
+            TextFieldMMD(
+                value = password,
+                onValueChange = { password = it },
+                singleLine = true,
+                visualTransformation = PasswordVisualTransformation(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, autoCorrectEnabled = false),
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Spacer(Modifier.height(6.dp))
+            TextMMD(text = stringResource(R.string.export_password_note), style = MaterialTheme.typography.labelSmall)
+            Spacer(Modifier.height(18.dp))
+            DialogButtons(
+                onCancel = { exporting = null },
+                onOk = {
+                    exporting = null
+                    sendOut(uri, password.toCharArray())
+                },
+                okLabel = stringResource(R.string.save),
+            )
         }
     }
 
