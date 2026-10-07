@@ -38,6 +38,9 @@ class DrawnBarcodesReadTest {
         BarcodeFormat.UPC_A to "036000291452",
         BarcodeFormat.UPC_E to "01234565",
         BarcodeFormat.ITF to "00012345678905",
+        // The shape of a US public library card: fourteen digits, Codabar or Code 39.
+        BarcodeFormat.CODABAR to "21234001234567",
+        BarcodeFormat.CODE_39 to "21234001234567",
     )
 
     private val boxes = listOf(480 to 560, 360 to 300, 800 to 300)
@@ -45,8 +48,8 @@ class DrawnBarcodesReadTest {
     @Test
     fun everyFormatReadsBackAtEverySize() {
         for ((format, text) in samples) {
-            val m = Modules.encode(text, format)
             for ((w, h) in boxes) {
+                val m = Modules.encodeFor(text, format, Charsets.ISO_8859_1, w, h)
                 val fit = Fit.of(m, w, h) ?: fail("$format did not fit $w x $h").let { return }
                 assertTrue("$format overflows $w x $h", fit.width <= w && fit.height <= h)
                 // A scanner reads a code whichever way it runs; this reader reads only across,
@@ -97,18 +100,24 @@ class DrawnBarcodesReadTest {
     }
 
     /**
-     * A long code is turned exactly when running down the panel buys it more pixels a module
-     * than running across, and never otherwise.
+     * A bar code is turned only when lying flat gives it under two pixels a module and turning
+     * gives it more; a grid code whenever turning gives it more.
      */
     @Test
     fun turnedOnlyWhenItGains() {
         for (text in listOf("LIB-0001", "LIB-000123456-ABCDEF", "LIB-000123456-0000987654321-XYZ")) {
             val m = Modules.encode(text, BarcodeFormat.CODE_128)
             val along = m.width + 2 * m.quiet
+            val flat = 480 / along
             val fit = Fit.of(m, 480, 600)!!
-            assertEquals(text, 600 / along > 480 / along, fit.turned)
-            assertEquals(text, maxOf(600 / along, 480 / along), fit.scale)
+            assertEquals(text, 600 / along > flat && flat < 2, fit.turned)
         }
+        val pdf = Modules.encode("M1REYES/TOMAS         EXYZ789 SEAANCAS 0102 150M014C0007 148", BarcodeFormat.PDF_417)
+        val fit = Fit.of(pdf, 480, 600)!!
+        val flat = minOf(480 / (pdf.width + 2 * pdf.quiet), 600 / (pdf.height + 2 * pdf.quiet))
+        val side = minOf(600 / (pdf.width + 2 * pdf.quiet), 480 / (pdf.height + 2 * pdf.quiet))
+        assertEquals(side > flat, fit.turned)
+        assertEquals(maxOf(flat, side), fit.scale)
     }
 
     @Test
@@ -135,6 +144,15 @@ class DrawnBarcodesReadTest {
         val own = MultiFormatWriter().encode(text, BarcodeFormat.QR_CODE, 300, 300)
         val ownPixels = IntArray(own.width * own.height) { i -> if (own[i % own.width, i / own.width]) BLACK else WHITE }
         assertNull(read(ownPixels, own.width, own.height, BarcodeFormat.QR_CODE))
+    }
+
+    /** A boarding pass's PDF417, shaped for the card screen, gets at least two pixels a module. */
+    @Test
+    fun boardingPassIsShapedForThePanel() {
+        val text = samples.first { it.first == BarcodeFormat.PDF_417 }.second
+        val flat = Fit.of(Modules.encode(text, BarcodeFormat.PDF_417), 480, 560)!!
+        val shaped = Fit.of(Modules.encodeFor(text, BarcodeFormat.PDF_417, Charsets.ISO_8859_1, 480, 560), 480, 560)!!
+        assertTrue("shaped ${shaped.scale}, default ${flat.scale}", shaped.scale >= 2 && shaped.scale > flat.scale)
     }
 
     @Test(expected = IllegalArgumentException::class)

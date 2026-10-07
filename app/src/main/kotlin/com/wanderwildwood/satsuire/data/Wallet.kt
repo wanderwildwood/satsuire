@@ -41,21 +41,64 @@ object Wallet {
     )
 
     /**
-     * The cards, starred ones first and then by name, as Catima orders them. [archived] picks
-     * the cards put away rather than the ones in use.
+     * How the list is ordered, after the favourites, which always come first. Catima's own five
+     * orders, each in the direction Catima defaults to: names A to Z, the most recently used or
+     * added first, the soonest to start or to end first.
      */
-    fun rows(context: Context, archived: Boolean): List<Row> {
+    enum class Order(val db: DBHelper.LoyaltyCardOrder) {
+        NAME(DBHelper.LoyaltyCardOrder.Alpha),
+        LAST_USED(DBHelper.LoyaltyCardOrder.LastUsed),
+        LAST_ADDED(DBHelper.LoyaltyCardOrder.LastAdded),
+        EXPIRY(DBHelper.LoyaltyCardOrder.Expiry),
+        VALID_FROM(DBHelper.LoyaltyCardOrder.ValidFrom),
+    }
+
+    /**
+     * The cards, favourites first and then in [order]. [archived] picks the cards put away
+     * rather than the ones in use; [group] keeps only that group's cards.
+     */
+    fun rows(context: Context, archived: Boolean, group: String? = null, order: Order = Order.NAME): List<Row> {
         val filter = if (archived) DBHelper.LoyaltyCardArchiveFilter.Archived else DBHelper.LoyaltyCardArchiveFilter.Unarchived
+        val db = db(context)
+        val g = group?.let { DBHelper.getGroup(db, it) }
         val out = ArrayList<Row>()
-        DBHelper.getLoyaltyCardCursor(
-            db(context), "", null, DBHelper.LoyaltyCardOrder.Alpha, DBHelper.LoyaltyCardOrderDirection.Ascending, filter,
-        ).use { c ->
+        DBHelper.getLoyaltyCardCursor(db, "", g, order.db, DBHelper.LoyaltyCardOrderDirection.Ascending, filter).use { c ->
             while (c.moveToNext()) {
                 val card = LoyaltyCard.fromCursor(context, c)
                 out += Row(card.id, card.store, card.starStatus != 0, card.validFrom, card.expiry)
             }
         }
         return out
+    }
+
+    /** The groups, in Catima's order, each with how many cards it holds. */
+    fun groups(context: Context): List<Pair<String, Int>> {
+        val db = db(context)
+        return DBHelper.getGroups(db).map { it._id to DBHelper.getGroupCardCount(db, it._id) }
+    }
+
+    fun cardGroups(context: Context, id: Int): List<String> = DBHelper.getLoyaltyCardGroups(db(context), id).map { it._id }
+
+    /** Adds a group unless one of that name is already there. */
+    fun addGroup(context: Context, name: String) {
+        val db = db(context)
+        val n = name.trim()
+        if (n.isNotEmpty() && DBHelper.getGroup(db, n) == null) DBHelper.insertGroup(db, n)
+    }
+
+    fun renameGroup(context: Context, from: String, to: String): Boolean {
+        val db = db(context)
+        val n = to.trim()
+        if (n.isEmpty() || n == from || DBHelper.getGroup(db, n) != null) return false
+        return DBHelper.updateGroup(db, from, n)
+    }
+
+    /** Deletes the group only; its cards stay. */
+    fun deleteGroup(context: Context, name: String): Boolean = DBHelper.deleteGroup(db(context), name)
+
+    /** Marks a card as just used, for the "last used" order. */
+    fun touch(context: Context, id: Int) {
+        DBHelper.updateLoyaltyCardLastUsed(db(context), id)
     }
 
     fun archivedCount(context: Context): Int = DBHelper.getArchivedCardsCount(db(context))
@@ -74,7 +117,7 @@ object Wallet {
         val format = draft.format?.let { CatimaBarcode.fromName(it) }
         val barcodeValue = draft.barcodeValue?.takeIf { it.isNotEmpty() && it != draft.number }
         val encoding = from.barcodeEncoding ?: StandardCharsets.ISO_8859_1
-        return if (existing != null) {
+        val id = if (existing != null) {
             DBHelper.updateLoyaltyCard(
                 db, existing.id, draft.name.trim(), draft.note.trim(),
                 draft.validFrom?.let(::Date), draft.expiry?.let(::Date),
@@ -92,6 +135,11 @@ object Wallet {
                 0, null, 0,
             ).toInt()
         }
+        if (draft.groups != null) {
+            val chosen = draft.groups.mapNotNull { DBHelper.getGroup(db, it) }
+            DBHelper.setLoyaltyCardGroups(db, id, chosen)
+        }
+        return id
     }
 
     fun delete(context: Context, id: Int): Boolean = DBHelper.deleteLoyaltyCard(db(context), context, id)

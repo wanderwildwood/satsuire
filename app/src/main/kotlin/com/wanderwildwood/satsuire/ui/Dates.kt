@@ -21,6 +21,7 @@ fun validityText(v: Validity, short: Boolean = false): String? = when (v) {
     is Validity.Expired -> stringResource(R.string.validity_expired, dayText(v.until))
     is Validity.NotYet -> stringResource(R.string.validity_not_yet, dayText(v.from))
     is Validity.Valid -> when {
+        v.until != null && v.from == v.until -> stringResource(R.string.validity_on, dayText(v.until))
         v.until != null && v.from != null && !short -> stringResource(R.string.validity_from_until, dayText(v.from), dayText(v.until))
         v.until != null -> stringResource(R.string.validity_until, dayText(v.until))
         v.from != null && !short -> stringResource(R.string.validity_from, dayText(v.from))

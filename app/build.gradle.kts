@@ -123,6 +123,9 @@ dependencies {
     debugImplementation(libs.compose.ui.tooling)
 
     implementation(libs.mmd)
+    // MMD's date picker draws its month arrows from Material's core icons and does not bring
+    // them itself: without this, opening a date crashes.
+    implementation(libs.compose.material.icons.core)
 
     implementation(libs.zxing.core)
     implementation(libs.zxing.embedded)

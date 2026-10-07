@@ -1,26 +1,69 @@
-**Last updated**  
-August 7 2026
+# Privacy
 
-# Privacy Policy
-Catima does not collect or transmit any personal information.
+Wallet keeps your cards on the phone. It has no internet permission, so it cannot send them
+anywhere; they leave the phone only when you share one, or save them to a file yourself.
 
-To ensure correct app functionality, we require access to the following:
+That is the whole policy. The rest of this page is the evidence for it.
 
-- Bluetooth: When using Catima together with the Wear OS companion app, Bluetooth access is needed to be able to communicate to Wear OS. This may show up as "find, connect to, and determine the relative position of nearby devices" because Android considers Bluetooth as part of location, but location information is never collected or used. The app can still be used when Bluetooth permission is denied, but you will not be able to use the Wear OS companion app.
-- Camera: We need access to your camera to be able to scan barcodes. The app can still be used when camera access is denied, but you will have to manually type the barcode information.
-- NFC: We need NFC access to temporarily disable NFC while showing a barcode to prevent NFC payment apps from triggering (such as when using a check-in gates which support both barcodes and NFC payments). This functionality can be disabled in settings.
-- Storage (Android 5 and 6 only): We need access to your device storage to create or import backups. The app can still be used when storage access is denied, but you will not be able to create or import backups.
+## One permission
 
-Catima offers a feature to share cards with other users. All the relevant data is in the generated shareable URLs and never transmitted to our servers. When viewed through catima.app, the data in the URL is rendered using client-side Javascript to further ensure no data is ever transmitted to us.
+`app/src/main/AndroidManifest.xml` declares exactly one:
 
-## Crash reporting privacy
+```
+android.permission.CAMERA
+```
 
-In the FOSS version of Catima (the version used on IzzyOnDroid, F-Droid and GitHub), the open source crash reporter ACRA is used for crash reporting. When a crash is detected, Catima will ask the user if they are willing to report the crash. If they choose to do so, the user's mail client is opened so they can review the data that would be sent. Crash reporting data is only sent when the user explicitly chooses to do so, it is **never** sent automatically. Crash reporting data is only used to solve crashes and no (potentially) sensitive information is ever shared. Users who do not want to be asked to report crashes can disable the "Ask to send crash reports" setting in Catima settings.
+It is asked for the first time you press "Scan it with the camera", and used only while the
+scanning screen is open. Refuse it and the app still works: type the number, or read the
+barcode from a picture.
 
-For the Google Play version of Catima, crash reporting is [managed by Google](https://support.google.com/googleplay/android-developer/answer/9859174?hl=en). Users can opt in or out of crash reporting through the Google app under the "Usage and diagnostics" setting.
+There is no `INTERNET` permission. A card number, a ticket, a boarding pass with your name in
+it: none of it can reach a network from this app.
 
-# Changes
-This Privacy Policy may be updated from time to time for any reason. We will notify you of any changes to our Privacy Policy by posting the new Privacy Policy to https://catima.app/privacy-policy/. A snapshot of the Privacy Policy is available within the Catima app, though it may be outdated. When the Privacy Policy on the website and in the app differ, the website should be considered leading. You are advised to consult the Privacy Policy regularly for any changes, as continued use is deemed approval of all changes.
+## What it keeps
 
-# Contact us
-If you have any questions regarding privacy while using the Application, or have questions about our practices, please contact us via email at catima.g9ex3@hackerchick.me.
+The cards, in a database in the app's own storage, which no other app can read. It is
+Catima's database, so a Catima export brought in keeps everything it carried. The settings
+(the list's order and group, and the lock-screen switch) are in `SharedPreferences`.
+
+The app is excluded from Android backups (`allowBackup="false"`).
+
+## What leaves, and only when you ask
+
+- **Share** hands one card's name, number and a picture of its barcode to the app you choose.
+  The picture is written to the app's cache and that app is allowed to read that one file.
+- **Save every card to a file** writes a Catima export where you choose. It has no password:
+  anyone holding the file can read the cards in it.
+- **Add to calendar** hands the card's name, days, number and note to your calendar app, which
+  shows you the event before anything is saved.
+- **Glance**, when it is installed and the switch in settings is on, is told the names of
+  today's tickets, to show on the lock screen. Only Glance is answered; any other app that
+  asks gets nothing.
+
+## What comes in
+
+A picture, PDF or pass file shared or opened here is read for its barcode and not kept. Only
+the card you save from it stays.
+
+## No analytics
+
+No crash reporting, no telemetry, no advertising identifier. Catima's own crash reporter is
+not part of this app. The dependencies are AndroidX, Jetpack Compose, Mudita's MMD, ZXing,
+ZXing Android Embedded, Apache Commons CSV and zip4j.
+
+## Checking any of this for yourself
+
+```
+aapt2 dump badging app-release.apk | grep uses-permission
+```
+
+prints every permission the built app carries:
+
+```
+uses-permission: name='android.permission.CAMERA'
+uses-permission: name='com.wanderwildwood.satsuire.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'
+```
+
+The second is not one of mine: AndroidX defines it for every app, signature-level and scoped
+to this package, so a receiver registered at run time is not exposed to other apps. It grants
+access to nothing.

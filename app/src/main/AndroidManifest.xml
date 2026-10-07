@@ -71,6 +71,22 @@
                 <data android:mimeType="application/vnd-com.apple.pkpass" />
                 <data android:mimeType="application/vnd.apple.pkpasses" />
             </intent-filter>
+
+            <!-- The same pass from an app that cannot name its type: Android has no type for
+                 .pkpass, so a file manager sends any type at all, and only the name says it is
+                 a pass. Android's path patterns stop at the first dot they meet, hence the
+                 second line for a name with a dot before the extension. -->
+            <intent-filter android:label="@string/share_label">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" />
+                <data android:scheme="file" />
+                <data android:host="*" />
+                <data android:mimeType="*/*" />
+                <data android:pathPattern=".*\\.pkpass" />
+                <data android:pathPattern=".*\\..*\\.pkpass" />
+                <data android:pathPattern=".*\\.pkpasses" />
+            </intent-filter>
         </activity>
 
         <!-- The scanner library brings a whole scanning activity of its own; the app draws its

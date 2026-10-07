@@ -127,4 +127,33 @@ class WalletDataTest {
         assertEquals(before.headerColor, after.headerColor)
         assertEquals(1, DBHelper.getLoyaltyCardCount(Wallet.db(activity)))
     }
+
+    @Test
+    fun groupsFilterAndSurviveEditing() {
+        Wallet.addGroup(activity, "Travel")
+        Wallet.addGroup(activity, "Shops")
+        Wallet.addGroup(activity, "Travel ")
+        val ferry = Wallet.save(activity, Draft(name = "Ferry", number = "F1", groups = listOf("Travel")))
+        Wallet.save(activity, Draft(name = "Co-op", number = "C1", groups = listOf("Shops")))
+        Wallet.save(activity, Draft(name = "Library", number = "L1"))
+        assertEquals(listOf("Shops" to 1, "Travel" to 1), Wallet.groups(activity).sortedBy { it.first })
+        assertEquals(listOf("Ferry"), Wallet.rows(activity, false, "Travel").map { it.name })
+        // An edit that never read the groups leaves them alone.
+        Wallet.save(activity, Draft.of(Wallet.card(activity, ferry)!!).copy(note = "Deck B"))
+        assertEquals(listOf("Travel"), Wallet.cardGroups(activity, ferry))
+        assertTrue(Wallet.renameGroup(activity, "Travel", "Trips"))
+        assertEquals(listOf("Ferry"), Wallet.rows(activity, false, "Trips").map { it.name })
+        Wallet.deleteGroup(activity, "Trips")
+        assertEquals(3, Wallet.rows(activity, false).size)
+    }
+
+    @Test
+    fun orders() {
+        val a = Wallet.save(activity, Draft(name = "A", number = "1", expiry = 3_000_000_000_000))
+        val b = Wallet.save(activity, Draft(name = "B", number = "2", expiry = 2_000_000_000_000))
+        Wallet.save(activity, Draft(name = "C", number = "3"))
+        assertEquals(listOf("B", "A", "C"), Wallet.rows(activity, false, order = Wallet.Order.EXPIRY).map { it.name })
+        assertEquals(listOf("C", "B", "A"), Wallet.rows(activity, false, order = Wallet.Order.LAST_ADDED).map { it.name })
+        assertTrue(a > 0 && b > 0)
+    }
 }

@@ -1,6 +1,12 @@
 package com.wanderwildwood.satsuire.ui
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.ui.Alignment
+import com.mudita.mmd.components.buttons.OutlinedButtonMMD
+import com.mudita.mmd.components.checkbox.CheckboxMMD
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -29,7 +35,7 @@ import com.google.zxing.BarcodeFormat
 import protect.card_locker.CatimaBarcode
 import java.time.LocalDate
 
-private enum class Picking { FORMAT, FROM, UNTIL }
+private enum class Picking { FORMAT, FROM, UNTIL, GROUPS }
 
 /**
  * A card's details, typed or corrected: its name, its number, the kind of barcode, the days it
@@ -43,6 +49,8 @@ fun EditScreen(
     onSave: () -> Unit,
     onDiscard: () -> Unit,
     onDelete: (() -> Unit)?,
+    allGroups: List<String>,
+    onNewGroup: (String) -> Unit,
 ) {
     var picking by rememberSaveable { mutableStateOf<Picking?>(null) }
     var problem by rememberSaveable { mutableStateOf<String?>(null) }
@@ -136,6 +144,14 @@ fun EditScreen(
                     onClick = { picking = Picking.UNTIL },
                 )
             }
+            item(key = "groups") {
+                val chosen = draft.groups.orEmpty()
+                SettingRow(
+                    title = stringResource(R.string.edit_groups),
+                    value = if (chosen.isEmpty()) stringResource(R.string.edit_no_groups) else chosen.joinToString(", "),
+                    onClick = { picking = Picking.GROUPS },
+                )
+            }
             item(key = "note") {
                 TextFieldMMD(
                     value = draft.note,
@@ -176,7 +192,65 @@ fun EditScreen(
             onPick = { onChange(draft.copy(expiry = it)); picking = null },
             onDismiss = { picking = null },
         )
+        Picking.GROUPS -> GroupsChoice(
+            all = allGroups,
+            chosen = draft.groups.orEmpty(),
+            onToggle = { g ->
+                val now = draft.groups.orEmpty()
+                onChange(draft.copy(groups = if (g in now) now - g else now + g))
+            },
+            onNew = { name ->
+                onNewGroup(name)
+                onChange(draft.copy(groups = (draft.groups.orEmpty() + name.trim()).distinct()))
+            },
+            onDismiss = { picking = null },
+        )
         null -> Unit
+    }
+}
+
+/** The groups a card is in, ticked in place, and a new one typed in. */
+@Composable
+private fun GroupsChoice(
+    all: List<String>,
+    chosen: List<String>,
+    onToggle: (String) -> Unit,
+    onNew: (String) -> Unit,
+    onDismiss: () -> Unit,
+) {
+    var name by rememberSaveable { mutableStateOf("") }
+    EInkDialog(onDismiss = onDismiss) {
+        LazyColumnMMD(Modifier.fillMaxWidth().heightIn(max = 300.dp)) {
+            for (g in all) {
+                item(key = "g:$g") {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxWidth().clickable { onToggle(g) }.padding(vertical = 4.dp),
+                    ) {
+                        CheckboxMMD(checked = g in chosen, onCheckedChange = null)
+                        TextMMD(text = g, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(start = 8.dp))
+                    }
+                }
+            }
+        }
+        TextFieldMMD(
+            value = name,
+            onValueChange = { name = it },
+            label = { TextMMD(text = stringResource(R.string.edit_new_group)) },
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
+            modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+        )
+        Spacer(Modifier.height(14.dp))
+        // The ticks take effect as they are made; this only closes, adding a group if one was typed.
+        OutlinedButtonMMD(
+            onClick = {
+                if (name.isNotBlank()) onNew(name)
+                name = ""
+                onDismiss()
+            },
+            modifier = Modifier.fillMaxWidth().height(48.dp),
+        ) { TextMMD(text = stringResource(R.string.done), style = MaterialTheme.typography.bodySmall) }
     }
 }
 

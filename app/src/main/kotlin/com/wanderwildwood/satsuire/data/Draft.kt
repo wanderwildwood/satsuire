@@ -20,6 +20,8 @@ data class Draft(
     val validFrom: Long? = null,
     val expiry: Long? = null,
     val note: String = "",
+    /** The groups it is in; null where they have not been read, which leaves them as they are. */
+    val groups: List<String>? = null,
 ) {
     val isNew: Boolean get() = id < 0
 
@@ -43,7 +45,7 @@ data class Draft(
                 if (d == null) {
                     arrayListOf<Any?>()
                 } else {
-                    arrayListOf<Any?>(d.id, d.name, d.number, d.format, d.barcodeValue, d.validFrom, d.expiry, d.note)
+                    arrayListOf<Any?>(d.id, d.name, d.number, d.format, d.barcodeValue, d.validFrom, d.expiry, d.note, d.groups?.let { ArrayList(it) })
                 }
             },
             restore = { v ->
@@ -60,6 +62,7 @@ data class Draft(
                         validFrom = l[5] as Long?,
                         expiry = l[6] as Long?,
                         note = l[7] as String,
+                        groups = (l.getOrNull(8) as List<*>?)?.map { it as String },
                     )
                 }
             },

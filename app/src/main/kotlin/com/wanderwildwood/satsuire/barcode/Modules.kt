@@ -88,6 +88,39 @@ class Modules(
             return first
         }
 
+        /**
+         * As [encode], shaped for a box [boxWidth] by [boxHeight] pixels where the standard
+         * leaves the shape open. A PDF417 can hold the same content in few wide rows or many
+         * narrow ones; ZXing's default is wide and flat, which on a 480-pixel panel left a
+         * boarding pass one pixel a module. Each column count from 1 to 12 is tried, and the
+         * one drawn largest in the box is kept.
+         */
+        fun encodeFor(
+            content: String,
+            format: BarcodeFormat,
+            charset: Charset,
+            boxWidth: Int,
+            boxHeight: Int,
+        ): Modules {
+            val default = encode(content, format, charset)
+            if (format != BarcodeFormat.PDF_417) return default
+            var best = default
+            var bestScale = Fit.of(default, boxWidth, boxHeight)?.scale ?: 0
+            for (cols in 1..12) {
+                val hints = HashMap<EncodeHintType, Any>()
+                hints[EncodeHintType.MARGIN] = 0
+                hints[EncodeHintType.PDF417_DIMENSIONS] = com.google.zxing.pdf417.encoder.Dimensions(cols, cols, 3, 90)
+                if (charset.name() != StandardCharsets.ISO_8859_1.name()) hints[EncodeHintType.CHARACTER_SET] = charset.name()
+                val m = runCatching { build(content, format, hints) }.getOrNull() ?: continue
+                val scale = Fit.of(m, boxWidth, boxHeight)?.scale ?: continue
+                if (scale > bestScale) {
+                    best = m
+                    bestScale = scale
+                }
+            }
+            return best
+        }
+
         private fun build(content: String, format: BarcodeFormat, hints: Map<EncodeHintType, Any>): Modules {
             val matrix = try {
                 MultiFormatWriter().encode(content, format, 0, 0, hints)

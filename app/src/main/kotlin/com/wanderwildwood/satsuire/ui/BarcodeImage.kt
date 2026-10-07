@@ -19,7 +19,8 @@ import androidx.compose.ui.unit.dp
 import com.mudita.mmd.components.text.TextMMD
 import com.wanderwildwood.satsuire.R
 import com.wanderwildwood.satsuire.barcode.Fit
-import com.wanderwildwood.satsuire.barcode.Modules
+import com.wanderwildwood.satsuire.barcode.modulesFor
+import protect.card_locker.LoyaltyCard
 import com.wanderwildwood.satsuire.barcode.bitmap
 import protect.card_locker.CatimaBarcode
 
@@ -29,10 +30,12 @@ import protect.card_locker.CatimaBarcode
  * nothing between this and the panel can scale it and grey its edges.
  */
 @Composable
-fun BarcodeImage(modules: Modules, modifier: Modifier = Modifier) {
+fun BarcodeImage(card: LoyaltyCard, modifier: Modifier = Modifier) {
     BoxWithConstraints(modifier) {
         val w = constraints.maxWidth
         val h = constraints.maxHeight
+        val modules = remember(card.id, card.cardId, card.barcodeId, card.barcodeType?.name(), w, h) { card.modulesFor(w, h) }
+            ?: return@BoxWithConstraints
         val fit = remember(modules, w, h) { Fit.of(modules, w, h) }
         if (fit == null) {
             TextMMD(

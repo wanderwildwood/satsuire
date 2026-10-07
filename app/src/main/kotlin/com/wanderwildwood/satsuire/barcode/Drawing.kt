@@ -19,6 +19,12 @@ fun LoyaltyCard.modules(): Modules? {
     return runCatching { Modules.encode(encoded(), format, barcodeEncoding ?: StandardCharsets.ISO_8859_1) }.getOrNull()
 }
 
+/** As [modules], with the shape chosen for a box of [w] by [h] pixels where the kind allows a choice. */
+fun LoyaltyCard.modulesFor(w: Int, h: Int): Modules? {
+    val format: BarcodeFormat = barcodeType?.format() ?: return null
+    return runCatching { Modules.encodeFor(encoded(), format, barcodeEncoding ?: StandardCharsets.ISO_8859_1, w, h) }.getOrNull()
+}
+
 fun bitmap(m: Modules, fit: Fit): Bitmap =
     Bitmap.createBitmap(render(m, fit), fit.width, fit.height, Bitmap.Config.ARGB_8888)
 

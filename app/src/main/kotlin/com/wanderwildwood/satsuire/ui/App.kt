@@ -74,6 +74,14 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit) {
     var about by rememberSaveable { mutableStateOf(false) }
     var choices by remember { mutableStateOf<List<ParseResult>?>(null) }
     var locked by remember { mutableStateOf<Uri?>(null) }
+    var group by remember { mutableStateOf(Prefs.group(context)) }
+    var order by remember { mutableStateOf(Prefs.order(context)) }
+    var ordering by rememberSaveable { mutableStateOf(false) }
+    val groups by produceState(emptyList<Pair<String, Int>>(), refresh) {
+        value = withContext(Dispatchers.IO) { Wallet.groups(context) }
+    }
+    // A group deleted or renamed since it was chosen shows every card rather than none.
+    val shownGroup = group?.takeIf { g -> groups.any { it.first == g } }
 
     fun changed() {
         refresh++
@@ -87,10 +95,10 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit) {
         val card = result.loyaltyCard
         if (result.parseResultType == ParseResultType.FULL) {
             base = card
-            draft = Draft.of(card).copy(id = -1)
+            draft = Draft.of(card).copy(id = -1, groups = listOfNotNull(shownGroup))
         } else {
             base = null
-            draft = Draft(number = card.cardId, format = card.barcodeType?.name())
+            draft = Draft(number = card.cardId, format = card.barcodeType?.name(), groups = listOfNotNull(shownGroup))
         }
         push(EDIT)
     }
@@ -180,8 +188,8 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit) {
     when {
         top == LIST || top == ARCHIVED -> {
             val archived = top == ARCHIVED
-            val rows by produceState<List<Wallet.Row>?>(null, refresh, archived) {
-                value = withContext(Dispatchers.IO) { Wallet.rows(context, archived) }
+            val rows by produceState<List<Wallet.Row>?>(null, refresh, archived, shownGroup, order) {
+                value = withContext(Dispatchers.IO) { Wallet.rows(context, archived, if (archived) null else shownGroup, order) }
             }
             val archivedCount by produceState(0, refresh) {
                 value = withContext(Dispatchers.IO) { Wallet.archivedCount(context) }
@@ -190,7 +198,19 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit) {
                 rows = rows,
                 archived = archived,
                 archivedCount = if (archived) 0 else archivedCount,
-                onOpen = { push(card(it)) },
+                group = shownGroup,
+                groups = groups,
+                onGroup = {
+                    group = it
+                    Prefs.setGroup(context, it)
+                },
+                onOpen = { id ->
+                    push(card(id))
+                    scope.launch {
+                        withContext(Dispatchers.IO) { Wallet.touch(context, id) }
+                        if (order == Wallet.Order.LAST_USED) refresh++
+                    }
+                },
                 onArchived = { push(ARCHIVED) },
                 onAdd = { adding = true },
                 onSettings = { push(SETTINGS) },
@@ -209,9 +229,12 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit) {
                     card = c,
                     onBack = ::pop,
                     onEdit = {
-                        base = null
-                        draft = Draft.of(c)
-                        push(EDIT)
+                        scope.launch {
+                            val inGroups = withContext(Dispatchers.IO) { Wallet.cardGroups(context, c.id) }
+                            base = null
+                            draft = Draft.of(c).copy(groups = inGroups)
+                            push(EDIT)
+                        }
                     },
                     onAction = { action ->
                         when (action) {
@@ -277,6 +300,13 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit) {
                             if (stack.last() == card(d.id)) pop()
                         }
                     }),
+                    allGroups = groups.map { it.first },
+                    onNewGroup = { name ->
+                        scope.launch {
+                            withContext(Dispatchers.IO) { Wallet.addGroup(context, name) }
+                            refresh++
+                        }
+                    },
                 )
             }
         }
@@ -290,9 +320,26 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit) {
             onType = {
                 pop()
                 base = null
-                draft = Draft(format = null)
+                draft = Draft(format = null, groups = listOfNotNull(shownGroup))
                 push(EDIT)
             },
+            onBack = ::pop,
+        )
+        top == GROUPS -> GroupsScreen(
+            groups = groups,
+            onAdd = { name -> scope.launch { withContext(Dispatchers.IO) { Wallet.addGroup(context, name) }; refresh++ } },
+            onRename = { from, to ->
+                scope.launch {
+                    val ok = withContext(Dispatchers.IO) { Wallet.renameGroup(context, from, to) }
+                    if (!ok) message = context.getString(R.string.groups_not_renamed)
+                    if (ok && group == from) {
+                        group = to.trim()
+                        Prefs.setGroup(context, group)
+                    }
+                    refresh++
+                }
+            },
+            onDelete = { name -> scope.launch { withContext(Dispatchers.IO) { Wallet.deleteGroup(context, name) }; refresh++ } },
             onBack = ::pop,
         )
         top == SETTINGS -> {
@@ -308,10 +355,28 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit) {
                     Prefs.setOnLockScreen(context, it)
                     GlanceProvider.changed(context)
                 },
+                order = orderName(order),
+                onOrder = { ordering = true },
+                groupCount = groups.size,
+                onGroups = { push(GROUPS) },
                 onBringIn = { importFile.launch(arrayOf("*/*")) },
                 onSendOut = { exportFile.launch("wallet-${LocalDate.now()}.zip") },
                 onBack = ::pop,
             )
+        }
+    }
+
+    if (ordering) {
+        EInkDialog(onDismiss = { ordering = false }) {
+            TextMMD(text = stringResource(R.string.settings_order), style = MaterialTheme.typography.bodyLarge)
+            Spacer(Modifier.height(6.dp))
+            for (o in Wallet.Order.entries) {
+                ChoiceRow(orderName(o), bold = o == order) {
+                    order = o
+                    Prefs.setOrder(context, o)
+                    ordering = false
+                }
+            }
         }
     }
 
@@ -326,7 +391,7 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit) {
             ChoiceRow(stringResource(R.string.add_type)) {
                 adding = false
                 base = null
-                draft = Draft()
+                draft = Draft(groups = listOfNotNull(shownGroup))
                 push(EDIT)
             }
             ChoiceRow(stringResource(R.string.add_file), stringResource(R.string.add_file_note)) {
@@ -394,6 +459,18 @@ private const val CARD = "card:"
 private const val EDIT = "edit"
 private const val SCAN = "scan"
 private const val SETTINGS = "settings"
+private const val GROUPS = "groups"
+
+@Composable
+private fun orderName(o: Wallet.Order): String = stringResource(
+    when (o) {
+        Wallet.Order.NAME -> R.string.order_name
+        Wallet.Order.LAST_USED -> R.string.order_last_used
+        Wallet.Order.LAST_ADDED -> R.string.order_last_added
+        Wallet.Order.EXPIRY -> R.string.order_expiry
+        Wallet.Order.VALID_FROM -> R.string.order_valid_from
+    },
+)
 
 private fun card(id: Int) = CARD + id
 

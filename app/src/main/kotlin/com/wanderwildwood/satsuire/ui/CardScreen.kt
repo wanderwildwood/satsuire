@@ -69,7 +69,7 @@ fun CardScreen(
         Column(Modifier.padding(padding).fillMaxSize()) {
             Box(Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.Center) {
                 when {
-                    modules != null -> BarcodeImage(modules, Modifier.fillMaxSize())
+                    modules != null -> BarcodeImage(card, Modifier.fillMaxSize())
                     card.barcodeType != null -> TextMMD(
                         text = stringResource(R.string.card_cannot_draw, card.barcodeType!!.prettyName()),
                         style = MaterialTheme.typography.bodyMedium,
@@ -79,12 +79,19 @@ fun CardScreen(
                     else -> Unit
                 }
             }
+            // A number short enough to read out is written large; a boarding pass's long string
+            // is there to be checked, not typed, and is kept small to leave the code its room.
+            val long = card.cardId.length > 24
             TextMMD(
                 text = card.cardId,
-                style = if (modules == null) MaterialTheme.typography.headlineMedium else MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold,
+                style = when {
+                    modules == null -> MaterialTheme.typography.headlineMedium
+                    long -> MaterialTheme.typography.labelSmall
+                    else -> MaterialTheme.typography.titleLarge
+                },
+                fontWeight = if (long) FontWeight.Normal else FontWeight.Bold,
                 textAlign = TextAlign.Center,
-                maxLines = 3,
+                maxLines = if (long) 2 else 3,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 6.dp),
             )
@@ -116,7 +123,7 @@ fun CardScreen(
         }
     }
 
-    if (note) MessageDialog(card.note) { note = false }
+    if (note) LongTextDialog(card.note) { note = false }
 
     if (menu) {
         EInkDialog(onDismiss = { menu = false }) {
@@ -124,7 +131,7 @@ fun CardScreen(
                 menu = false
                 onAction(a)
             }
-            ChoiceRow(stringResource(if (card.starStatus != 0) R.string.action_unstar else R.string.action_star)) { pick(CardAction.STAR) }
+            ChoiceRow(stringResource(if (card.starStatus != 0) R.string.action_unfavourite else R.string.action_favourite)) { pick(CardAction.STAR) }
             if (card.validFrom != null || card.expiry != null) {
                 ChoiceRow(stringResource(R.string.action_calendar)) { pick(CardAction.CALENDAR) }
             }

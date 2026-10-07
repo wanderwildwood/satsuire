@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Catima's colours for a card that came without one. Nothing here is drawn in colour;
-         they are kept so a card brought in and sent back out to Catima keeps a colour. -->
+    <!-- Catima's colours, which its FidMe importer still picks from. The app shows no colour
+         anywhere; a colour that comes in with a card is stored as Catima stores it and ignored. -->
     <array name="letter_tile_colors">
         <item>#f16364</item>
         <item>#f58559</item>

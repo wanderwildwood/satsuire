@@ -57,6 +57,19 @@ fun ScanScreen(onRead: (String, BarcodeFormat) -> Unit, onType: () -> Unit, onBa
         refused = !granted
     }
     LaunchedEffect(Unit) { if (!allowed && !refused) ask.launch(Manifest.permission.CAMERA) }
+    // Allowed later in the phone's settings, the camera comes on when the app is back in front.
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
+    DisposableEffect(lifecycle) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_RESUME &&
+                ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+            ) {
+                allowed = true
+            }
+        }
+        lifecycle.addObserver(observer)
+        onDispose { lifecycle.removeObserver(observer) }
+    }
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.surface,

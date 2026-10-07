@@ -6,9 +6,9 @@ package com.wanderwildwood.satsuire.barcode
  *
  * A scanner reads the width of a bar against the width of the narrowest one. Give every module
  * the same whole number of pixels and every bar is exactly a multiple of the narrowest; there is
- * nothing for the panel to round. Turning the code costs nothing to a scanner, which reads a
- * barcode in any direction, so a long code that only gets one pixel a module across the panel
- * is turned to run down it when that buys it more.
+ * nothing for the panel to round. A grid code (QR, Aztec, PDF417, Data Matrix) is read whole
+ * by an imager in any direction, so it is turned whenever that buys it more. A bar code read
+ * along a line is turned only when lying flat would leave it under two pixels a module.
  */
 data class Fit(
     /** Pixels per module, at least 1. */
@@ -39,7 +39,10 @@ data class Fit(
 
             val flat = scaleFor(boxWidth, boxHeight)
             val side = scaleFor(boxHeight, boxWidth)
-            val turned = side > flat
+            // A bar code read along one line is turned only when lying flat would give it under
+            // two pixels a module: a handheld laser reads along its own line, and a cashier
+            // should not have to turn it. A grid code is read whole, whichever way it lies.
+            val turned = side > flat && (!m.linear || flat < 2)
             val scale = if (turned) side else flat
             if (scale < 1) return null
 
