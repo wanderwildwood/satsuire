@@ -83,6 +83,7 @@
     <string name="action_archive">Put away</string>
     <string name="action_unarchive">Bring back</string>
     <string name="no_calendar">There is no calendar app on this phone to add it to.</string>
+    <string name="card_gone">That card is no longer in Wallet.</string>
     <string name="share_failed">There is no app on this phone to share it with.</string>
 
     <!-- ============================================================ -->

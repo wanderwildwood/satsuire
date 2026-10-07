@@ -87,6 +87,13 @@
                 <data android:pathPattern=".*\\..*\\.pkpass" />
                 <data android:pathPattern=".*\\.pkpasses" />
             </intent-filter>
+
+            <!-- A calendar event made with "Add to calendar", asking to show its card: Android's
+                 own request for it, sent by Calendar's "Open in Wallet". See data/CardLink.kt. -->
+            <intent-filter>
+                <action android:name="android.provider.calendar.action.HANDLE_CUSTOM_EVENT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
         <!-- The scanner library brings a whole scanning activity of its own; the app draws its

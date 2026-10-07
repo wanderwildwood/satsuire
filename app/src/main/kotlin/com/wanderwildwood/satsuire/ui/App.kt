@@ -37,6 +37,7 @@ import com.mudita.mmd.components.text.TextMMD
 import com.mudita.mmd.components.text_field.TextFieldMMD
 import com.wanderwildwood.satsuire.R
 import com.wanderwildwood.satsuire.barcode.shareIntent
+import com.wanderwildwood.satsuire.data.CardLink
 import com.wanderwildwood.satsuire.data.Draft
 import com.wanderwildwood.satsuire.data.Incoming
 import com.wanderwildwood.satsuire.data.Prefs
@@ -60,7 +61,7 @@ import java.time.LocalDate
  * half typed in is still there when the phone comes back to it.
  */
 @Composable
-fun WalletApp(handed: Intent?, onHandled: () -> Unit) {
+fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAsked: () -> Unit = {}) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val stack = rememberSaveable(saver = stackSaver()) { mutableStateListOf(LIST) }
@@ -128,6 +129,27 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit) {
         busy = null
         take(found)
         reading = null
+    }
+
+    // A card asked for by the calendar event made from it; said plainly when it has gone since.
+    // Taken off the activity at once and looked up in its own effect, as with [handed]: clearing
+    // the activity's copy changes the key above, which would cancel a lookup made there.
+    var opening by remember { mutableStateOf<Int?>(null) }
+    LaunchedEffect(asked) {
+        if (asked != null) {
+            opening = asked
+            onAsked()
+        }
+    }
+    LaunchedEffect(opening) {
+        val id = opening ?: return@LaunchedEffect
+        val there = withContext(Dispatchers.IO) { Wallet.card(context, id) } != null
+        if (there) {
+            if (stack.last() != card(id)) push(card(id))
+        } else {
+            message = context.getString(R.string.card_gone)
+        }
+        opening = null
     }
 
     val pickFile = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
@@ -513,7 +535,8 @@ private fun stackSaver() = listSaver<SnapshotStateList<String>, String>(
 /**
  * The card's days as an event in whatever calendar app answers Android's request to add one —
  * Calendar does. All-day, from the first day it is good to the last; a card with only one of
- * the two dates becomes a one-day event on that day. Returns what to say when nothing answers.
+ * the two dates becomes a one-day event on that day. The event carries a link back to the card
+ * ([CardLink]), so Calendar can open it. Returns what to say when nothing answers.
  */
 private fun addToCalendar(context: Context, card: LoyaltyCard): String? {
     val from = card.validFrom?.time
@@ -525,7 +548,7 @@ private fun addToCalendar(context: Context, card: LoyaltyCard): String? {
     val begin = Validity.millis(startDay)
     val end = Validity.millis(endDay.plusDays(1))
     val kind = card.barcodeType?.prettyName()
-    val intent = Intent(Intent.ACTION_INSERT, CalendarContract.Events.CONTENT_URI)
+    val intent = CardLink.put(context, Intent(Intent.ACTION_INSERT, CalendarContract.Events.CONTENT_URI), card.id)
         .putExtra(CalendarContract.Events.TITLE, card.store)
         .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, begin)
         .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, end)
