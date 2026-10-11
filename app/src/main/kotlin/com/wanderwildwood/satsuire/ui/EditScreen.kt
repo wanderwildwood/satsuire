@@ -85,7 +85,7 @@ fun EditScreen(
             }
         },
     ) { padding ->
-        LazyColumnMMD(Modifier.padding(padding).fillMaxSize().padding(horizontal = 20.dp)) {
+        LazyColumnMMD(Modifier.padding(padding).fillMaxSize().padding(horizontal = 20.dp), isScrollbarVisible = false) {
             item(key = "name") {
                 Spacer(Modifier.height(8.dp))
                 TextFieldMMD(
@@ -220,7 +220,7 @@ private fun GroupsChoice(
 ) {
     var name by rememberSaveable { mutableStateOf("") }
     EInkDialog(onDismiss = onDismiss) {
-        LazyColumnMMD(Modifier.fillMaxWidth().heightIn(max = 300.dp)) {
+        LazyColumnMMD(Modifier.fillMaxWidth().heightIn(max = 300.dp), isScrollbarVisible = false) {
             for (g in all) {
                 item(key = "g:$g") {
                     Row(
@@ -264,7 +264,7 @@ private val NUMERIC = setOf("EAN_8", "EAN_13", "UPC_A", "UPC_E", "ITF")
 @Composable
 fun FormatDialog(current: String?, onPick: (String?) -> Unit, onDismiss: () -> Unit) {
     EInkDialog(onDismiss = onDismiss) {
-        LazyColumnMMD(Modifier.fillMaxWidth().height(460.dp)) {
+        LazyColumnMMD(Modifier.fillMaxWidth().height(460.dp), isScrollbarVisible = false) {
             item(key = "none") {
                 ChoiceRow(stringResource(R.string.format_none), bold = current == null) { onPick(null) }
             }

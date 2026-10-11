@@ -30,7 +30,7 @@ fun SettingsScreen(
         containerColor = MaterialTheme.colorScheme.surface,
         topBar = { Bar(stringResource(R.string.settings_title), onBack = onBack) },
     ) { padding ->
-        LazyColumnMMD(Modifier.padding(padding).fillMaxSize().padding(horizontal = 20.dp)) {
+        LazyColumnMMD(Modifier.padding(padding).fillMaxSize().padding(horizontal = 20.dp), isScrollbarVisible = false) {
             item(key = "order") {
                 SettingRow(stringResource(R.string.settings_order), order, onOrder)
             }

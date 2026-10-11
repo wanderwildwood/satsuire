@@ -80,7 +80,7 @@ fun ListScreen(
             )
             return@Scaffold
         }
-        LazyColumnMMD(Modifier.padding(padding).fillMaxSize()) {
+        LazyColumnMMD(Modifier.padding(padding).fillMaxSize(), isScrollbarVisible = false) {
             if (showFilter) {
                 item(key = "filter") {
                     TextMMD(
@@ -151,7 +151,7 @@ private fun CardRow(row: Wallet.Row, today: LocalDate, onClick: () -> Unit) {
 @Composable
 private fun GroupFilterDialog(current: String?, groups: List<Pair<String, Int>>, onPick: (String?) -> Unit, onDismiss: () -> Unit) {
     EInkDialog(onDismiss = onDismiss) {
-        LazyColumnMMD(Modifier.fillMaxWidth().heightIn(max = 460.dp)) {
+        LazyColumnMMD(Modifier.fillMaxWidth().heightIn(max = 460.dp), isScrollbarVisible = false) {
             item(key = "all") { ChoiceRow(stringResource(R.string.group_all), bold = current == null) { onPick(null) } }
             for ((name, count) in groups) {
                 item(key = "g:$name") {

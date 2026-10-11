@@ -53,7 +53,7 @@ fun GroupsScreen(
             )
             return@Scaffold
         }
-        LazyColumnMMD(Modifier.padding(padding).fillMaxSize().padding(horizontal = 20.dp)) {
+        LazyColumnMMD(Modifier.padding(padding).fillMaxSize().padding(horizontal = 20.dp), isScrollbarVisible = false) {
             for ((name, count) in groups) {
                 item(key = "g:$name") {
                     SettingRow(name, pluralStringResource(R.plurals.group_count, count, count)) { open = name }
