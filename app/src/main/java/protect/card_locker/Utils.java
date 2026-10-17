@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ImageDecoder;
+import android.graphics.Matrix;
 import android.graphics.pdf.PdfRenderer;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
@@ -60,6 +61,8 @@ import com.wanderwildwood.satsuire.R;
  */
 public class Utils {
     private static final String TAG = "Catima";
+
+    private static final float PDF_LONG_SIDE = 2400f;
 
     public static final String CARD_IMAGE_FILENAME_REGEX = "^(card_)(\\d+)(_(?:front|back|icon)\\.png)$";
 
@@ -187,7 +190,12 @@ public class Utils {
                 Bitmap renderedPage;
                 for (int i = 0; i < renderer.getPageCount(); i++) {
                     PdfRenderer.Page page = renderer.openPage(i);
-                    renderedPage = Bitmap.createBitmap(page.getWidth(), page.getHeight(), Bitmap.Config.ARGB_8888);
+                    // A page's size is in points, so drawn at that size it is 72 dots to the
+                    // inch, and a small code on a ticket (an inch-wide QR, a boarding pass's
+                    // Aztec) gets under two pixels to a module, which ZXing cannot read. Draw
+                    // it larger, up to about 2400 pixels on its long side.
+                    float scale = Math.max(1f, Math.min(4f, PDF_LONG_SIDE / (float) Math.max(page.getWidth(), page.getHeight())));
+                    renderedPage = Bitmap.createBitmap(Math.round(page.getWidth() * scale), Math.round(page.getHeight() * scale), Bitmap.Config.ARGB_8888);
 
                     // Ensure the page has a background
                     // Fixes some transparent PDF files not being read well
@@ -195,7 +203,9 @@ public class Utils {
                     canvas.drawColor(Color.WHITE);
                     canvas.drawBitmap(renderedPage, 0, 0, null);
 
-                    page.render(renderedPage, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
+                    Matrix toPixels = new Matrix();
+                    toPixels.setScale(scale, scale);
+                    page.render(renderedPage, null, toPixels, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
                     page.close();
 
                     List<ParseResult> barcodesFromPage = getBarcodesFromBitmap(renderedPage);
