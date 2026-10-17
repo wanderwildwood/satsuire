@@ -226,6 +226,7 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
                 archivedCount = if (archived) 0 else archivedCount,
                 group = shownGroup,
                 groups = groups,
+                byName = order == Wallet.Order.NAME,
                 onGroup = {
                     group = it
                     Prefs.setGroup(context, it)

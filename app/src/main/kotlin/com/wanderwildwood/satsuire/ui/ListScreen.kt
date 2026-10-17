@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -23,6 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.mudita.mmd.components.divider.HorizontalDividerMMD
+import androidx.compose.foundation.lazy.rememberLazyListState
 import com.mudita.mmd.components.lazy.LazyColumnMMD
 import com.mudita.mmd.components.text.TextMMD
 import com.wanderwildwood.satsuire.R
@@ -43,6 +45,8 @@ fun ListScreen(
     archivedCount: Int,
     group: String?,
     groups: List<Pair<String, Int>>,
+    /** Ordered A to Z after the favourites, so the jump down the edge can be letters. */
+    byName: Boolean,
     onGroup: (String?) -> Unit,
     onOpen: (Int) -> Unit,
     onArchived: () -> Unit,
@@ -80,36 +84,48 @@ fun ListScreen(
             )
             return@Scaffold
         }
-        LazyColumnMMD(Modifier.padding(padding).fillMaxSize(), isScrollbarVisible = false) {
-            if (showFilter) {
-                item(key = "filter") {
-                    TextMMD(
-                        text = stringResource(R.string.list_showing, group ?: stringResource(R.string.group_all)),
-                        style = MaterialTheme.typography.labelSmall,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable { choosing = true }
-                            .padding(horizontal = 20.dp, vertical = 12.dp),
-                    )
-                    HorizontalDividerMMD()
-                }
+        val state = rememberLazyListState()
+        // Favourites come first in every order; the letters are for the cards after them.
+        val jump = remember(rows, byName, showFilter) {
+            if (byName) {
+                val starred = rows.takeWhile { it.starred }.size
+                ListJump.Letters(rows.drop(starred).map { it.name }, firstIndex = (if (showFilter) 1 else 0) + starred)
+            } else {
+                ListJump.Pages
             }
-            for (row in rows) {
-                item(key = "c:${row.id}") {
-                    CardRow(row, today) { onOpen(row.id) }
-                    HorizontalDividerMMD()
+        }
+        ListJumpBox(state, jump, Modifier.padding(padding)) {
+            LazyColumnMMD(Modifier.fillMaxSize(), state = state, isScrollbarVisible = false) {
+                if (showFilter) {
+                    item(key = "filter") {
+                        TextMMD(
+                            text = stringResource(R.string.list_showing, group ?: stringResource(R.string.group_all)),
+                            style = MaterialTheme.typography.labelSmall,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { choosing = true }
+                                .padding(horizontal = 20.dp, vertical = 12.dp),
+                        )
+                        HorizontalDividerMMD()
+                    }
                 }
-            }
-            if (!archived && archivedCount > 0) {
-                item(key = "archived") {
-                    TextMMD(
-                        text = pluralStringResource(R.plurals.put_away_row, archivedCount, archivedCount),
-                        style = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable(onClick = onArchived)
-                            .padding(horizontal = 20.dp, vertical = 16.dp),
-                    )
+                for (row in rows) {
+                    item(key = "c:${row.id}") {
+                        CardRow(row, today) { onOpen(row.id) }
+                        HorizontalDividerMMD()
+                    }
+                }
+                if (!archived && archivedCount > 0) {
+                    item(key = "archived") {
+                        TextMMD(
+                            text = pluralStringResource(R.plurals.put_away_row, archivedCount, archivedCount),
+                            style = MaterialTheme.typography.bodyMedium,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable(onClick = onArchived)
+                                .padding(horizontal = 20.dp, vertical = 16.dp),
+                        )
+                    }
                 }
             }
         }
