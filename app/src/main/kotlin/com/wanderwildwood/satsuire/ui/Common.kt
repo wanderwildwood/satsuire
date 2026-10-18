@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
-import com.mudita.mmd.components.lazy.LazyColumnMMD
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -187,7 +186,7 @@ fun MessageDialog(message: String, onDismiss: () -> Unit) {
 fun LongTextDialog(text: String, onDismiss: () -> Unit) {
     val paragraphs = text.split(Regex("\n\\s*\n")).map { it.trim() }.filter { it.isNotEmpty() }
     EInkDialog(onDismiss = onDismiss) {
-        LazyColumnMMD(Modifier.fillMaxWidth().heightIn(max = 420.dp), scrollStep = 1, isScrollbarVisible = false) {
+        PagedColumn(Modifier.fillMaxWidth().heightIn(max = 420.dp)) {
             paragraphs.forEachIndexed { i, p ->
                 item(key = i) {
                     TextMMD(text = p, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(bottom = 12.dp))

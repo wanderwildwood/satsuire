@@ -18,7 +18,6 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
-import com.mudita.mmd.components.lazy.LazyColumnMMD
 import com.mudita.mmd.components.text.TextMMD
 import com.mudita.mmd.components.text_field.TextFieldMMD
 import com.wanderwildwood.satsuire.R
@@ -53,7 +52,7 @@ fun GroupsScreen(
             )
             return@Scaffold
         }
-        LazyColumnMMD(Modifier.padding(padding).fillMaxSize().padding(horizontal = 20.dp), isScrollbarVisible = false) {
+        PagedColumn(Modifier.padding(padding).fillMaxSize().padding(horizontal = 20.dp)) {
             for ((name, count) in groups) {
                 item(key = "g:$name") {
                     SettingRow(name, pluralStringResource(R.plurals.group_count, count, count)) { open = name }

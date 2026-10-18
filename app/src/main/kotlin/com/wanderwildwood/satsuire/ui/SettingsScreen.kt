@@ -9,7 +9,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.mudita.mmd.components.lazy.LazyColumnMMD
 import com.wanderwildwood.satsuire.R
 
 /** The list's order, the groups, the lock-screen switch, and cards in and out as files. */
@@ -30,7 +29,7 @@ fun SettingsScreen(
         containerColor = MaterialTheme.colorScheme.surface,
         topBar = { Bar(stringResource(R.string.settings_title), onBack = onBack) },
     ) { padding ->
-        LazyColumnMMD(Modifier.padding(padding).fillMaxSize().padding(horizontal = 20.dp), isScrollbarVisible = false) {
+        PagedColumn(Modifier.padding(padding).fillMaxSize().padding(horizontal = 20.dp)) {
             item(key = "order") {
                 SettingRow(stringResource(R.string.settings_order), order, onOrder)
             }

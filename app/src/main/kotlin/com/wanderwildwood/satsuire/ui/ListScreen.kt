@@ -25,7 +25,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.mudita.mmd.components.divider.HorizontalDividerMMD
 import androidx.compose.foundation.lazy.rememberLazyListState
-import com.mudita.mmd.components.lazy.LazyColumnMMD
 import com.mudita.mmd.components.text.TextMMD
 import com.wanderwildwood.satsuire.R
 import com.wanderwildwood.satsuire.data.Validity
@@ -95,7 +94,7 @@ fun ListScreen(
             }
         }
         ListJumpBox(state, jump, Modifier.padding(padding)) {
-            LazyColumnMMD(Modifier.fillMaxSize(), state = state, isScrollbarVisible = false) {
+            PagedColumn(Modifier.fillMaxSize(), state = state) {
                 if (showFilter) {
                     item(key = "filter") {
                         TextMMD(
@@ -167,7 +166,7 @@ private fun CardRow(row: Wallet.Row, today: LocalDate, onClick: () -> Unit) {
 @Composable
 private fun GroupFilterDialog(current: String?, groups: List<Pair<String, Int>>, onPick: (String?) -> Unit, onDismiss: () -> Unit) {
     EInkDialog(onDismiss = onDismiss) {
-        LazyColumnMMD(Modifier.fillMaxWidth().heightIn(max = 460.dp), isScrollbarVisible = false) {
+        PagedColumn(Modifier.fillMaxWidth().heightIn(max = 460.dp)) {
             item(key = "all") { ChoiceRow(stringResource(R.string.group_all), bold = current == null) { onPick(null) } }
             for ((name, count) in groups) {
                 item(key = "g:$name") {

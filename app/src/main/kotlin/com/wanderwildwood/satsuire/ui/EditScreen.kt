@@ -24,7 +24,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.mudita.mmd.components.lazy.LazyColumnMMD
 import com.mudita.mmd.components.text.TextMMD
 import com.mudita.mmd.components.text_field.TextFieldMMD
 import com.wanderwildwood.satsuire.R
@@ -85,7 +84,7 @@ fun EditScreen(
             }
         },
     ) { padding ->
-        LazyColumnMMD(Modifier.padding(padding).fillMaxSize().padding(horizontal = 20.dp), isScrollbarVisible = false) {
+        PagedColumn(Modifier.padding(padding).fillMaxSize().padding(horizontal = 20.dp)) {
             item(key = "name") {
                 Spacer(Modifier.height(8.dp))
                 TextFieldMMD(
@@ -168,7 +167,6 @@ fun EditScreen(
                     ArmedRow(stringResource(R.string.edit_delete), stringResource(R.string.edit_delete_armed), onDelete)
                 }
             }
-            item(key = "foot") { Spacer(Modifier.height(24.dp)) }
         }
     }
 
@@ -220,14 +218,14 @@ private fun GroupsChoice(
 ) {
     var name by rememberSaveable { mutableStateOf("") }
     EInkDialog(onDismiss = onDismiss) {
-        LazyColumnMMD(Modifier.fillMaxWidth().heightIn(max = 300.dp), isScrollbarVisible = false) {
+        PagedColumn(Modifier.fillMaxWidth().heightIn(max = 300.dp)) {
             for (g in all) {
                 item(key = "g:$g") {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier.fillMaxWidth().clickable { onToggle(g) }.padding(vertical = 4.dp),
                     ) {
-                        CheckboxMMD(checked = g in chosen, onCheckedChange = null)
+                        CheckboxMMD(checked = g in chosen, onCheckedChange = { onToggle(g) })
                         TextMMD(text = g, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(start = 8.dp))
                     }
                 }
@@ -264,7 +262,7 @@ private val NUMERIC = setOf("EAN_8", "EAN_13", "UPC_A", "UPC_E", "ITF")
 @Composable
 fun FormatDialog(current: String?, onPick: (String?) -> Unit, onDismiss: () -> Unit) {
     EInkDialog(onDismiss = onDismiss) {
-        LazyColumnMMD(Modifier.fillMaxWidth().height(460.dp), isScrollbarVisible = false) {
+        PagedColumn(Modifier.fillMaxWidth().height(460.dp)) {
             item(key = "none") {
                 ChoiceRow(stringResource(R.string.format_none), bold = current == null) { onPick(null) }
             }
