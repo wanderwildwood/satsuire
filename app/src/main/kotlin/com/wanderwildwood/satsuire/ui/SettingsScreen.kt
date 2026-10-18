@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -48,6 +50,11 @@ fun SettingsScreen(
                     note = if (glanceInstalled) null else stringResource(R.string.settings_lock_screen_no_glance),
                     onChange = onLockScreenChange,
                 )
+            }
+            item(key = "jump") {
+                val context = LocalContext.current
+                val jumpShown by rememberListJumpShown()
+                SwitchRow(stringResource(R.string.list_jump_setting), jumpShown) { ListJumpPrefs.setShown(context, it) }
             }
             item(key = "in") {
                 SettingRow(stringResource(R.string.settings_bring_in), stringResource(R.string.settings_bring_in_value), onBringIn)

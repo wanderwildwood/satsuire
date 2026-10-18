@@ -199,4 +199,7 @@
     <string name="intent_import_card_from_url_path_prefix_thelastproject" translatable="false">/Catima/share</string>
     <string name="intent_import_card_from_url_host_brarcher" translatable="false">brarcher.github.io</string>
     <string name="intent_import_card_from_url_path_prefix_brarcher" translatable="false">/loyalty-card-locker/share</string>
+    <string name="list_jump_setting">Letters and page dots</string>
+    <string name="list_jump_shown">Shown</string>
+    <string name="list_jump_hidden">Hidden</string>
 </resources>
