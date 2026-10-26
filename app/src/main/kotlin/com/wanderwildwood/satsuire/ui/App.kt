@@ -1,6 +1,5 @@
 package com.wanderwildwood.satsuire.ui
 
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -37,7 +36,6 @@ import com.mudita.mmd.components.text.TextMMD
 import com.mudita.mmd.components.text_field.TextFieldMMD
 import com.wanderwildwood.satsuire.R
 import com.wanderwildwood.satsuire.barcode.shareIntent
-import com.wanderwildwood.satsuire.data.CardLink
 import com.wanderwildwood.satsuire.data.Draft
 import com.wanderwildwood.satsuire.data.Incoming
 import com.wanderwildwood.satsuire.data.Prefs
@@ -534,26 +532,26 @@ private fun stackSaver() = listSaver<SnapshotStateList<String>, String>(
 )
 
 /**
- * The card's days as an event in whatever calendar app answers Android's request to add one —
- * Calendar does. All-day, from the first day it is good to the last; a card with only one of
- * the two dates becomes a one-day event on that day. The event carries a link back to the card
- * ([CardLink]), so Calendar can open it. Returns what to say when nothing answers.
+ * The card's days as an event in whatever calendar app answers Android's request to add one.
+ * The plainest request there is, so every calendar can take it: a title, a note, a start and an
+ * end, timed (09:00 on the first day to 09:30 on the last; a card with only one of the two
+ * dates becomes a half-hour on that day), started in a task of its own so that a calendar that
+ * stumbles cannot take Wallet down with it. Returns what to say when nothing answers.
  */
 private fun addToCalendar(context: Context, card: LoyaltyCard): String? {
     val from = card.validFrom?.time
     val until = card.expiry?.time
     val startDay = Validity.day(from ?: until ?: return null)
     val endDay = Validity.day(until ?: from!!)
-    // Local midnights, as Etar sends an all-day event (Calendar reads both ways). The last day
-    // is included, so the end is the midnight after it.
-    val begin = Validity.millis(startDay)
-    val end = Validity.millis(endDay.plusDays(1))
+    val zone = java.time.ZoneId.systemDefault()
+    val begin = startDay.atTime(9, 0).atZone(zone).toInstant().toEpochMilli()
+    val end = endDay.atTime(9, 30).atZone(zone).toInstant().toEpochMilli()
     val kind = card.barcodeType?.prettyName()
-    val intent = CardLink.put(context, Intent(Intent.ACTION_INSERT, CalendarContract.Events.CONTENT_URI), card.id)
+    val intent = Intent(Intent.ACTION_INSERT, CalendarContract.Events.CONTENT_URI)
+        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         .putExtra(CalendarContract.Events.TITLE, card.store)
         .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, begin)
         .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, end)
-        .putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true)
         .putExtra(
             CalendarContract.Events.DESCRIPTION,
             listOfNotNull(card.cardId, kind, card.note.takeIf { it.isNotBlank() }).joinToString("\n"),
@@ -561,7 +559,8 @@ private fun addToCalendar(context: Context, card: LoyaltyCard): String? {
     return try {
         context.startActivity(intent)
         null
-    } catch (_: ActivityNotFoundException) {
+    } catch (e: Exception) {
+        Log.w(TAG, "Adding to the calendar failed", e)
         context.getString(R.string.no_calendar)
     }
 }
