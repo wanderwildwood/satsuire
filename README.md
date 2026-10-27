@@ -44,8 +44,10 @@ PDF417, QR Code, UPC-A and UPC-E.
   Shared text becomes the card's number, and a Catima share link becomes the whole card.
 - **A pass file opened from Files or Email** opens here.
 - **Add to calendar** puts a ticket's days into Calendar, or any calendar app that takes
-  Android's request to add an event. The event remembers its card: in Calendar it has
-  an **Open in Wallet** button, which shows the barcode.
+  Android's request to add an event. It is a timed event (09:00 on the first day to 09:30 on
+  the last) whose note carries the number, the barcode kind, your note and the card's name.
+  In Google Calendar and in Calendar (koyomi) the event also remembers its card and has an
+  **Open in Wallet** button, which shows the barcode; any other calendar gets the plain event.
 - **Share** sends a card's barcode as a picture with its name and number, so another phone
   can scan it, or read it into its own Wallet.
 - **Glance** lists today's tickets by name on the lock screen: a flight today, a ferry ticket

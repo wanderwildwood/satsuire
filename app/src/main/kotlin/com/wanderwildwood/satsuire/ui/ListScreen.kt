@@ -1,6 +1,7 @@
 package com.wanderwildwood.satsuire.ui
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.heightIn
@@ -44,8 +45,6 @@ fun ListScreen(
     archivedCount: Int,
     group: String?,
     groups: List<Pair<String, Int>>,
-    /** Ordered A to Z after the favourites, so the jump down the edge can be letters. */
-    byName: Boolean,
     onGroup: (String?) -> Unit,
     onOpen: (Int) -> Unit,
     onArchived: () -> Unit,
@@ -84,22 +83,13 @@ fun ListScreen(
             return@Scaffold
         }
         val state = rememberLazyListState()
-        // Favourites come first in every order; the letters are for the cards after them.
-        val jump = remember(rows, byName, showFilter) {
-            if (byName) {
-                val starred = rows.takeWhile { it.starred }.size
-                ListJump.Letters(rows.drop(starred).map { it.name }, firstIndex = (if (showFilter) 1 else 0) + starred)
-            } else {
-                ListJump.Pages
-            }
-        }
-        ListJumpBox(state, jump, Modifier.padding(padding)) {
+        Box(Modifier.padding(padding)) {
             PagedColumn(Modifier.fillMaxSize(), state = state) {
                 if (showFilter) {
                     item(key = "filter") {
                         TextMMD(
                             text = stringResource(R.string.list_showing, group ?: stringResource(R.string.group_all)),
-                            style = MaterialTheme.typography.labelSmall,
+                            style = MaterialTheme.typography.bodySmall,
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clickable { choosing = true }
@@ -157,7 +147,7 @@ private fun CardRow(row: Wallet.Row, today: LocalDate, onClick: () -> Unit) {
             )
         }
         validityText(validity, short = true)?.let {
-            TextMMD(text = it, style = MaterialTheme.typography.labelSmall)
+            TextMMD(text = it, style = MaterialTheme.typography.bodySmall)
         }
     }
 }

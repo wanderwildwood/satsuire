@@ -31,7 +31,7 @@ import protect.card_locker.LoyaltyCard
 import java.time.LocalDate
 
 /** What the card screen's ⋮ can do. */
-enum class CardAction { STAR, CALENDAR, SHARE, ARCHIVE }
+enum class CardAction { STAR, CALENDAR, SHARE, ARCHIVE, DELETE }
 
 /**
  * One card: its barcode filling what the screen has, the number written out under it for a
@@ -86,7 +86,7 @@ fun CardScreen(
                 text = card.cardId,
                 style = when {
                     modules == null -> MaterialTheme.typography.headlineMedium
-                    long -> MaterialTheme.typography.labelSmall
+                    long -> MaterialTheme.typography.bodySmall
                     else -> MaterialTheme.typography.titleLarge
                 },
                 fontWeight = if (long) FontWeight.Normal else FontWeight.Bold,
@@ -108,7 +108,7 @@ fun CardScreen(
             if (card.note.isNotBlank()) {
                 TextMMD(
                     text = card.note,
-                    style = MaterialTheme.typography.labelSmall,
+                    style = MaterialTheme.typography.bodySmall,
                     textAlign = TextAlign.Center,
                     maxLines = 3,
                     overflow = TextOverflow.Ellipsis,
@@ -139,6 +139,8 @@ fun CardScreen(
             ChoiceRow(stringResource(if (card.archiveStatus != 0) R.string.action_unarchive else R.string.action_archive)) {
                 pick(CardAction.ARCHIVE)
             }
+            // Last, and armed: the second press within six seconds deletes.
+            ArmedRow(stringResource(R.string.edit_delete), stringResource(R.string.edit_delete_armed)) { pick(CardAction.DELETE) }
         }
     }
 }

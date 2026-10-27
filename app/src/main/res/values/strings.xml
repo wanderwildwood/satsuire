@@ -79,6 +79,7 @@
     <string name="action_favourite">Add to favourites</string>
     <string name="action_unfavourite">Remove from favourites</string>
     <string name="action_calendar">Add to calendar</string>
+    <string name="calendar_note_wallet">In Wallet: %1$s</string>
     <string name="action_share">Share</string>
     <string name="action_archive">Put away</string>
     <string name="action_unarchive">Bring back</string>
@@ -169,8 +170,10 @@
     <!-- About -->
 
     <string name="about_title">Wallet %1$s</string>
-    <string name="about_what">The cards stay on this phone. The app has no internet; the camera is used only while scanning.</string>
-    <string name="about_licence">GNU General Public License v3</string>
+    <string name="about_privacy_title">Privacy</string>
+    <string name="about_privacy">Everything you put in this app stays on this phone. It has no internet access, so nothing is sent anywhere or collected about you. A card leaves only when you share it, add it to your calendar or save a file you choose. The camera is used only while you scan. No ads, no analytics, no tracking.</string>
+    <string name="about_terms_title">Terms</string>
+    <string name="about_terms">Free software under the GNU General Public License v3. It comes with no warranty: use it at your own risk.</string>
     <string name="about_catima">Built on Catima, GPL v3 or later</string>
     <string name="about_zxing">Barcodes drawn and read by ZXing, Apache 2.0</string>
     <string name="about_icons">Icons from Material Symbols, Apache 2.0</string>
@@ -199,7 +202,4 @@
     <string name="intent_import_card_from_url_path_prefix_thelastproject" translatable="false">/Catima/share</string>
     <string name="intent_import_card_from_url_host_brarcher" translatable="false">brarcher.github.io</string>
     <string name="intent_import_card_from_url_path_prefix_brarcher" translatable="false">/loyalty-card-locker/share</string>
-    <string name="list_jump_setting">Letters and page dots</string>
-    <string name="list_jump_shown">Shown</string>
-    <string name="list_jump_hidden">Hidden</string>
 </resources>

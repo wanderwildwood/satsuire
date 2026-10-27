@@ -36,6 +36,7 @@ import com.mudita.mmd.components.text.TextMMD
 import com.mudita.mmd.components.text_field.TextFieldMMD
 import com.wanderwildwood.satsuire.R
 import com.wanderwildwood.satsuire.barcode.shareIntent
+import com.wanderwildwood.satsuire.data.CardLink
 import com.wanderwildwood.satsuire.data.Draft
 import com.wanderwildwood.satsuire.data.Incoming
 import com.wanderwildwood.satsuire.data.Prefs
@@ -224,7 +225,6 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
                 archivedCount = if (archived) 0 else archivedCount,
                 group = shownGroup,
                 groups = groups,
-                byName = order == Wallet.Order.NAME,
                 onGroup = {
                     group = it
                     Prefs.setGroup(context, it)
@@ -276,6 +276,11 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
                             }
                             CardAction.CALENDAR -> addToCalendar(context, c)?.let { message = it }
                             CardAction.SHARE -> share(context, c)?.let { message = it }
+                            CardAction.DELETE -> scope.launch {
+                                withContext(Dispatchers.IO) { Wallet.delete(context, c.id) }
+                                changed()
+                                pop()
+                            }
                         }
                     },
                 )
@@ -373,7 +378,7 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
                 context.packageManager.getLaunchIntentForPackage(GlanceProvider.READER) != null
             }
             SettingsScreen(
-                onLockScreen = on,
+                onLockScreen = on && glance,
                 glanceInstalled = glance,
                 onLockScreenChange = {
                     on = it
@@ -459,7 +464,7 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
                 modifier = Modifier.fillMaxWidth(),
             )
             Spacer(Modifier.height(6.dp))
-            TextMMD(text = stringResource(R.string.export_password_note), style = MaterialTheme.typography.labelSmall)
+            TextMMD(text = stringResource(R.string.export_password_note), style = MaterialTheme.typography.bodySmall)
             Spacer(Modifier.height(18.dp))
             DialogButtons(
                 onCancel = { exporting = null },
@@ -536,7 +541,9 @@ private fun stackSaver() = listSaver<SnapshotStateList<String>, String>(
  * The plainest request there is, so every calendar can take it: a title, a note, a start and an
  * end, timed (09:00 on the first day to 09:30 on the last; a card with only one of the two
  * dates becomes a half-hour on that day), started in a task of its own so that a calendar that
- * stumbles cannot take Wallet down with it. Returns what to say when nothing answers.
+ * stumbles cannot take Wallet down with it. The note names the card, so the event says where
+ * it came from in any calendar; the link back ([CardLink]) goes only to a calendar that reads
+ * it. Returns what to say when nothing answers.
  */
 private fun addToCalendar(context: Context, card: LoyaltyCard): String? {
     val from = card.validFrom?.time
@@ -554,8 +561,14 @@ private fun addToCalendar(context: Context, card: LoyaltyCard): String? {
         .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, end)
         .putExtra(
             CalendarContract.Events.DESCRIPTION,
-            listOfNotNull(card.cardId, kind, card.note.takeIf { it.isNotBlank() }).joinToString("\n"),
+            listOfNotNull(
+                card.cardId,
+                kind,
+                card.note.takeIf { it.isNotBlank() },
+                context.getString(R.string.calendar_note_wallet, card.store),
+            ).joinToString("\n"),
         )
+    if (CardLink.readsLink(context, intent)) CardLink.put(context, intent, card.id)
     return try {
         context.startActivity(intent)
         null

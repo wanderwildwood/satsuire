@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -40,16 +42,20 @@ fun AboutDialog(onDismiss: () -> Unit) {
         )
 
         Spacer(Modifier.height(14.dp))
-        TextMMD(text = stringResource(R.string.about_what), style = MaterialTheme.typography.labelSmall)
+        TextMMD(text = stringResource(R.string.about_privacy_title), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
+        TextMMD(text = stringResource(R.string.about_privacy), style = MaterialTheme.typography.bodySmall)
 
         Spacer(Modifier.height(14.dp))
-        TextMMD(text = stringResource(R.string.about_licence), style = MaterialTheme.typography.labelSmall)
-        TextMMD(text = stringResource(R.string.about_catima), style = MaterialTheme.typography.labelSmall)
-        TextMMD(text = stringResource(R.string.about_zxing), style = MaterialTheme.typography.labelSmall)
-        TextMMD(text = stringResource(R.string.about_icons), style = MaterialTheme.typography.labelSmall)
+        TextMMD(text = stringResource(R.string.about_terms_title), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
+        TextMMD(text = stringResource(R.string.about_terms), style = MaterialTheme.typography.bodySmall)
 
         Spacer(Modifier.height(14.dp))
-        TextMMD(text = "github.com/wanderwildwood/satsuire", style = MaterialTheme.typography.labelSmall)
+        TextMMD(text = stringResource(R.string.about_catima), style = MaterialTheme.typography.bodySmall)
+        TextMMD(text = stringResource(R.string.about_zxing), style = MaterialTheme.typography.bodySmall)
+        TextMMD(text = stringResource(R.string.about_icons), style = MaterialTheme.typography.bodySmall)
+
+        Spacer(Modifier.height(14.dp))
+        TextMMD(text = "github.com/wanderwildwood/satsuire", style = MaterialTheme.typography.bodySmall)
 
         Spacer(Modifier.height(14.dp))
         Llama()
@@ -80,7 +86,7 @@ private fun Llama() {
     ) {
         TextMMD(
             text = "wanderthe.dev",
-            style = MaterialTheme.typography.labelSmall,
+            style = MaterialTheme.typography.bodySmall,
             // The site's address opens the site, the way the llama beside it opens its page.
             modifier = Modifier
                 .clickable {
@@ -92,7 +98,8 @@ private fun Llama() {
                         Toast.makeText(context, context.getString(R.string.about_no_browser), Toast.LENGTH_SHORT).show()
                     }
                 }
-                .padding(vertical = 4.dp),
+                .heightIn(min = 48.dp)
+                .wrapContentHeight(Alignment.CenterVertically),
         )
         Spacer(Modifier.width(6.dp))
         Row(
@@ -107,7 +114,8 @@ private fun Llama() {
                         Toast.makeText(context, context.getString(R.string.about_no_browser), Toast.LENGTH_SHORT).show()
                     }
                 }
-                .padding(vertical = 4.dp),
+                .heightIn(min = 48.dp)
+                .wrapContentHeight(Alignment.CenterVertically),
         ) {
             Image(
                 painter = painterResource(R.drawable.llama),
@@ -115,7 +123,7 @@ private fun Llama() {
                 modifier = Modifier.size(22.dp),
             )
             Spacer(Modifier.width(6.dp))
-            TextMMD(text = stringResource(R.string.about_feed_the_llamas), style = MaterialTheme.typography.labelSmall)
+            TextMMD(text = stringResource(R.string.about_feed_the_llamas), style = MaterialTheme.typography.bodySmall)
         }
     }
 }

@@ -92,7 +92,7 @@ fun SettingRow(title: String, value: String?, onClick: (() -> Unit)?) {
             .padding(vertical = 14.dp),
     ) {
         TextMMD(text = title, style = MaterialTheme.typography.bodyMedium)
-        if (value != null) TextMMD(text = value, style = MaterialTheme.typography.labelSmall)
+        if (value != null) TextMMD(text = value, style = MaterialTheme.typography.bodySmall)
     }
 }
 
@@ -107,7 +107,7 @@ fun SwitchRow(title: String, checked: Boolean, note: String? = null, onChange: (
     ) {
         Column(Modifier.weight(1f)) {
             TextMMD(text = title, style = MaterialTheme.typography.bodyMedium)
-            if (note != null) TextMMD(text = note, style = MaterialTheme.typography.labelSmall)
+            if (note != null) TextMMD(text = note, style = MaterialTheme.typography.bodySmall)
         }
         Spacer(Modifier.width(12.dp))
         SwitchMMD(checked = checked, onCheckedChange = null)
@@ -162,7 +162,7 @@ fun ChoiceRow(text: String, note: String? = null, bold: Boolean = false, onClick
             style = MaterialTheme.typography.bodyMedium,
             fontWeight = if (bold) FontWeight.Bold else FontWeight.Normal,
         )
-        if (note != null) TextMMD(text = note, style = MaterialTheme.typography.labelSmall)
+        if (note != null) TextMMD(text = note, style = MaterialTheme.typography.bodySmall)
     }
 }
 

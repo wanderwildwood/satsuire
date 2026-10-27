@@ -1,6 +1,8 @@
 package com.wanderwildwood.satsuire
 
 import android.content.Intent
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.platform.LocalCursorBlinkEnabled
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -31,13 +33,16 @@ class MainActivity : ComponentActivity() {
         if (savedInstanceState == null && Incoming.carries(intent)) handed.value = intent
         if (savedInstanceState == null) asked.value = CardLink.id(intent)
         setContent {
-            ThemeMMD(colorScheme = monochrome) {
-                WalletApp(
-                    handed = handed.value,
-                    onHandled = { handed.value = null },
-                    asked = asked.value,
-                    onAsked = { asked.value = null },
-                )
+            // A steady cursor: a blinking one redraws the screen twice a second all day.
+            CompositionLocalProvider(LocalCursorBlinkEnabled provides false) {
+                ThemeMMD(colorScheme = monochrome) {
+                    WalletApp(
+                        handed = handed.value,
+                        onHandled = { handed.value = null },
+                        asked = asked.value,
+                        onAsked = { asked.value = null },
+                    )
+                }
             }
         }
     }

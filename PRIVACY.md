@@ -36,7 +36,8 @@ The app is excluded from Android backups (`allowBackup="false"`).
   is locked with AES inside the zip, as Catima locks its own, and only that password opens it;
   given none, it is a plain file anyone holding it can read.
 - **Add to calendar** hands the card's name, days, number and note to your calendar app, which
-  shows you the event before anything is saved.
+  shows you the event before anything is saved. Google Calendar and Calendar (koyomi) are also
+  given a link back to the card.
 - **Glance**, when it is installed and the switch in settings is on, is told the names of
   today's tickets, to show on the lock screen. Only Glance is answered; any other app that
   asks gets nothing.
