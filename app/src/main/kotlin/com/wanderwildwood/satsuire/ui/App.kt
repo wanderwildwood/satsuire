@@ -77,6 +77,8 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
     var group by remember { mutableStateOf(Prefs.group(context)) }
     var order by remember { mutableStateOf(Prefs.order(context)) }
     var ordering by rememberSaveable { mutableStateOf(false) }
+    // The card just deleted, kept so the list can offer to put it back.
+    var removed by remember { mutableStateOf<Wallet.Removed?>(null) }
     val groups by produceState(emptyList<Pair<String, Int>>(), refresh) {
         value = withContext(Dispatchers.IO) { Wallet.groups(context) }
     }
@@ -229,7 +231,17 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
                     group = it
                     Prefs.setGroup(context, it)
                 },
+                removed = if (archived) null else removed,
+                onUndo = {
+                    val r = removed
+                    removed = null
+                    if (r != null) scope.launch {
+                        withContext(Dispatchers.IO) { Wallet.restore(context, r) }
+                        changed()
+                    }
+                },
                 onOpen = { id ->
+                    removed = null
                     push(card(id))
                     scope.launch {
                         withContext(Dispatchers.IO) { Wallet.touch(context, id) }
@@ -237,8 +249,8 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
                     }
                 },
                 onArchived = { push(ARCHIVED) },
-                onAdd = { adding = true },
-                onSettings = { push(SETTINGS) },
+                onAdd = { removed = null; adding = true },
+                onSettings = { removed = null; push(SETTINGS) },
                 onAbout = { about = true },
                 onBack = ::pop,
             )
@@ -277,7 +289,7 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
                             CardAction.CALENDAR -> addToCalendar(context, c)?.let { message = it }
                             CardAction.SHARE -> share(context, c)?.let { message = it }
                             CardAction.DELETE -> scope.launch {
-                                withContext(Dispatchers.IO) { Wallet.delete(context, c.id) }
+                                removed = withContext(Dispatchers.IO) { Wallet.remove(context, c.id) }
                                 changed()
                                 pop()
                             }
@@ -322,7 +334,7 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
                     },
                     onDelete = if (d.isNew) null else ({
                         scope.launch {
-                            withContext(Dispatchers.IO) { Wallet.delete(context, d.id) }
+                            removed = withContext(Dispatchers.IO) { Wallet.remove(context, d.id) }
                             draft = null
                             changed()
                             // Out of the editor and off the deleted card's own screen.

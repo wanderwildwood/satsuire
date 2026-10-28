@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
@@ -24,6 +25,7 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.mudita.mmd.components.buttons.OutlinedButtonMMD
 import com.mudita.mmd.components.divider.HorizontalDividerMMD
 import androidx.compose.foundation.lazy.rememberLazyListState
 import com.mudita.mmd.components.text.TextMMD
@@ -46,6 +48,8 @@ fun ListScreen(
     group: String?,
     groups: List<Pair<String, Int>>,
     onGroup: (String?) -> Unit,
+    removed: Wallet.Removed?,
+    onUndo: () -> Unit,
     onOpen: (Int) -> Unit,
     onArchived: () -> Unit,
     onAdd: () -> Unit,
@@ -55,6 +59,19 @@ fun ListScreen(
 ) {
     Scaffold(
         containerColor = MaterialTheme.colorScheme.surface,
+        bottomBar = {
+            if (removed != null) {
+                Column(Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 8.dp)) {
+                    TextMMD(
+                        text = stringResource(R.string.deleted_done, removed.card.store.ifBlank { removed.card.cardId }),
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                    OutlinedButtonMMD(onClick = onUndo, modifier = Modifier.fillMaxWidth().padding(top = 4.dp).height(48.dp)) {
+                        TextMMD(text = stringResource(R.string.deleted_undo), style = MaterialTheme.typography.bodyMedium)
+                    }
+                }
+            }
+        },
         topBar = {
             if (archived) {
                 Bar(stringResource(R.string.put_away_title), onBack = onBack)

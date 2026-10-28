@@ -175,4 +175,23 @@ class WalletDataTest {
         assertEquals(listOf("C", "B", "A"), Wallet.rows(activity, false, order = Wallet.Order.LAST_ADDED).map { it.name })
         assertTrue(a > 0 && b > 0)
     }
+
+    @Test
+    fun deletedCardComesBackAsItWas() {
+        Wallet.addGroup(activity, "Travel")
+        val id = Wallet.save(
+            activity,
+            Draft(name = "Ferry", number = "F1", format = "AZTEC", note = "Deck B", expiry = 2_000_000_000_000, groups = listOf("Travel")),
+        )
+        val gone = Wallet.remove(activity, id)!!
+        assertEquals(0, Wallet.rows(activity, false).size)
+        Wallet.restore(activity, gone)
+        val back = Wallet.card(activity, id)!!
+        assertEquals("Ferry", back.store)
+        assertEquals("F1", back.cardId)
+        assertEquals("Deck B", back.note)
+        assertEquals(2_000_000_000_000, back.expiry!!.time)
+        assertEquals(listOf("Travel"), Wallet.cardGroups(activity, id))
+        assertEquals(listOf("Ferry"), Wallet.rows(activity, false, "Travel").map { it.name })
+    }
 }

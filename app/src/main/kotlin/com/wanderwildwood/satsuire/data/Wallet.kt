@@ -144,6 +144,46 @@ object Wallet {
 
     fun delete(context: Context, id: Int): Boolean = DBHelper.deleteLoyaltyCard(db(context), context, id)
 
+    /** Everything a deleted card was, kept so that [restore] can put it back as it was. */
+    class Removed(
+        val card: LoyaltyCard,
+        val groups: List<String>,
+        val images: Map<String, ByteArray>,
+    )
+
+    /** Deletes a card and hands back what it was (null when there was no such card). */
+    fun remove(context: Context, id: Int): Removed? {
+        val card = card(context, id) ?: return null
+        val groups = cardGroups(context, id)
+        val images = HashMap<String, ByteArray>()
+        for (type in protect.card_locker.ImageLocationType.values()) {
+            val file = protect.card_locker.Utils.retrieveCardImageAsFile(context, id, type)
+            if (file.isFile) {
+                runCatching { file.readBytes() }.onSuccess {
+                    images[protect.card_locker.Utils.getCardImageFileName(id, type)] = it
+                }
+            }
+        }
+        if (!delete(context, id)) return null
+        return Removed(card, groups, images)
+    }
+
+    /** Puts a card taken out by [remove] back, under the same number, in the same groups. */
+    fun restore(context: Context, r: Removed) {
+        val db = db(context)
+        val c = r.card
+        DBHelper.insertLoyaltyCard(
+            db, c.id, c.store, c.note, c.validFrom, c.expiry,
+            c.balance ?: BigDecimal.ZERO, c.balanceType, c.cardId, c.barcodeId, c.barcodeType,
+            c.barcodeEncoding ?: StandardCharsets.ISO_8859_1, c.headerColor,
+            c.starStatus, c.lastUsed, c.archiveStatus,
+        )
+        DBHelper.setLoyaltyCardGroups(db, c.id, r.groups.mapNotNull { DBHelper.getGroup(db, it) })
+        for ((name, bytes) in r.images) {
+            runCatching { context.openFileOutput(name, Context.MODE_PRIVATE).use { it.write(bytes) } }
+        }
+    }
+
     fun setStarred(context: Context, id: Int, starred: Boolean): Boolean =
         DBHelper.updateLoyaltyCardStarStatus(db(context), id, if (starred) 1 else 0)
 
