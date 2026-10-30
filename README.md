@@ -12,7 +12,7 @@ sixteen greys, a slow redraw, and is read outdoors as often as indoors.
 
 | | | | |
 |---|---|---|---|
-| ![The cards](screenshots/1-cards.png) | ![A library card](screenshots/2-card.png) | ![A boarding pass](screenshots/3-boarding.png) | ![Adding a card](screenshots/4-add.png) |
+| ![The cards](screenshots/1-cards.png) | ![A library card](screenshots/2-card.png) | ![A boarding pass](screenshots/3-boarding.png) | ![About](screenshots/4-about.png) |
 
 ## What it does
 
