@@ -62,7 +62,7 @@
 
     <string name="scan_title">Scan</string>
     <string name="scan_hint">Hold the barcode flat and still in front of the camera. The picture is only for aiming; it does not need to look sharp here.</string>
-    <string name="scan_no_camera">Without the camera, Wallet cannot scan. The number can be typed instead, or read from a picture.</string>
+    <string name="scan_no_camera">Without the camera, Wallet cannot scan. The number can be typed instead, or read from a picture, or the camera can be allowed in the app\'s settings.</string>
 
     <string name="incoming_reading">Looking for a barcode…</string>
     <string name="incoming_no_barcode">No barcode could be found in that. A photo works best taken straight on, with the whole barcode in it.</string>
@@ -173,14 +173,11 @@
 
     <string name="about_title">Wallet %1$s</string>
     <string name="about_privacy_title">Privacy</string>
-    <string name="about_privacy">Everything you put in this app stays on this phone. It has no internet access, so nothing is sent anywhere or collected about you. A card leaves only when you share it, add it to your calendar or save a file you choose. The camera is used only while you scan. No ads, no analytics, no tracking.</string>
+    <string name="about_privacy">Everything you put in this app stays on this phone. It has no internet access, so nothing is sent anywhere or collected about you, and the app is not included in phone backups. A card leaves only when you share it, add it to your calendar or save a file you choose; a saved file can be locked with a password. The camera is used only while you scan, and no picture is kept. No ads, no analytics, no tracking.</string>
     <string name="about_terms_title">Terms</string>
-    <string name="about_terms">Free software under the GNU General Public License v3. It comes with no warranty: use it at your own risk.</string>
+    <string name="about_terms">Free software under the GNU General Public License v3. It comes with no warranty, to the extent the law allows: use it at your own risk, and keep your cards\' original barcodes where a missed scan would matter.</string>
     <string name="about_catima">Built on Catima, GPL v3 or later</string>
-    <string name="about_zxing">Barcodes drawn and read by ZXing, Apache 2.0</string>
-    <string name="about_icons">Icons from Material Symbols, Apache 2.0</string>
     <string name="about_feed_the_llamas">feed the llamas</string>
-    <string name="about_no_browser">There is no browser on this phone to open that with.</string>
     <string name="about_close">Close</string>
 
     <!-- ============================================================ -->
@@ -210,4 +207,18 @@
     <string name="folio_page">Page %1$d of %2$d</string>
     <string name="folio_go">Go</string>
     <string name="folio_cancel">Cancel</string>
+    <string name="transfer_unreadable">That file could not be read. Check that it is still there and that this app may open it.</string>
+    <string name="open_app_settings">Open app settings</string>
+    <string name="about_licences">Licences</string>
+    <string name="licences_title">Licences</string>
+    <string name="licences_source_head">Source code</string>
+    <string name="licences_licence_head">Licence</string>
+    <string name="licences_licence">Wallet is free software under the GNU General Public License, version 3 only (GPL-3.0-only), copyright wander wildwood, for what is written here. Catima\'s files keep the licence they came under, GPL-3.0-or-later. The work it is built on keeps its own licence and its authors keep their copyright, as listed under Built with. The full text of each licence is at the end of this page.</string>
+    <string name="licences_built_head">Built with</string>
+    <string name="licences_back">Back</string>
+    <string name="about_no_browser_address">No browser is installed. The address is %1$s.</string>
+    <string name="licences_gpl">GNU General Public License, version 3</string>
+    <string name="licences_apache">Apache License, version 2.0</string>
+    <string name="licences_mit">MIT License</string>
+    <string name="licences_ofl">SIL Open Font License, version 1.1</string>
 </resources>

@@ -29,6 +29,12 @@
         <!-- Glance, which draws today's tickets on the lock screen: only to say in settings
              whether it is there. -->
         <package android:name="com.wanderwildwood.hitome" />
+        <!-- A real browser, for the links in About. -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="https" />
+        </intent>
     </queries>
 
     <application

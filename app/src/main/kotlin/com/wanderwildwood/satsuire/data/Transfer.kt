@@ -26,6 +26,9 @@ object Transfer {
 
         /** No importer could read it. */
         data object NotACardFile : Result
+
+        /** The file could not be opened or read at all (it moved, or access was refused). */
+        data object Unreadable : Result
     }
 
     private val ORDER = listOf(DataFormat.Catima, DataFormat.Fidme, DataFormat.VoucherVault)
@@ -39,7 +42,9 @@ object Transfer {
                 context.contentResolver.openInputStream(uri)
             } catch (_: java.io.IOException) {
                 null
-            } ?: return Result.NotACardFile
+            } catch (_: SecurityException) {
+                null
+            } ?: return Result.Unreadable
             val result = input.use { MultiFormatImporter.importData(context, db, it, format, password) }
             when (result.resultType()) {
                 ImportExportResultType.Success -> return Result.Brought(DBHelper.getLoyaltyCardCount(db) - before, format)

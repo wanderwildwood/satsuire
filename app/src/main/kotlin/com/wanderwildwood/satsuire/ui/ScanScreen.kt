@@ -87,6 +87,20 @@ fun ScanScreen(onRead: (String, BarcodeFormat) -> Unit, onType: () -> Unit, onBa
                 Column(Modifier.padding(20.dp)) {
                     TextMMD(text = stringResource(R.string.scan_no_camera), style = MaterialTheme.typography.bodyMedium)
                     Spacer(Modifier.height(18.dp))
+                    OutlinedButtonMMD(
+                        onClick = {
+                            runCatching {
+                                context.startActivity(
+                                    android.content.Intent(
+                                        android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                        android.net.Uri.fromParts("package", context.packageName, null),
+                                    ),
+                                )
+                            }
+                        },
+                        modifier = Modifier.fillMaxWidth().height(48.dp),
+                    ) { TextMMD(text = stringResource(R.string.open_app_settings), style = MaterialTheme.typography.bodySmall) }
+                    Spacer(Modifier.height(10.dp))
                     OutlinedButtonMMD(onClick = onType, modifier = Modifier.fillMaxWidth().height(48.dp)) {
                         TextMMD(text = stringResource(R.string.add_type), style = MaterialTheme.typography.bodySmall)
                     }

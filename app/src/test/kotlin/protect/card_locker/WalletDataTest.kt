@@ -94,7 +94,7 @@ class WalletDataTest {
         assertEquals(0, DBHelper.getLoyaltyCardCount(Wallet.db(activity)))
 
         val missing = Uri.fromFile(File(activity.cacheDir, "not-there.zip"))
-        assertEquals(Transfer.Result.NotACardFile, Transfer.bringIn(activity, missing))
+        assertEquals(Transfer.Result.Unreadable, Transfer.bringIn(activity, missing))
     }
 
     @Test

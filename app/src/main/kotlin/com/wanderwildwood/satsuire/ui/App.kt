@@ -169,7 +169,7 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
             val result = withContext(Dispatchers.IO) {
                 runCatching { Transfer.bringIn(context, uri, password) }
                     .onFailure { Log.w(TAG, "Bringing cards in failed", it) }
-                    .getOrDefault(Transfer.Result.NotACardFile)
+                    .getOrDefault(Transfer.Result.Unreadable)
             }
             busy = null
             when (result) {
@@ -186,6 +186,7 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
                     locked = uri
                 }
                 Transfer.Result.NotACardFile -> message = context.getString(R.string.transfer_not_cards)
+                Transfer.Result.Unreadable -> message = context.getString(R.string.transfer_unreadable)
             }
         }
     }
@@ -198,6 +199,11 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
     val exportFile = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/zip")) { uri ->
         if (uri != null) exporting = uri
     }
+    // The file picker has already made an empty file by the time the password is asked: if nothing
+    // is written to it, it must not be left behind.
+    fun dropExport(uri: Uri) {
+        runCatching { android.provider.DocumentsContract.deleteDocument(context.contentResolver, uri) }
+    }
     fun sendOut(uri: Uri, password: CharArray?) {
         scope.launch {
             val ok = withContext(Dispatchers.IO) {
@@ -205,6 +211,7 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
                     .onFailure { Log.w(TAG, "Saving cards out failed", it) }
                     .getOrDefault(false)
             }
+            if (!ok) dropExport(uri)
             message = context.getString(if (ok) R.string.transfer_saved else R.string.transfer_not_saved)
         }
     }
@@ -464,7 +471,7 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
 
     exporting?.let { uri ->
         var password by remember { mutableStateOf("") }
-        EInkDialog(onDismiss = { exporting = null }) {
+        EInkDialog(onDismiss = { dropExport(uri); exporting = null }) {
             TextMMD(text = stringResource(R.string.export_password), style = MaterialTheme.typography.bodyMedium)
             Spacer(Modifier.height(8.dp))
             TextFieldMMD(
@@ -479,7 +486,7 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
             TextMMD(text = stringResource(R.string.export_password_note), style = MaterialTheme.typography.bodySmall)
             Spacer(Modifier.height(18.dp))
             DialogButtons(
-                onCancel = { exporting = null },
+                onCancel = { dropExport(uri); exporting = null },
                 onOk = {
                     exporting = null
                     sendOut(uri, password.toCharArray())
