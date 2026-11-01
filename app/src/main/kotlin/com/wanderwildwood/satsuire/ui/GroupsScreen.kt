@@ -52,7 +52,7 @@ fun GroupsScreen(
             )
             return@Scaffold
         }
-        PagedColumn(Modifier.padding(padding).fillMaxSize().padding(horizontal = 20.dp)) {
+        PagedColumn(Modifier.padding(padding).fillMaxSize(), contentPadding = androidx.compose.foundation.layout.PaddingValues(start = 20.dp, end = 12.dp)) {
             for ((name, count) in groups) {
                 item(key = "g:$name") {
                     SettingRow(name, pluralStringResource(R.plurals.group_count, count, count)) { open = name }

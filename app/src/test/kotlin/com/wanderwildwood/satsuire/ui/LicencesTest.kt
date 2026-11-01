@@ -1,21 +1,29 @@
 package com.wanderwildwood.satsuire.ui
 
+import java.io.File
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class LicencesTest {
-    @Test fun everyLibraryHasAnHttpsLinkAndALicence() {
-        assertTrue(LIBRARIES.isNotEmpty())
-        LIBRARIES.forEach {
-            assertTrue(it.name, it.link.startsWith("https://"))
-            assertTrue(it.name, it.licence.isNotBlank())
-        }
+    private val data = LicencesData(
+        "satsuire", SOURCE_URL, "GPL-3.0-only", LICENCE_COMPONENTS,
+        LICENCE_RAW.map { LicenceText(it.first, it.first, it.second) }, emptyList(),
+    )
+
+    @Test fun theDataHasNoProblems() {
+        assertEquals(emptyList<String>(), licencesProblems(data))
+        assertTrue(LICENCE_COMPONENTS.isNotEmpty())
     }
-    @Test fun sourceLinkIsThisRepo() {
-        assertTrue(SOURCE_URL.startsWith("https://github.com/wanderwildwood/"))
+
+    @Test fun theSourceLinkIsTheRepo() {
+        assertEquals("https://github.com/wanderwildwood/satsuire", SOURCE_URL)
     }
-    @Test fun paragraphsKeepEveryWord() {
-        assertEquals(listOf("a b", "c"), licenceParagraphs("a\nb\n\n\nc\n"))
+
+    @Test fun gplIsFirstAndEveryTextIsBundled() {
+        assertEquals("gpl", orderedTexts(data.texts).first().id)
+        val raw = File("src/main/res/raw")
+        assertTrue(raw.listFiles().orEmpty().count { it.extension == "txt" } >= LICENCE_RAW.size)
+        assertTrue(licenceParagraphs(File(raw, raw.list().orEmpty().first { it.startsWith("gpl") }).readText()).size > 10)
     }
 }

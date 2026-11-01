@@ -29,7 +29,7 @@ fun SettingsScreen(
         containerColor = MaterialTheme.colorScheme.surface,
         topBar = { Bar(stringResource(R.string.settings_title), onBack = onBack) },
     ) { padding ->
-        PagedColumn(Modifier.padding(padding).fillMaxSize().padding(horizontal = 20.dp)) {
+        PagedColumn(Modifier.padding(padding).fillMaxSize(), contentPadding = androidx.compose.foundation.layout.PaddingValues(start = 20.dp, end = 12.dp)) {
             item(key = "order") {
                 SettingRow(stringResource(R.string.settings_order), order, onOrder)
             }

@@ -39,11 +39,11 @@ PDF417, QR Code, UPC-A and UPC-E.
 
 ## With the other apps
 
-- **Share a picture** from Gallery, Camera, Email or Messaging and choose Wallet: it reads the
+- **Share a picture** from Pictures, Lens, Mailbox or Messaging and choose Wallet: it reads the
   barcode in it and opens a new card with it. A PDF ticket and a pass file work the same way.
   Shared text becomes the card's number, and a Catima share link becomes the whole card.
-- **A pass file opened from Files or Email** opens here.
-- **Add to calendar** puts a ticket's days into Calendar, or any calendar app that takes
+- **A pass file opened from Cabinet or Mailbox** opens here.
+- **Add to calendar** puts a ticket's days into Datebook, or any calendar app that takes
   Android's request to add an event. It is a timed event (09:00 on the first day to 09:30 on
   the last) whose note carries the number, the barcode kind, your note and the card's name.
   In Google Calendar and in Calendar (koyomi) the event also remembers its card and has an

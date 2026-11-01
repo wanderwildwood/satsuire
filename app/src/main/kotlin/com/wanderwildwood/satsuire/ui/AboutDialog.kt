@@ -42,7 +42,7 @@ fun AboutDialog(onDismiss: () -> Unit) {
     var licences by rememberSaveable { mutableStateOf(false) }
     EInkDialog(onDismiss = onDismiss) {
         if (licences) {
-            LicencesPage(onBack = { licences = false }, room = room)
+            LicencesScreen(rememberLicencesData(), rememberLicencesLabels(), onBack = { licences = false }, modifier = Modifier.fillMaxWidth().height(room))
             return@EInkDialog
         }
         PagedColumn(modifier = Modifier.fillMaxWidth().height(room)) {
