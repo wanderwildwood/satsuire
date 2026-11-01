@@ -23,11 +23,16 @@ fun SettingsScreen(
     onGroups: () -> Unit,
     onBringIn: () -> Unit,
     onSendOut: () -> Unit,
+    onAbout: () -> Unit,
     onBack: () -> Unit,
 ) {
     Scaffold(
         containerColor = MaterialTheme.colorScheme.surface,
-        topBar = { Bar(stringResource(R.string.settings_title), onBack = onBack) },
+        topBar = {
+            Bar(stringResource(R.string.settings_title), onBack = onBack) {
+                BarButton(Icons.Info, stringResource(R.string.cd_about), onAbout)
+            }
+        },
     ) { padding ->
         PagedColumn(Modifier.padding(padding).fillMaxSize(), contentPadding = androidx.compose.foundation.layout.PaddingValues(start = 20.dp, end = 12.dp)) {
             item(key = "order") {

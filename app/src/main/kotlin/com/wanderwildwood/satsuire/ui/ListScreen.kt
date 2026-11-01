@@ -54,7 +54,6 @@ fun ListScreen(
     onArchived: () -> Unit,
     onAdd: () -> Unit,
     onSettings: () -> Unit,
-    onAbout: () -> Unit,
     onBack: () -> Unit,
 ) {
     Scaffold(
@@ -79,7 +78,6 @@ fun ListScreen(
                 Bar(stringResource(R.string.app_name), onBack = null) {
                     BarButton(Icons.Add, stringResource(R.string.cd_add), onAdd)
                     BarButton(Icons.Settings, stringResource(R.string.cd_settings), onSettings)
-                    BarButton(Icons.Info, stringResource(R.string.cd_about), onAbout)
                 }
             }
         },

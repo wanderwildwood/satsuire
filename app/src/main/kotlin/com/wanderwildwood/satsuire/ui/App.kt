@@ -258,7 +258,6 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
                 onArchived = { push(ARCHIVED) },
                 onAdd = { removed = null; adding = true },
                 onSettings = { removed = null; push(SETTINGS) },
-                onAbout = { about = true },
                 onBack = ::pop,
             )
         }
@@ -410,6 +409,7 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
                 onGroups = { push(GROUPS) },
                 onBringIn = { importFile.launch(arrayOf("*/*")) },
                 onSendOut = { exportFile.launch("wallet-${LocalDate.now()}.zip") },
+                onAbout = { about = true },
                 onBack = ::pop,
             )
         }
