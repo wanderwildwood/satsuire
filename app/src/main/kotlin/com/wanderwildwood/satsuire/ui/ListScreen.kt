@@ -110,13 +110,13 @@ fun ListScreen(
                                 .clickable { choosing = true }
                                 .padding(horizontal = 20.dp, vertical = 12.dp),
                         )
-                        HorizontalDividerMMD()
+                        DottedRule(start = 20.dp, end = 20.dp)
                     }
                 }
                 for (row in rows) {
                     item(key = "c:${row.id}") {
                         CardRow(row, today) { onOpen(row.id) }
-                        HorizontalDividerMMD()
+                        DottedRule(start = 20.dp, end = 20.dp)
                     }
                 }
                 if (!archived && archivedCount > 0) {
