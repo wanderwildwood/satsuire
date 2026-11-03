@@ -6,7 +6,7 @@ Loyalty cards, library and membership cards, event tickets and boarding passes, 
 phone and shown as barcodes a scanner can read off an E Ink screen.
 
 Built for the [Mudita Kompakt](https://mudita.com/products/kompakt/), whose 4.3" panel has
-sixteen greys, a slow redraw, and is read outdoors as often as indoors.
+sixteen grays, a slow redraw, and is read outdoors as often as indoors.
 
 ## Screenshots
 
@@ -18,7 +18,7 @@ sixteen greys, a slow redraw, and is read outdoors as often as indoors.
 
 - **Show a card.** The barcode fills what the screen has, pure black on pure white, with the
   white margin a scanner needs around it. Every bar is a whole number of pixels wide, so there
-  is no grey edge for the panel to soften; a long code is turned to run down the screen when
+  is no gray edge for the panel to soften; a long code is turned to run down the screen when
   that makes its bars wider. The number is written out under it for a cashier to type when a
   scanner will not read. The screen stays awake while a card is open.
 - **Add a card** by scanning it with the camera, by typing the number and choosing the kind of
@@ -26,7 +26,7 @@ sixteen greys, a slow redraw, and is read outdoors as often as indoors.
   Wallet pass file (`.pkpass`).
 - **Tickets and passes**: a card can have a first and a last day. The list says when one has
   expired or is not valid yet. Boarding passes use Aztec or PDF417, and both are drawn.
-- **Favourites** sit at the top of the list, marked with a star.
+- **Favorites** sit at the top of the list, marked with a star.
 - **Groups** sort cards into kinds — travel, shops — and the list shows all of them or one
   group. **Order** is by name, last used, last added, or soonest to expire or to start.
 - **Put away** a card that is finished with; it leaves the list and waits at the bottom of it.
@@ -56,7 +56,7 @@ PDF417, QR Code, UPC-A and UPC-E.
 
 ## What it does not do
 
-No colours, card photos, balances, NFC or watch app: those parts of Catima are left out.
+No colors, card photos, balances, NFC or watch app: those parts of Catima are left out.
 Groups and the other fields a Catima export carries come in and go back out unchanged.
 No internet, and no cloud: the cards are only on the phone and in the files you save.
 
@@ -93,10 +93,10 @@ Barcodes are drawn and read by [ZXing](https://github.com/zxing/zxing), and scan
 [ZXing Android Embedded](https://github.com/journeyapps/zxing-android-embedded), both Apache
 License 2.0. Icons are [Material Symbols](https://fonts.google.com/icons), Apache License 2.0.
 
-## Licence
+## License
 
 GPL-3.0-only for what is written here. See [LICENSE](LICENSE). Catima's own files keep the
-licence they came under, GPL-3.0-or-later.
+license they came under, GPL-3.0-or-later.
 
 Copyright (C) 2026 wander wildwood
 
