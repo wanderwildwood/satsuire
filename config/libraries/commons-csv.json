@@ -1,0 +1,7 @@
+{
+  "uniqueId": "org.apache.commons:commons-csv",
+  "licenses": [
+    "commons-csv-apache",
+    "commons-csv-notice"
+  ]
+}

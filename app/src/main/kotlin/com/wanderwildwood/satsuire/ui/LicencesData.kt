@@ -7,20 +7,6 @@ import com.wanderwildwood.satsuire.R
 /** The address of the app's own source code. */
 const val SOURCE_URL = "https://github.com/wanderwildwood/satsuire"
 
-/** What the APK carries that is not this app's own code, and the licence each project declares. */
-val LICENCE_COMPONENTS: List<LicenceComponent> = listOf(
-    LicenceComponent("Catima (Loyalty Card Locker lineage)", "Catima contributors", "GPL-3.0-or-later", "https://github.com/CatimaLoyalty/Android"),
-    LicenceComponent("ZXing", "ZXing authors", "Apache-2.0", "https://github.com/zxing/zxing"),
-    LicenceComponent("ZXing Android Embedded", "JourneyApps", "Apache-2.0", "https://github.com/journeyapps/zxing-android-embedded"),
-    LicenceComponent("Apache Commons CSV", "The Apache Software Foundation", "Apache-2.0", "https://commons.apache.org/proper/commons-csv/"),
-    LicenceComponent("Zip4j", "Srikanth Reddy Lingala", "Apache-2.0", "https://github.com/srikanth-lingala/zip4j"),
-    LicenceComponent("Mudita Mindful Design (MMD)", "Mudita", "Apache-2.0", "https://github.com/mudita/MMD"),
-    LicenceComponent("Lato typeface, supplied with MMD", "\u0141ukasz Dziedzic", "OFL-1.1", "https://www.latofonts.com"),
-    LicenceComponent("AndroidX and Jetpack Compose", "Google", "Apache-2.0", "https://developer.android.com/jetpack"),
-    LicenceComponent("Kotlin and kotlinx.coroutines", "JetBrains", "Apache-2.0", "https://kotlinlang.org"),
-    LicenceComponent("Material Symbols icons", "Google", "Apache-2.0", "https://fonts.google.com/icons"),
-)
-
 /** Each distinct licence text once: family id and the raw resource. */
 val LICENCE_RAW: List<Pair<String, Int>> = listOf(
     "gpl" to R.raw.gpl_3_0,
@@ -33,7 +19,8 @@ fun rememberLicencesData(): LicencesData = LicencesData(
     appName = "Wallet",
     sourceUrl = SOURCE_URL,
     licenceLine = stringResource(R.string.licences_licence),
-    components = LICENCE_COMPONENTS,
+    // One row per artifact in the APK, listed by the build (config/libraries adds what Gradle cannot see).
+    components = rememberGeneratedComponents(R.raw.aboutlibraries),
     texts = LICENCE_RAW.map { (id, raw) ->
         LicenceText(id, stringResource(when (id) {
             "gpl" -> R.string.licences_full_gpl

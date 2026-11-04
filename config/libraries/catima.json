@@ -1,0 +1,14 @@
+{
+  "uniqueId": "catima",
+  "name": "Catima, the app this is a fork of",
+  "description": "Wallet is a fork of Catima (from the Loyalty Card Locker lineage); its database, barcode and import and export code is Catima's.",
+  "developers": [
+    {
+      "name": "Catima contributors"
+    }
+  ],
+  "website": "https://github.com/CatimaLoyalty/Android",
+  "licenses": [
+    "GPL-3.0-or-later"
+  ]
+}
