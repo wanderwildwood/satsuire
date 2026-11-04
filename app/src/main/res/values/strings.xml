@@ -80,14 +80,12 @@
     <string name="action_unfavourite">Remove from favorites</string>
     <string name="action_calendar">Add to calendar</string>
     <string name="calendar_note_wallet">In Wallet: %1$s</string>
-    <!-- %1$s is a date -->
-    <string name="calendar_note_until">Valid until %1$s</string>
     <!-- The event's title when the card has no name -->
     <string name="calendar_title_card">Card</string>
     <string name="action_share">Share</string>
     <string name="action_archive">Put away</string>
     <string name="action_unarchive">Bring back</string>
-    <string name="no_calendar">There is no calendar app on this phone to add it to.</string>
+    <string name="datebook_failed">Datebook could not be opened.</string>
     <string name="card_gone">That card is no longer in Wallet.</string>
     <string name="share_failed">There is no app on this phone to share it with.</string>
 
@@ -177,7 +175,7 @@
 
     <string name="about_title">Wallet %1$s</string>
     <string name="about_privacy_title">Privacy</string>
-    <string name="about_privacy">Everything you put in this app stays on this phone. It has no internet access, so nothing is sent anywhere or collected about you, and the app is not included in phone backups. A card leaves only when you share it, add it to your calendar or save a file you choose; a saved file can be locked with a password. The camera is used only while you scan, and no picture is kept. No ads, no analytics, no tracking.</string>
+    <string name="about_privacy">Everything you put in this app stays on this phone. It has no internet access, so nothing is sent anywhere or collected about you, and the app is not included in phone backups. A card leaves only when you share it, add it to Datebook or save a file you choose; a saved file can be locked with a password. The camera is used only while you scan, and no picture is kept. No ads, no analytics, no tracking.</string>
     <string name="about_terms_title">Terms</string>
     <string name="about_terms">Free software under the GNU General Public License v3. It comes with no warranty, to the extent the law allows: use it at your own risk, and keep your cards\' original barcodes where a missed scan would matter.</string>
     <string name="about_catima">Built on Catima, GPL v3 or later</string>

@@ -2,7 +2,6 @@ package com.wanderwildwood.satsuire.ui
 
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.provider.CalendarContract
 import android.util.Log
@@ -39,6 +38,7 @@ import com.wanderwildwood.satsuire.R
 import com.wanderwildwood.satsuire.barcode.shareIntent
 import com.wanderwildwood.satsuire.data.CalendarEvent
 import com.wanderwildwood.satsuire.data.CardLink
+import com.wanderwildwood.satsuire.data.Datebook
 import com.wanderwildwood.satsuire.data.Draft
 import com.wanderwildwood.satsuire.data.Incoming
 import com.wanderwildwood.satsuire.data.Prefs
@@ -272,6 +272,7 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
             if (c != null) {
                 CardScreen(
                     card = c,
+                    datebook = { Datebook.takes(Datebook.answering(context.packageManager)) },
                     onBack = ::pop,
                     onEdit = {
                         scope.launch {
@@ -558,53 +559,39 @@ private fun stackSaver() = listSaver<SnapshotStateList<String>, String>(
 )
 
 /**
- * The card as an event in whatever calendar app answers Android's request to add one.
+ * The card as a new event in Datebook ([Datebook]), and in no other calendar.
  *
- * Every calendar gets a complete, ordinary request, as Android's own documentation writes it:
- * a title that is never empty, a note, an empty place, an explicit "not all day", and a start
- * and an end that are always set, on the same day, with the end half an hour after the start
- * ([CalendarEvent]). Nothing is left for a small calendar to find missing, and nothing is sent
- * that it might not expect: the span over several days and the link back ([CardLink]) go only
- * to a calendar known to read them. The request is checked for a calendar to take it first,
- * and started in a task of its own so that a calendar that stumbles cannot take Wallet down
- * with it. Returns what to say when nothing answers.
+ * A complete, ordinary request, as Android's own documentation writes it: a title that is never
+ * empty, a note, an empty place, an explicit "not all day", and a start and an end that are
+ * always set, the half-hour stretched from the first day to the last ([CalendarEvent]), with
+ * the link back to the card ([CardLink]). Addressed to Datebook by package, so it cannot reach
+ * a calendar it was not made for, and started in a task of its own. The row is only offered
+ * while Datebook answers it. Returns what to say when Datebook does not open.
  */
 private fun addToCalendar(context: Context, card: LoyaltyCard): String? {
-    val intent = Intent(Intent.ACTION_INSERT, CalendarContract.Events.CONTENT_URI)
-        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-    val handlers = runCatching {
-        context.packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
-    }.getOrDefault(emptyList())
-    if (handlers.isEmpty()) return context.getString(R.string.no_calendar)
-    val known = CardLink.readsLink(context, intent)
-    val times = CalendarEvent.times(card.validFrom?.time, card.expiry?.time, known, LocalDate.now())
-        ?: return null
+    val times = CalendarEvent.times(card.validFrom?.time, card.expiry?.time) ?: return null
     val title = card.store.trim().ifEmpty { context.getString(R.string.calendar_title_card) }
-    val dates = java.time.format.DateTimeFormatter.ofLocalizedDate(java.time.format.FormatStyle.MEDIUM)
-    val kind = card.barcodeType?.prettyName()
     val note = listOfNotNull(
         card.cardId.takeIf { it.isNotBlank() },
-        kind,
+        card.barcodeType?.prettyName(),
         card.note.takeIf { it.isNotBlank() },
-        // A plain calendar sees one day; the note says when the card runs out.
-        context.getString(R.string.calendar_note_until, times.lastDay.format(dates))
-            .takeIf { !known && times.lastDay != times.day },
         context.getString(R.string.calendar_note_wallet, title),
     ).joinToString("\n")
-    intent
+    val intent = Datebook.request()
+        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         .putExtra(CalendarContract.Events.TITLE, title)
         .putExtra(CalendarContract.Events.DESCRIPTION, note)
         .putExtra(CalendarContract.Events.EVENT_LOCATION, "")
         .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, times.begin)
         .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, times.end)
         .putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, false)
-    if (known) CardLink.put(context, intent, card.id)
+    CardLink.put(context, intent, card.id)
     return try {
         context.startActivity(intent)
         null
     } catch (e: Exception) {
-        Log.w(TAG, "Adding to the calendar failed", e)
-        context.getString(R.string.no_calendar)
+        Log.w(TAG, "Datebook did not open", e)
+        context.getString(R.string.datebook_failed)
     }
 }
 
