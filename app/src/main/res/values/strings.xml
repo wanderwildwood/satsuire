@@ -80,6 +80,10 @@
     <string name="action_unfavourite">Remove from favorites</string>
     <string name="action_calendar">Add to calendar</string>
     <string name="calendar_note_wallet">In Wallet: %1$s</string>
+    <!-- %1$s is a date -->
+    <string name="calendar_note_until">Valid until %1$s</string>
+    <!-- The event's title when the card has no name -->
+    <string name="calendar_title_card">Card</string>
     <string name="action_share">Share</string>
     <string name="action_archive">Put away</string>
     <string name="action_unarchive">Bring back</string>
