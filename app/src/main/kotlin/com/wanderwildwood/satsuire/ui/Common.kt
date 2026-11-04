@@ -15,10 +15,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,7 +30,6 @@ import com.mudita.mmd.components.switcher.SwitchMMD
 import com.mudita.mmd.components.text.TextMMD
 import com.mudita.mmd.components.top_app_bar.TopAppBarMMD
 import com.wanderwildwood.satsuire.R
-import kotlinx.coroutines.delay
 
 /** An icon in a top bar, with a target a thumb can find. */
 @Composable
@@ -116,17 +112,12 @@ fun SwitchRow(title: String, checked: Boolean, note: String? = null, onChange: (
 
 /**
  * A row that asks once, in its own face: the first press arms it and changes what it says,
- * the second does it. It disarms itself after six seconds, so a stray press does not leave
- * a live trigger for whoever picks the phone up next.
+ * the second does it. It stays armed, with no timer, until the next other touch, Back or
+ * leaving the screen, so a stray press does not leave a live trigger behind.
  */
 @Composable
 fun ArmedRow(label: String, armedLabel: String, onConfirmed: () -> Unit) {
-    var armed by remember { mutableStateOf(false) }
-    LaunchedEffect(armed) {
-        if (!armed) return@LaunchedEffect
-        delay(6000)
-        armed = false
-    }
+    var armed by rememberArmedFlag()
     Row(
         modifier = Modifier
             .fillMaxWidth()

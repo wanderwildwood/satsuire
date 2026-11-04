@@ -1,5 +1,6 @@
 package com.wanderwildwood.satsuire.ui
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -66,25 +67,30 @@ fun GroupsScreen(
     }
     open?.let { name ->
         EInkDialog(onDismiss = { open = null }) {
-            var text by rememberSaveable(name) { mutableStateOf(name) }
-            TextFieldMMD(
-                value = text,
-                onValueChange = { text = it },
-                label = { TextMMD(text = stringResource(R.string.groups_name)) },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
-                modifier = Modifier.fillMaxWidth(),
-            )
-            Spacer(Modifier.height(8.dp))
-            ArmedRow(stringResource(R.string.groups_delete), stringResource(R.string.groups_delete_armed)) {
-                onDelete(name)
-                open = null
+            // Its own window: the dialog's touches never reach the screen's ArmedScope.
+            ArmedScope {
+                Column {
+                    var text by rememberSaveable(name) { mutableStateOf(name) }
+                    TextFieldMMD(
+                        value = text,
+                        onValueChange = { text = it },
+                        label = { TextMMD(text = stringResource(R.string.groups_name)) },
+                        singleLine = true,
+                        keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    ArmedRow(stringResource(R.string.groups_delete), stringResource(R.string.groups_delete_armed)) {
+                        onDelete(name)
+                        open = null
+                    }
+                    Spacer(Modifier.height(8.dp))
+                    DialogButtons(onCancel = { open = null }, onOk = {
+                        if (text.isNotBlank() && text.trim() != name) onRename(name, text)
+                        open = null
+                    }, okLabel = stringResource(R.string.save))
+                }
             }
-            Spacer(Modifier.height(8.dp))
-            DialogButtons(onCancel = { open = null }, onOk = {
-                if (text.isNotBlank() && text.trim() != name) onRename(name, text)
-                open = null
-            }, okLabel = stringResource(R.string.save))
         }
     }
 }

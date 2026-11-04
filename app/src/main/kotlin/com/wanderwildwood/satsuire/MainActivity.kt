@@ -12,6 +12,7 @@ import com.wanderwildwood.satsuire.data.CardLink
 import com.wanderwildwood.satsuire.data.Incoming
 import com.wanderwildwood.satsuire.ui.WalletApp
 import com.wanderwildwood.satsuire.ui.monochrome
+import com.wanderwildwood.satsuire.ui.ArmedScope
 
 /**
  * The one screen, opened from the launcher or handed something by another app: a picture or a
@@ -36,12 +37,14 @@ class MainActivity : ComponentActivity() {
             // A steady cursor: a blinking one redraws the screen twice a second all day.
             CompositionLocalProvider(LocalCursorBlinkEnabled provides false) {
                 ThemeMMD(colorScheme = monochrome) {
-                    WalletApp(
-                        handed = handed.value,
-                        onHandled = { handed.value = null },
-                        asked = asked.value,
-                        onAsked = { asked.value = null },
-                    )
+                    ArmedScope {
+                        WalletApp(
+                            handed = handed.value,
+                            onHandled = { handed.value = null },
+                            asked = asked.value,
+                            onAsked = { asked.value = null },
+                        )
+                    }
                 }
             }
         }

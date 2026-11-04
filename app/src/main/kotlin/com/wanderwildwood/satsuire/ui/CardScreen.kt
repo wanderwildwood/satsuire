@@ -127,20 +127,25 @@ fun CardScreen(
 
     if (menu) {
         EInkDialog(onDismiss = { menu = false }) {
-            fun pick(a: CardAction) {
-                menu = false
-                onAction(a)
+            // Its own window: the dialog's touches never reach the screen's ArmedScope.
+            ArmedScope {
+                Column {
+                    fun pick(a: CardAction) {
+                        menu = false
+                        onAction(a)
+                    }
+                    ChoiceRow(stringResource(if (card.starStatus != 0) R.string.action_unfavourite else R.string.action_favourite)) { pick(CardAction.STAR) }
+                    if (card.validFrom != null || card.expiry != null) {
+                        ChoiceRow(stringResource(R.string.action_calendar)) { pick(CardAction.CALENDAR) }
+                    }
+                    ChoiceRow(stringResource(R.string.action_share)) { pick(CardAction.SHARE) }
+                    ChoiceRow(stringResource(if (card.archiveStatus != 0) R.string.action_unarchive else R.string.action_archive)) {
+                        pick(CardAction.ARCHIVE)
+                    }
+                    // Last, and armed: the second press deletes; any other touch, Back or leaving disarms it.
+                    ArmedRow(stringResource(R.string.edit_delete), stringResource(R.string.edit_delete_armed)) { pick(CardAction.DELETE) }
+                }
             }
-            ChoiceRow(stringResource(if (card.starStatus != 0) R.string.action_unfavourite else R.string.action_favourite)) { pick(CardAction.STAR) }
-            if (card.validFrom != null || card.expiry != null) {
-                ChoiceRow(stringResource(R.string.action_calendar)) { pick(CardAction.CALENDAR) }
-            }
-            ChoiceRow(stringResource(R.string.action_share)) { pick(CardAction.SHARE) }
-            ChoiceRow(stringResource(if (card.archiveStatus != 0) R.string.action_unarchive else R.string.action_archive)) {
-                pick(CardAction.ARCHIVE)
-            }
-            // Last, and armed: the second press within six seconds deletes.
-            ArmedRow(stringResource(R.string.edit_delete), stringResource(R.string.edit_delete_armed)) { pick(CardAction.DELETE) }
         }
     }
 }
