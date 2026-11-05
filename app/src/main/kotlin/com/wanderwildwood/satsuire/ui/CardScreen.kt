@@ -43,6 +43,8 @@ enum class CardAction { STAR, CALENDAR, SHARE, ARCHIVE, DELETE }
 @Composable
 fun CardScreen(
     card: LoyaltyCard,
+    /** Whether Datebook is there to take "Add to calendar"; asked each time the menu opens. */
+    datebook: () -> Boolean,
     onBack: () -> Unit,
     onEdit: () -> Unit,
     onAction: (CardAction) -> Unit,
@@ -126,6 +128,8 @@ fun CardScreen(
     if (note) LongTextDialog(card.note) { note = false }
 
     if (menu) {
+        // Asked as the menu opens, so Datebook put on or taken off meanwhile is seen.
+        val calendar = remember { (card.validFrom != null || card.expiry != null) && datebook() }
         EInkDialog(onDismiss = { menu = false }) {
             // Its own window: the dialog's touches never reach the screen's ArmedScope.
             ArmedScope {
@@ -135,7 +139,7 @@ fun CardScreen(
                         onAction(a)
                     }
                     ChoiceRow(stringResource(if (card.starStatus != 0) R.string.action_unfavourite else R.string.action_favourite)) { pick(CardAction.STAR) }
-                    if (card.validFrom != null || card.expiry != null) {
+                    if (calendar) {
                         ChoiceRow(stringResource(R.string.action_calendar)) { pick(CardAction.CALENDAR) }
                     }
                     ChoiceRow(stringResource(R.string.action_share)) { pick(CardAction.SHARE) }
