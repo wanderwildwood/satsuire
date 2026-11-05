@@ -174,6 +174,7 @@
     <!-- About -->
 
     <string name="about_title">Wallet %1$s</string>
+    <string name="about_what">Loyalty and library cards, tickets and boarding passes, kept on this phone and drawn as barcodes a scanner can read off its screen. Scan one in, or read it from a picture, PDF or pass file.</string>
     <string name="about_privacy_title">Privacy</string>
     <string name="about_privacy">Everything you put in this app stays on this phone. It has no internet access, so nothing is sent anywhere or collected about you, and the app is not included in phone backups. A card leaves only when you share it, add it to Datebook or save a file you choose; a saved file can be locked with a password. The camera is used only while you scan, and no picture is kept. No ads, no analytics, no tracking.</string>
     <string name="about_terms_title">Terms</string>
@@ -208,7 +209,7 @@
     <string name="licences_title">Licenses</string>
     <string name="licences_source_head">Source code</string>
     <string name="licences_no_text">%s needs no license text here.</string>
-    <string name="licences_licence">Wallet is free software: GPL-3.0-only, copyright wander wildwood. Catima\'s files keep the license they came under, GPL-3.0-or-later. What it is built on keeps its own licenses, each on its own page.</string>
+    <string name="licences_licence">Wallet is free software: GPL-3.0-only, copyright wander wildwood. Catima\'s files keep the license they came under, GPL-3.0-or-later. What it is built on keeps its own licenses, listed below.</string>
     <string name="licences_back">Back</string>
     <string name="about_no_browser_address">No browser is installed. The address is %1$s.</string>
     <string name="licences_full_head">Full texts</string>
@@ -218,6 +219,12 @@
     <!-- shared-about: contact row + privacy section (edit in /opt/projects/shared-about) -->
     <string name="about_write_to">Write to %1$s</string>
     <string name="about_no_mail_app">No email app is installed. The address is %1$s.</string>
+    <!-- shared-about: what a screen reader says for an About drawer, the heading passed in -->
+    <string name="about_open_drawer">Open %1$s</string>
+    <string name="about_close_drawer">Close %1$s</string>
+    <string name="about_intro_head">What it does</string>
+    <string name="about_contact_head">Contact</string>
+    <string name="about_links_head">Links</string>
     <string name="privacy_who_title">Who we are</string>
     <string name="privacy_who">This app is made by wander wildwood, an independent developer: one person, not a company. That makes wander wildwood the data controller for anything the app itself handles, and that is very little: what you put in stays on this phone unless you send it somewhere yourself, and nothing comes to the developer.</string>
     <string name="privacy_contact_title">How to contact us</string>
