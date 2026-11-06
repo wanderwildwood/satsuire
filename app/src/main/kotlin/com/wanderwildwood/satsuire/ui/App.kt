@@ -7,7 +7,6 @@ import android.provider.CalendarContract
 import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -155,7 +154,7 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
         opening = null
     }
 
-    val pickFile = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+    val pickFile = rememberLauncherForActivityResult(FilesOpenDocument(writable = false)) { uri ->
         if (uri == null) return@rememberLauncherForActivityResult
         scope.launch {
             busy = context.getString(R.string.incoming_reading)
@@ -193,12 +192,12 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
         }
     }
 
-    val importFile = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+    val importFile = rememberLauncherForActivityResult(FilesOpenDocument(writable = false)) { uri ->
         if (uri != null) bringIn(uri, null)
     }
     // Where to save, asked first; then whether to lock it, asked over the list.
     var exporting by remember { mutableStateOf<Uri?>(null) }
-    val exportFile = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/zip")) { uri ->
+    val exportFile = rememberLauncherForActivityResult(FilesCreateDocument("application/zip")) { uri ->
         if (uri != null) exporting = uri
     }
     // The file picker has already made an empty file by the time the password is asked: if nothing

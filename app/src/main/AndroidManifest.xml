@@ -26,6 +26,9 @@
         <!-- Glance, which draws today's tickets on the lock screen: only to say in settings
              whether it is there. -->
         <package android:name="com.wanderwildwood.hitome" />
+        <!-- Cabinet, which answers "open a file" and "save a file" with its own e-ink screens
+             (ui/FilesPicker.kt); without it the phone's own picker opens. -->
+        <package android:name="com.wanderwildwood.tana" />
         <!-- A real browser, for the links in About. -->
         <intent>
             <action android:name="android.intent.action.VIEW" />
