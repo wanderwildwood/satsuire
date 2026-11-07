@@ -177,7 +177,7 @@ fun MessageDialog(message: String, onDismiss: () -> Unit) {
 fun LongTextDialog(text: String, onDismiss: () -> Unit) {
     val paragraphs = text.split(Regex("\n\\s*\n")).map { it.trim() }.filter { it.isNotEmpty() }
     EInkDialog(onDismiss = onDismiss) {
-        PagedColumn(Modifier.fillMaxWidth().heightIn(max = 420.dp)) {
+        PagedColumn(Modifier.fillMaxWidth().heightIn(max = 420.dp), showCutRow = true) {
             paragraphs.forEachIndexed { i, p ->
                 item(key = i) {
                     TextMMD(text = p, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(bottom = 12.dp))

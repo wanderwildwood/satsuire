@@ -99,7 +99,7 @@ fun ListScreen(
         }
         val state = rememberLazyListState()
         Box(Modifier.padding(padding)) {
-            PagedColumn(Modifier.fillMaxSize(), state = state) {
+            PagedColumn(Modifier.fillMaxSize(), state = state, showCutRow = true) {
                 if (showFilter) {
                     item(key = "filter") {
                         TextMMD(
@@ -171,7 +171,7 @@ private fun CardRow(row: Wallet.Row, today: LocalDate, onClick: () -> Unit) {
 @Composable
 private fun GroupFilterDialog(current: String?, groups: List<Pair<String, Int>>, onPick: (String?) -> Unit, onDismiss: () -> Unit) {
     EInkDialog(onDismiss = onDismiss) {
-        PagedColumn(Modifier.fillMaxWidth().heightIn(max = 460.dp)) {
+        PagedColumn(Modifier.fillMaxWidth().heightIn(max = 460.dp), showCutRow = true) {
             item(key = "all") { ChoiceRow(stringResource(R.string.group_all), bold = current == null) { onPick(null) } }
             for ((name, count) in groups) {
                 item(key = "g:$name") {

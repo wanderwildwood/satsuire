@@ -84,7 +84,7 @@ fun EditScreen(
             }
         },
     ) { padding ->
-        PagedColumn(Modifier.padding(padding).fillMaxSize(), contentPadding = androidx.compose.foundation.layout.PaddingValues(start = 20.dp, end = 12.dp)) {
+        PagedColumn(Modifier.padding(padding).fillMaxSize(), contentPadding = androidx.compose.foundation.layout.PaddingValues(start = 20.dp, end = 12.dp), showCutRow = true) {
             item(key = "name") {
                 Spacer(Modifier.height(8.dp))
                 TextFieldMMD(
@@ -218,7 +218,7 @@ private fun GroupsChoice(
 ) {
     var name by rememberSaveable { mutableStateOf("") }
     EInkDialog(onDismiss = onDismiss) {
-        PagedColumn(Modifier.fillMaxWidth().heightIn(max = 300.dp)) {
+        PagedColumn(Modifier.fillMaxWidth().heightIn(max = 300.dp), showCutRow = true) {
             for (g in all) {
                 item(key = "g:$g") {
                     Row(
@@ -262,7 +262,7 @@ private val NUMERIC = setOf("EAN_8", "EAN_13", "UPC_A", "UPC_E", "ITF")
 @Composable
 fun FormatDialog(current: String?, onPick: (String?) -> Unit, onDismiss: () -> Unit) {
     EInkDialog(onDismiss = onDismiss) {
-        PagedColumn(Modifier.fillMaxWidth().height(460.dp)) {
+        PagedColumn(Modifier.fillMaxWidth().height(460.dp), showCutRow = true) {
             item(key = "none") {
                 ChoiceRow(stringResource(R.string.format_none), bold = current == null) { onPick(null) }
             }
