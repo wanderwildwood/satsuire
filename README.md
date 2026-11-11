@@ -1,6 +1,4 @@
-# Wallet
-
-札入 *satsuire*
+# 札入 satsuire — Wallet
 
 Loyalty cards, library and membership cards, event tickets and boarding passes, kept on the
 phone and shown as barcodes a scanner can read off an E Ink screen.
