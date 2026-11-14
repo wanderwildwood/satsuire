@@ -47,7 +47,7 @@ fun BarcodeImage(card: LoyaltyCard, modifier: Modifier = Modifier) {
         }
         val image = remember(modules, fit) { bitmap(modules, fit).asImageBitmap() }
         val label = stringResource(R.string.cd_barcode, CatimaBarcode.fromBarcode(modules.format).prettyName())
-        Canvas(Modifier.fillMaxSize().semantics { contentDescription = label }) {
+        Canvas(Modifier.fillMaxSize().semantics { contentDescription = label }.keepColors()) {
             drawImage(
                 image = image,
                 srcOffset = IntOffset.Zero,

@@ -118,6 +118,8 @@ private fun Camera(onRead: (String, BarcodeFormat) -> Unit) {
     AndroidView(
         factory = { ctx ->
             BarcodeView(ctx).apply {
+                // The camera picture is a photograph.
+                DarkMode.keep(this)
                 decoderFactory = DefaultDecoderFactory(CatimaBarcode.barcodeFormats)
                 decodeContinuous { result ->
                     if (done) return@decodeContinuous

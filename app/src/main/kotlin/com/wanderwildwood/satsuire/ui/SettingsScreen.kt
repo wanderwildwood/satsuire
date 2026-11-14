@@ -6,6 +6,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -26,6 +27,7 @@ fun SettingsScreen(
     onAbout: () -> Unit,
     onBack: () -> Unit,
 ) {
+    val context = LocalContext.current
     Scaffold(
         containerColor = MaterialTheme.colorScheme.surface,
         topBar = {
@@ -43,6 +45,14 @@ fun SettingsScreen(
                     stringResource(R.string.settings_groups),
                     pluralStringResource(R.plurals.settings_groups_value, groupCount, groupCount),
                     onGroups,
+                )
+            }
+            item(key = "dark") {
+                SwitchRow(
+                    title = stringResource(R.string.settings_dark),
+                    checked = DarkMode.on,
+                    note = stringResource(R.string.settings_dark_note),
+                    onChange = { DarkMode.set(context, it) },
                 )
             }
             item(key = "lock") {
