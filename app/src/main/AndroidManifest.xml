@@ -14,6 +14,8 @@
         android:required="false" />
 
     <queries>
+        <!-- Home, whose dark mode switch this app follows when Home is installed. -->
+        <package android:name="com.wanderwildwood.iori" />
         <!-- The other apps that act on selected text, listed behind the ⋮ of a field's
              selection menu, as in every Compose app of this shop. -->
         <intent>
@@ -46,6 +48,12 @@
         android:label="@string/app_name"
         android:supportsRtl="false"
         android:theme="@style/Theme.App">
+
+        <!-- Starts dark mode before the first screen is drawn. Holds no data. -->
+        <provider
+            android:name="com.wanderwildwood.satsuire.ui.DarkModeInit"
+            android:authorities="${applicationId}.darkmodeinit"
+            android:exported="false" />
 
         <activity
             android:name=".MainActivity"
