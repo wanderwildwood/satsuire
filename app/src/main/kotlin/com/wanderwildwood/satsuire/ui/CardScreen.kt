@@ -87,7 +87,7 @@ fun CardScreen(
             TextMMD(
                 text = card.cardId,
                 style = when {
-                    modules == null -> MaterialTheme.typography.headlineMedium
+                    modules == null -> MaterialTheme.typography.headlineLarge
                     long -> MaterialTheme.typography.bodySmall
                     else -> MaterialTheme.typography.titleLarge
                 },
