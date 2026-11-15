@@ -30,6 +30,11 @@ import com.mudita.mmd.components.switcher.SwitchMMD
 import com.mudita.mmd.components.text.TextMMD
 import com.mudita.mmd.components.top_app_bar.TopAppBarMMD
 import com.wanderwildwood.satsuire.R
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.state.ToggleableState
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.toggleableState
 
 /** An icon in a top bar, with a target a thumb can find. */
 @Composable
@@ -97,6 +102,7 @@ fun SwitchRow(title: String, checked: Boolean, note: String? = null, onChange: (
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .semantics { role = Role.Switch; toggleableState = ToggleableState(checked) }
             .clickable { onChange(!checked) }
             .padding(vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
