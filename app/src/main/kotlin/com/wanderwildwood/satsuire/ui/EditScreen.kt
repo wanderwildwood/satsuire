@@ -1,6 +1,8 @@
 package com.wanderwildwood.satsuire.ui
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.heightIn
@@ -15,12 +17,15 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -28,6 +33,7 @@ import com.mudita.mmd.components.text.TextMMD
 import com.mudita.mmd.components.text_field.TextFieldMMD
 import com.wanderwildwood.satsuire.R
 import com.wanderwildwood.satsuire.barcode.Modules
+import com.wanderwildwood.satsuire.barcode.Suggest
 import com.wanderwildwood.satsuire.data.Draft
 import com.wanderwildwood.satsuire.data.Validity
 import com.google.zxing.BarcodeFormat
@@ -40,6 +46,9 @@ private enum class Picking { FORMAT, FROM, UNTIL, GROUPS }
  * A card's details, typed or corrected: its name, its number, the kind of barcode, the days it
  * is good for, and a note. Saving refuses a number the chosen barcode cannot carry and says
  * why, rather than keeping a card whose barcode will not draw.
+ *
+ * Leaving with changes unsaved (Back, or the close button) asks first, in place: the first
+ * press says the changes are not saved, and a second leaves without them.
  */
 @Composable
 fun EditScreen(
@@ -57,6 +66,24 @@ fun EditScreen(
     val needsName = stringResource(R.string.edit_needs_name)
     val needsNumber = stringResource(R.string.edit_needs_number)
     val backwards = stringResource(R.string.edit_dates_backwards)
+    // What the screen opened with, so leaving can tell whether anything was changed.
+    val start by rememberSaveable(stateSaver = Draft.saver) { mutableStateOf<Draft?>(draft) }
+    var leaving by rememberArmedFlag(disarmOnBack = false)
+    val listState = rememberLazyListState()
+    val focus = LocalFocusManager.current
+
+    fun leave() {
+        if (draft == start || leaving) onDiscard() else leaving = true
+    }
+    BackHandler { leave() }
+    // Asked at the top of the form, so it is in view wherever the form was paged to.
+    LaunchedEffect(leaving) { if (leaving) listState.scrollToItem(0) }
+
+    // A picker opens with no field holding the focus, so the keyboard does not come back when it closes.
+    fun pick(p: Picking) {
+        focus.clearFocus()
+        picking = p
+    }
 
     fun save() {
         val format = draft.format?.let { BarcodeFormat.valueOf(it) }
@@ -78,13 +105,23 @@ fun EditScreen(
             Bar(
                 title = stringResource(if (draft.isNew) R.string.edit_new else R.string.edit_title),
                 back = Icons.Close,
-                onBack = onDiscard,
+                onBack = ::leave,
             ) {
                 BarText(stringResource(R.string.save)) { save() }
             }
         },
     ) { padding ->
-        PagedColumn(Modifier.padding(padding).fillMaxSize(), contentPadding = androidx.compose.foundation.layout.PaddingValues(start = 20.dp, end = 12.dp), showCutRow = true) {
+        PagedColumn(Modifier.padding(padding).fillMaxSize(), state = listState, contentPadding = androidx.compose.foundation.layout.PaddingValues(start = 20.dp, end = 12.dp), showCutRow = true) {
+            if (leaving) {
+                item(key = "leaving") {
+                    TextMMD(
+                        text = stringResource(R.string.edit_not_saved_back_again),
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(top = 12.dp),
+                    )
+                }
+            }
             item(key = "name") {
                 Spacer(Modifier.height(8.dp))
                 TextFieldMMD(
@@ -126,21 +163,35 @@ fun EditScreen(
                 SettingRow(
                     title = stringResource(R.string.edit_format),
                     value = draft.format?.let { CatimaBarcode.fromName(it).prettyName() } ?: stringResource(R.string.format_none),
-                    onClick = { picking = Picking.FORMAT },
+                    onClick = { pick(Picking.FORMAT) },
                 )
+            }
+            // A number typed with no barcode chosen that has the length and check digit of a
+            // shop barcode: offered, not set, since a card number can pass the check by chance.
+            val suggested = if (draft.format == null) Suggest.formatFor(draft.number) else null
+            if (suggested != null) {
+                item(key = "suggest") {
+                    ChoiceRow(
+                        text = stringResource(R.string.edit_use_format, CatimaBarcode.fromName(suggested).prettyName()),
+                        note = stringResource(R.string.edit_use_format_note),
+                    ) {
+                        focus.clearFocus()
+                        onChange(draft.copy(format = suggested))
+                    }
+                }
             }
             item(key = "from") {
                 SettingRow(
                     title = stringResource(R.string.edit_valid_from),
                     value = draft.validFrom?.let { dayText(Validity.day(it)) } ?: stringResource(R.string.edit_no_date),
-                    onClick = { picking = Picking.FROM },
+                    onClick = { pick(Picking.FROM) },
                 )
             }
             item(key = "until") {
                 SettingRow(
                     title = stringResource(R.string.edit_valid_until),
                     value = draft.expiry?.let { dayText(Validity.day(it)) } ?: stringResource(R.string.edit_no_date),
-                    onClick = { picking = Picking.UNTIL },
+                    onClick = { pick(Picking.UNTIL) },
                 )
             }
             item(key = "groups") {
@@ -148,7 +199,7 @@ fun EditScreen(
                 SettingRow(
                     title = stringResource(R.string.edit_groups),
                     value = if (chosen.isEmpty()) stringResource(R.string.edit_no_groups) else chosen.joinToString(", "),
-                    onClick = { picking = Picking.GROUPS },
+                    onClick = { pick(Picking.GROUPS) },
                 )
             }
             item(key = "note") {

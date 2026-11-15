@@ -30,6 +30,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.Alignment
+import com.mudita.mmd.components.checkbox.CheckboxMMD
 import androidx.compose.ui.unit.dp
 import com.mudita.mmd.components.text.TextMMD
 import com.mudita.mmd.components.text_field.TextFieldMMD
@@ -472,26 +479,59 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
     }
 
     exporting?.let { uri ->
+        // A password that cannot be recovered is typed twice, or read back in the clear: a typo
+        // would make a backup nobody can open.
         var password by remember { mutableStateOf("") }
+        var again by remember { mutableStateOf("") }
+        var shown by remember { mutableStateOf(false) }
+        var differ by remember { mutableStateOf(false) }
+        val hide = if (shown) VisualTransformation.None else PasswordVisualTransformation()
+        val passwordKeys = KeyboardOptions(keyboardType = if (shown) KeyboardType.Text else KeyboardType.Password, autoCorrectEnabled = false)
         EInkDialog(onDismiss = { dropExport(uri); exporting = null }) {
             TextMMD(text = stringResource(R.string.export_password), style = MaterialTheme.typography.bodyMedium)
             Spacer(Modifier.height(8.dp))
             TextFieldMMD(
                 value = password,
-                onValueChange = { password = it },
+                onValueChange = { password = it; differ = false },
+                label = { TextMMD(text = stringResource(R.string.export_password_label)) },
                 singleLine = true,
-                visualTransformation = PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, autoCorrectEnabled = false),
+                visualTransformation = hide,
+                keyboardOptions = passwordKeys,
                 modifier = Modifier.fillMaxWidth(),
             )
+            if (!shown && password.isNotEmpty()) {
+                TextFieldMMD(
+                    value = again,
+                    onValueChange = { again = it; differ = false },
+                    label = { TextMMD(text = stringResource(R.string.export_password_repeat)) },
+                    singleLine = true,
+                    visualTransformation = hide,
+                    keyboardOptions = passwordKeys,
+                    modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+                )
+            }
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth().padding(top = 6.dp).clickable { shown = !shown; differ = false },
+            ) {
+                CheckboxMMD(checked = shown, onCheckedChange = { shown = it; differ = false })
+                TextMMD(text = stringResource(R.string.export_password_show), style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(start = 8.dp))
+            }
+            if (differ) {
+                TextMMD(text = stringResource(R.string.export_password_mismatch), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold)
+            }
             Spacer(Modifier.height(6.dp))
             TextMMD(text = stringResource(R.string.export_password_note), style = MaterialTheme.typography.bodySmall)
             Spacer(Modifier.height(18.dp))
             DialogButtons(
                 onCancel = { dropExport(uri); exporting = null },
                 onOk = {
-                    exporting = null
-                    sendOut(uri, password.toCharArray())
+                    if (!shown && password.isNotEmpty() && again != password) {
+                        differ = true
+                    } else {
+                        exporting = null
+                        sendOut(uri, password.toCharArray())
+                    }
                 },
                 okLabel = stringResource(R.string.save),
             )

@@ -99,6 +99,10 @@
     <!-- Catima's separate value for the barcode, shown only when a card has one -->
     <string name="edit_barcode_value">What the barcode holds, if not the number</string>
     <string name="edit_format">Kind of barcode</string>
+    <!-- %1$s is a barcode kind, such as EAN 13 -->
+    <string name="edit_use_format">Use %1$s</string>
+    <string name="edit_use_format_note">The number has the length and check digit of one</string>
+    <string name="edit_not_saved_back_again">Your changes are not saved. Back again leaves without them; Save keeps them.</string>
     <string name="edit_valid_from">Valid from</string>
     <string name="edit_valid_until">Valid until</string>
     <string name="edit_no_date">No date</string>
@@ -153,6 +157,10 @@
     <string name="settings_send_out_value">A Catima file, locked with a password if you give one</string>
     <string name="export_password">A password locks the file; Catima opens it with the same one. Leave it empty for a plain file anyone can read.</string>
     <string name="export_password_note">There is no way to recover a forgotten password.</string>
+    <string name="export_password_label">Password (optional)</string>
+    <string name="export_password_repeat">Password again</string>
+    <string name="export_password_show">Show the password</string>
+    <string name="export_password_mismatch">The two passwords differ.</string>
 
     <string name="transfer_reading">Reading the file…</string>
     <plurals name="transfer_brought">
