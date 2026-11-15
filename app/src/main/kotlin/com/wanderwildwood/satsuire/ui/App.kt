@@ -59,6 +59,12 @@ import protect.card_locker.LoyaltyCard
 import protect.card_locker.ParseResult
 import protect.card_locker.ParseResultType
 import java.time.LocalDate
+import androidx.compose.runtime.withFrameNanos
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.text.input.ImeAction
 
 /**
  * The whole app: a stack of screens over the list of cards, and whatever another app handed
@@ -487,7 +493,17 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
         var differ by remember { mutableStateOf(false) }
         val hide = if (shown) VisualTransformation.None else PasswordVisualTransformation()
         val passwordKeys = KeyboardOptions(keyboardType = if (shown) KeyboardType.Text else KeyboardType.Password, autoCorrectEnabled = false)
+        val exportField = remember { FocusRequester() }
         EInkDialog(onDismiss = { dropExport(uri); exporting = null }) {
+            // The field is what the dialog is for: it takes the focus as it opens and the keyboard
+            // comes up. Asked from inside the dialog, a frame after it is drawn: the field lives in
+            // the dialog's own window, which a request from the screen beneath does not reach.
+            val keyboardNow = LocalSoftwareKeyboardController.current
+            LaunchedEffect(Unit) {
+                withFrameNanos { }
+                runCatching { exportField.requestFocus() }
+                keyboardNow?.show()
+            }
             TextMMD(text = stringResource(R.string.export_password), style = MaterialTheme.typography.bodyMedium)
             Spacer(Modifier.height(8.dp))
             TextFieldMMD(
@@ -497,7 +513,7 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
                 singleLine = true,
                 visualTransformation = hide,
                 keyboardOptions = passwordKeys,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().focusRequester(exportField),
             )
             if (!shown && password.isNotEmpty()) {
                 TextFieldMMD(
@@ -540,7 +556,21 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
 
     locked?.let { uri ->
         var password by remember { mutableStateOf("") }
+        val lockedField = remember { FocusRequester() }
+        val openLocked = {
+            locked = null
+            bringIn(uri, password.toCharArray())
+        }
         EInkDialog(onDismiss = { locked = null }) {
+            // The field is what the dialog is for: it takes the focus as it opens and the keyboard
+            // comes up. Asked from inside the dialog, a frame after it is drawn: the field lives in
+            // the dialog's own window, which a request from the screen beneath does not reach.
+            val keyboardNow = LocalSoftwareKeyboardController.current
+            LaunchedEffect(Unit) {
+                withFrameNanos { }
+                runCatching { lockedField.requestFocus() }
+                keyboardNow?.show()
+            }
             TextMMD(text = stringResource(R.string.transfer_password), style = MaterialTheme.typography.bodyMedium)
             Spacer(Modifier.height(8.dp))
             TextFieldMMD(
@@ -548,16 +578,15 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
                 onValueChange = { password = it },
                 singleLine = true,
                 visualTransformation = PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, autoCorrectEnabled = false),
-                modifier = Modifier.fillMaxWidth(),
+                // Done on the keyboard opens the file.
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, autoCorrectEnabled = false, imeAction = ImeAction.Done),
+                keyboardActions = KeyboardActions(onDone = { openLocked() }),
+                modifier = Modifier.fillMaxWidth().focusRequester(lockedField),
             )
             Spacer(Modifier.height(18.dp))
             DialogButtons(
                 onCancel = { locked = null },
-                onOk = {
-                    locked = null
-                    bringIn(uri, password.toCharArray())
-                },
+                onOk = { openLocked() },
                 okLabel = stringResource(R.string.transfer_open),
             )
         }

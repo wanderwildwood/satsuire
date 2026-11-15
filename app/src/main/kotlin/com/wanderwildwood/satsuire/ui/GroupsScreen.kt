@@ -22,6 +22,14 @@ import androidx.compose.ui.unit.dp
 import com.mudita.mmd.components.text.TextMMD
 import com.mudita.mmd.components.text_field.TextFieldMMD
 import com.wanderwildwood.satsuire.R
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.withFrameNanos
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.runtime.remember
 
 /**
  * Catima's groups: added, renamed, deleted. Deleting a group leaves its cards where they are.
@@ -98,16 +106,29 @@ fun GroupsScreen(
 @Composable
 private fun NameDialog(title: String, initial: String, onDone: (String) -> Unit, onDismiss: () -> Unit) {
     var text by rememberSaveable { mutableStateOf(initial) }
+    val field = remember { FocusRequester() }
+    val ok = { if (text.isNotBlank()) onDone(text) else onDismiss() }
     EInkDialog(onDismiss = onDismiss) {
+        // The field is what the dialog is for: it takes the focus as it opens and the keyboard
+        // comes up. Asked from inside the dialog, a frame after it is drawn: the field lives in
+        // the dialog's own window, which a request from the screen beneath does not reach.
+        val keyboardNow = LocalSoftwareKeyboardController.current
+        LaunchedEffect(Unit) {
+            withFrameNanos { }
+            runCatching { field.requestFocus() }
+            keyboardNow?.show()
+        }
         TextFieldMMD(
             value = text,
             onValueChange = { text = it },
             label = { TextMMD(text = title) },
             singleLine = true,
-            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
-            modifier = Modifier.fillMaxWidth(),
+            // Done on the keyboard is OK.
+            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences, imeAction = ImeAction.Done),
+            keyboardActions = KeyboardActions(onDone = { ok() }),
+            modifier = Modifier.fillMaxWidth().focusRequester(field),
         )
         Spacer(Modifier.height(18.dp))
-        DialogButtons(onCancel = onDismiss, onOk = { if (text.isNotBlank()) onDone(text) else onDismiss() })
+        DialogButtons(onCancel = onDismiss, onOk = { ok() })
     }
 }
