@@ -13,6 +13,7 @@ import com.wanderwildwood.satsuire.data.Incoming
 import com.wanderwildwood.satsuire.ui.WalletApp
 import com.wanderwildwood.satsuire.ui.houseTypography
 import com.wanderwildwood.satsuire.ui.monochrome
+import com.wanderwildwood.satsuire.ui.DarkSelection
 import com.wanderwildwood.satsuire.ui.ArmedScope
 
 /**
@@ -37,7 +38,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             // A steady cursor: a blinking one redraws the screen twice a second all day.
             CompositionLocalProvider(LocalCursorBlinkEnabled provides false) {
-                ThemeMMD(colorScheme = monochrome, typography = houseTypography) {
+                ThemeMMD(colorScheme = monochrome, typography = houseTypography) { DarkSelection {
                     ArmedScope {
                         WalletApp(
                             handed = handed.value,
@@ -46,7 +47,7 @@ class MainActivity : ComponentActivity() {
                             onAsked = { asked.value = null },
                         )
                     }
-                }
+                } }
             }
         }
     }
