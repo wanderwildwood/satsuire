@@ -14,9 +14,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -268,16 +272,36 @@ private fun GroupsChoice(
     onDismiss: () -> Unit,
 ) {
     var name by rememberSaveable { mutableStateOf("") }
+    var typing by remember { mutableStateOf(false) }
+    val focus = LocalFocusManager.current
+    val addTyped = {
+        if (name.isNotBlank()) onNew(name)
+        name = ""
+    }
     EInkDialog(onDismiss = onDismiss) {
-        PagedColumn(Modifier.fillMaxWidth().heightIn(max = 300.dp), showCutRow = true) {
-            for (g in all) {
-                item(key = "g:$g") {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.fillMaxWidth().clickable { onToggle(g) }.padding(vertical = 4.dp),
-                    ) {
-                        CheckboxMMD(checked = g in chosen, onCheckedChange = { onToggle(g) })
-                        TextMMD(text = g, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(start = 8.dp))
+        TextMMD(text = stringResource(R.string.edit_groups), style = MaterialTheme.typography.bodyLarge)
+        Spacer(Modifier.height(6.dp))
+        if (all.isNotEmpty()) {
+            // As tall as the groups when they fit. While a name is being typed the keyboard takes
+            // the lower half of the screen and the dialog sits above it: the list then pages two
+            // rows at a time, so the field and Done stay in sight instead of the dialog running
+            // up under the status bar.
+            val listState = rememberLazyListState()
+            val height = rememberFittedHeight(listState, room = if (typing) 110.dp else 300.dp, tail = false)
+            PagedColumn(
+                Modifier.fillMaxWidth().heightIn(max = height),
+                state = listState,
+                showCutRow = true,
+            ) {
+                for (g in all) {
+                    item(key = "g:$g") {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.fillMaxWidth().clickable { onToggle(g) }.padding(vertical = 4.dp),
+                        ) {
+                            CheckboxMMD(checked = g in chosen, onCheckedChange = { onToggle(g) })
+                            TextMMD(text = g, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(start = 8.dp))
+                        }
                     }
                 }
             }
@@ -287,15 +311,16 @@ private fun GroupsChoice(
             onValueChange = { name = it },
             label = { TextMMD(text = stringResource(R.string.edit_new_group)) },
             singleLine = true,
-            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
-            modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+            // Done on the keyboard (or Enter) adds the group typed and puts the keyboard away.
+            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences, imeAction = ImeAction.Done),
+            keyboardActions = KeyboardActions(onDone = { addTyped(); focus.clearFocus() }),
+            modifier = Modifier.fillMaxWidth().padding(top = 8.dp).onFocusChanged { typing = it.isFocused },
         )
         Spacer(Modifier.height(14.dp))
         // The ticks take effect as they are made; this only closes, adding a group if one was typed.
         OutlinedButtonMMD(
             onClick = {
-                if (name.isNotBlank()) onNew(name)
-                name = ""
+                addTyped()
                 onDismiss()
             },
             modifier = Modifier.fillMaxWidth().height(48.dp),
