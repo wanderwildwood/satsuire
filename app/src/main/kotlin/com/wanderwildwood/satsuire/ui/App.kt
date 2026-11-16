@@ -6,7 +6,17 @@ import android.net.Uri
 import android.provider.CalendarContract
 import android.util.Log
 import androidx.activity.compose.BackHandler
+import android.graphics.Rect
+import android.view.ViewTreeObserver
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.unit.Dp
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -503,6 +513,8 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
             }
         }
         val asksAgain = !shown && password.isNotEmpty()
+        // Read from the screen beneath: the dialog's own window is moved, not resized, by the keyboard.
+        val room = rememberRoomAboveKeyboard()
         EInkDialog(onDismiss = { dropExport(uri); exporting = null }) {
             // The field is what the dialog is for: it takes the focus as it opens and the keyboard
             // comes up. Asked from inside the dialog, a frame after it is drawn: the field lives in
@@ -513,6 +525,11 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
                 runCatching { exportField.requestFocus() }
                 keyboardNow?.show()
             }
+            // With both fields and the keyboard up the dialog is taller than the room above the
+            // keyboard, and a dialog is measured against the whole screen, so it ran on under the
+            // keys. Cancel and Save keep their place at the foot: what is above them gets the
+            // room that is left and scrolls, and the field being typed in is kept in sight.
+            Column(Modifier.heightIn(max = (room - EXPORT_DIALOG_FOOT - if (differ) 32.dp else 0.dp).coerceAtLeast(96.dp)).verticalScroll(rememberScrollState())) {
             TextMMD(text = stringResource(R.string.export_password), style = MaterialTheme.typography.bodyMedium)
             Spacer(Modifier.height(8.dp))
             TextFieldMMD(
@@ -546,11 +563,14 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
                 CheckboxMMD(checked = shown, onCheckedChange = { shown = it; differ = false })
                 TextMMD(text = stringResource(R.string.export_password_show), style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(start = 8.dp))
             }
-            if (differ) {
-                TextMMD(text = stringResource(R.string.export_password_mismatch), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold)
-            }
             Spacer(Modifier.height(6.dp))
             TextMMD(text = stringResource(R.string.export_password_note), style = MaterialTheme.typography.bodySmall)
+            }
+            // Said beside the buttons, where it is seen whatever the part above has scrolled to.
+            if (differ) {
+                Spacer(Modifier.height(6.dp))
+                TextMMD(text = stringResource(R.string.export_password_mismatch), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold)
+            }
             Spacer(Modifier.height(18.dp))
             DialogButtons(
                 onCancel = { dropExport(uri); exporting = null },
@@ -675,4 +695,30 @@ private fun share(context: Context, card: LoyaltyCard): String? = try {
 } catch (e: Exception) {
     Log.w(TAG, "Sharing a card failed", e)
     context.getString(R.string.share_failed)
+}
+
+/** What the export dialog needs besides its scrolling part: its padding and rim, the gap, the buttons, a margin. */
+private val EXPORT_DIALOG_FOOT = 36.dp + 4.dp + 18.dp + 48.dp + 10.dp
+
+/**
+ * The height of the part of the screen this window can show: below the status bar and, while the
+ * keyboard is up, above it. Read from the window, since a dialog's own constraints are the whole
+ * screen's whatever the keyboard covers.
+ */
+@Composable
+private fun rememberRoomAboveKeyboard(): Dp {
+    val view = LocalView.current
+    val density = LocalDensity.current
+    var px by remember { mutableIntStateOf(0) }
+    DisposableEffect(view) {
+        val frame = Rect()
+        val read = ViewTreeObserver.OnGlobalLayoutListener {
+            view.getWindowVisibleDisplayFrame(frame)
+            px = frame.height()
+        }
+        read.onGlobalLayout()
+        view.viewTreeObserver.addOnGlobalLayoutListener(read)
+        onDispose { view.viewTreeObserver.removeOnGlobalLayoutListener(read) }
+    }
+    return if (px <= 0) Dp.Infinity else with(density) { px.toDp() }
 }
