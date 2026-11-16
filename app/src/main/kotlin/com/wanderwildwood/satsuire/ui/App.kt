@@ -494,6 +494,15 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
         val hide = if (shown) VisualTransformation.None else PasswordVisualTransformation()
         val passwordKeys = KeyboardOptions(keyboardType = if (shown) KeyboardType.Text else KeyboardType.Password, autoCorrectEnabled = false)
         val exportField = remember { FocusRequester() }
+        val save = {
+            if (!shown && password.isNotEmpty() && again != password) {
+                differ = true
+            } else {
+                exporting = null
+                sendOut(uri, password.toCharArray())
+            }
+        }
+        val asksAgain = !shown && password.isNotEmpty()
         EInkDialog(onDismiss = { dropExport(uri); exporting = null }) {
             // The field is what the dialog is for: it takes the focus as it opens and the keyboard
             // comes up. Asked from inside the dialog, a frame after it is drawn: the field lives in
@@ -512,17 +521,21 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
                 label = { TextMMD(text = stringResource(R.string.export_password_label)) },
                 singleLine = true,
                 visualTransformation = hide,
-                keyboardOptions = passwordKeys,
+                // With the keyboard up it covers Save: its own key goes on to the second field,
+                // or saves when there is none.
+                keyboardOptions = passwordKeys.copy(imeAction = if (asksAgain) ImeAction.Next else ImeAction.Done),
+                keyboardActions = KeyboardActions(onDone = { save() }),
                 modifier = Modifier.fillMaxWidth().focusRequester(exportField),
             )
-            if (!shown && password.isNotEmpty()) {
+            if (asksAgain) {
                 TextFieldMMD(
                     value = again,
                     onValueChange = { again = it; differ = false },
                     label = { TextMMD(text = stringResource(R.string.export_password_repeat)) },
                     singleLine = true,
                     visualTransformation = hide,
-                    keyboardOptions = passwordKeys,
+                    keyboardOptions = passwordKeys.copy(imeAction = ImeAction.Done),
+                    keyboardActions = KeyboardActions(onDone = { save() }),
                     modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
                 )
             }
@@ -541,14 +554,7 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
             Spacer(Modifier.height(18.dp))
             DialogButtons(
                 onCancel = { dropExport(uri); exporting = null },
-                onOk = {
-                    if (!shown && password.isNotEmpty() && again != password) {
-                        differ = true
-                    } else {
-                        exporting = null
-                        sendOut(uri, password.toCharArray())
-                    }
-                },
+                onOk = { save() },
                 okLabel = stringResource(R.string.save),
             )
         }
