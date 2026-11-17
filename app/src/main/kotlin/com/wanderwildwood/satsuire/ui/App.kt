@@ -114,6 +114,8 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
         GlanceProvider.changed(context)
     }
 
+    var saving by remember { mutableStateOf(false) }
+
     fun push(s: String) { stack.add(s) }
     fun pop() { if (stack.size > 1) stack.removeAt(stack.lastIndex) }
 
@@ -126,6 +128,8 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
             base = null
             draft = Draft(number = card.cardId, format = card.barcodeType?.name(), groups = listOfNotNull(shownGroup))
         }
+        // One editor at a time: a card handed in while another was being edited takes its place.
+        if (stack.last() == EDIT) pop()
         push(EDIT)
     }
 
@@ -220,12 +224,22 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
     }
     // Where to save, asked first; then whether to lock it, asked over the list.
     var exporting by remember { mutableStateOf<Uri?>(null) }
+    // Whether the picked file was new and empty. A file picked to be written over is never deleted.
+    var exportIsNew by remember { mutableStateOf(false) }
     val exportFile = rememberLauncherForActivityResult(FilesCreateDocument("application/zip")) { uri ->
-        if (uri != null) exporting = uri
+        if (uri != null) {
+            exportIsNew = runCatching {
+                context.contentResolver.query(uri, arrayOf(android.provider.OpenableColumns.SIZE), null, null, null)?.use { c ->
+                    c.moveToFirst() && !c.isNull(0) && c.getLong(0) == 0L
+                }
+            }.getOrNull() ?: false
+            exporting = uri
+        }
     }
     // The file picker has already made an empty file by the time the password is asked: if nothing
-    // is written to it, it must not be left behind.
+    // is written to it, it must not be left behind. One that was there before is left alone.
     fun dropExport(uri: Uri) {
+        if (!exportIsNew) return
         runCatching { android.provider.DocumentsContract.deleteDocument(context.contentResolver, uri) }
     }
     fun sendOut(uri: Uri, password: CharArray?) {
@@ -338,12 +352,19 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
                 EditScreen(
                     draft = d,
                     onChange = { draft = it },
-                    onSave = {
+                    onSave = save@{
+                        // A second press while the first is saving would add a new card twice.
+                        if (saving) return@save
+                        saving = true
                         scope.launch {
-                            val id = withContext(Dispatchers.IO) {
-                                runCatching { Wallet.save(context, d, base) }
-                                    .onFailure { Log.w(TAG, "Saving a card failed", it) }
-                                    .getOrNull()
+                            val id = try {
+                                withContext(Dispatchers.IO) {
+                                    runCatching { Wallet.save(context, d, base) }
+                                        .onFailure { Log.w(TAG, "Saving a card failed", it) }
+                                        .getOrNull()
+                                }
+                            } finally {
+                                saving = false
                             }
                             if (id == null) {
                                 message = context.getString(R.string.edit_not_saved)
@@ -387,7 +408,7 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
             onRead = { text, format ->
                 pop()
                 base = null
-                draft = Draft(number = text, format = format.name)
+                draft = Draft(number = text, format = format.name, groups = listOfNotNull(shownGroup))
                 push(EDIT)
             },
             onType = {
@@ -432,8 +453,14 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
                 onOrder = { ordering = true },
                 groupCount = groups.size,
                 onGroups = { push(GROUPS) },
-                onBringIn = { importFile.launch(arrayOf("*/*")) },
-                onSendOut = { exportFile.launch("wallet-${LocalDate.now()}.zip") },
+                onBringIn = {
+                    runCatching { importFile.launch(arrayOf("*/*")) }
+                        .onFailure { message = context.getString(R.string.no_file_picker) }
+                },
+                onSendOut = {
+                    runCatching { exportFile.launch("wallet-${LocalDate.now()}.zip") }
+                        .onFailure { message = context.getString(R.string.no_file_picker) }
+                },
                 onAbout = { about = true },
                 onBack = ::pop,
             )
@@ -502,7 +529,8 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
         var shown by remember { mutableStateOf(false) }
         var differ by remember { mutableStateOf(false) }
         val hide = if (shown) VisualTransformation.None else PasswordVisualTransformation()
-        val passwordKeys = KeyboardOptions(keyboardType = if (shown) KeyboardType.Text else KeyboardType.Password, autoCorrectEnabled = false)
+        // A password keyboard either way: shown or not, it learns and suggests nothing.
+        val passwordKeys = KeyboardOptions(keyboardType = KeyboardType.Password, autoCorrectEnabled = false)
         val exportField = remember { FocusRequester() }
         val save = {
             if (!shown && password.isNotEmpty() && again != password) {
