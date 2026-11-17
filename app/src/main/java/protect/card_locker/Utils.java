@@ -480,9 +480,16 @@ public class Utils {
             return;
         }
 
-        FileOutputStream out = context.openFileOutput(fileName, Context.MODE_PRIVATE);
-
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+        // Closed when done, and a picture that could not be written is said, not left half there.
+        try (FileOutputStream out = context.openFileOutput(fileName, Context.MODE_PRIVATE)) {
+            if (!bitmap.compress(Bitmap.CompressFormat.PNG, 100, out)) {
+                throw new FileNotFoundException("Could not write " + fileName);
+            }
+        } catch (FileNotFoundException e) {
+            throw e;
+        } catch (IOException e) {
+            throw new FileNotFoundException(e.toString());
+        }
     }
 
     static public void saveCardImage(Context context, Bitmap bitmap, int loyaltyCardId, ImageLocationType type) throws FileNotFoundException {
@@ -528,15 +535,26 @@ public class Utils {
         return new File(context.getCacheDir() + "/" + name);
     }
 
+    private static final long MAX_TEMP_FILE_BYTES = 200L * 1024 * 1024;
+
     public static File copyToTempFile(Context context, InputStream input, String name) throws IOException {
         File file = createTempFile(context, name);
         try (FileOutputStream out = new FileOutputStream(file)) {
             byte[] buf = new byte[4096];
             int len;
+            long total = 0;
             while ((len = input.read(buf)) != -1) {
+                total += len;
+                // No pass or backup comes near this; stop rather than fill the phone.
+                if (total > MAX_TEMP_FILE_BYTES) {
+                    throw new IOException("File too large");
+                }
                 out.write(buf, 0, len);
             }
             return file;
+        } catch (IOException e) {
+            file.delete();
+            throw e;
         }
     }
 

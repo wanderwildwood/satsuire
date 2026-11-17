@@ -35,6 +35,8 @@ class MainActivity : ComponentActivity() {
         // the card it made is already on screen or saved.
         if (savedInstanceState == null && Incoming.carries(intent)) handed.value = intent
         if (savedInstanceState == null) asked.value = CardLink.id(intent)
+        // A barcode picture handed out by an earlier run has been read by now.
+        if (savedInstanceState == null) java.io.File(cacheDir, "shared").listFiles()?.forEach { it.delete() }
         setContent {
             // A steady cursor: a blinking one redraws the screen twice a second all day.
             CompositionLocalProvider(LocalCursorBlinkEnabled provides false) {

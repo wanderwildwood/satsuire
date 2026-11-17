@@ -48,8 +48,8 @@ sealed interface Incoming {
         /** Reads [intent]; slow (it may decode a photograph or every page of a PDF), so off the main thread. */
         fun read(context: Context, intent: Intent): Incoming {
             if (intent.action == Intent.ACTION_SEND) {
-                @Suppress("DEPRECATION")
-                val stream = intent.getParcelableExtra<Uri>(Intent.EXTRA_STREAM)
+                // Only a Uri: anything else another app puts there is ignored, not a crash.
+                val stream = androidx.core.content.IntentCompat.getParcelableExtra(intent, Intent.EXTRA_STREAM, Uri::class.java)
                 if (stream != null) return file(context, stream, intent.type)
                 val text = intent.getStringExtra(Intent.EXTRA_TEXT) ?: return Unreadable
                 return text(context, text)

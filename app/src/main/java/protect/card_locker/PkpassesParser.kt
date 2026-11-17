@@ -52,13 +52,14 @@ class PkpassesParser(context: Context, uri: Uri?) {
                         val tempFileName = "pkpassparser_" + System.currentTimeMillis() + "_" + localFileHeader.fileName
                         val tempFile = Utils.copyToTempFile(mContext, zipInputStream, tempFileName)
 
-                        // Parse temporary file
-                        pkPassParsers.add(
-                            PkpassParser(mContext, tempFile.toUri())
-                        )
-
-                        // Delete temporary file
-                        tempFile.delete()
+                        // Parse temporary file, and delete it whether or not that worked
+                        try {
+                            pkPassParsers.add(
+                                PkpassParser(mContext, tempFile.toUri())
+                            )
+                        } finally {
+                            tempFile.delete()
+                        }
                     }
                 }
             }

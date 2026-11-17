@@ -15,6 +15,8 @@ import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 
 public class ZipUtils {
+    private static final int MAX_TEXT_CHARS = 10 * 1024 * 1024;
+
     public static Bitmap readImage(ZipInputStream zipInputStream) {
         return BitmapFactory.decodeStream(zipInputStream);
     }
@@ -28,6 +30,10 @@ public class ZipUtils {
         Reader reader = new BufferedReader(new InputStreamReader(zipInputStream, StandardCharsets.UTF_8));
         int c;
         while ((c = reader.read()) != -1) {
+            // A pass's JSON is a few kilobytes; anything this long is not one.
+            if (stringBuilder.length() >= MAX_TEXT_CHARS) {
+                throw new IOException("Entry too large");
+            }
             stringBuilder.append((char) c);
         }
         return stringBuilder.toString();
