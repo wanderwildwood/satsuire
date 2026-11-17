@@ -24,7 +24,7 @@ it: none of it can reach a network from this app.
 
 The cards, in a database in the app's own storage, which no other app can read. It is
 Catima's database, so a Catima export brought in keeps everything it carried. The settings
-(the list's order and group, and the lock-screen switch) are in `SharedPreferences`.
+(the list's order and group, the lock-screen switch and dark mode) are in `SharedPreferences`.
 
 The app is excluded from Android backups (`allowBackup="false"`).
 
@@ -41,6 +41,11 @@ The app is excluded from Android backups (`allowBackup="false"`).
 - **Glance**, when it is installed and the switch in settings is on, is told the names of
   today's tickets, to show on the lock screen. Only Glance is answered; any other app that
   asks gets nothing.
+- **Home**, when it is installed, is asked whether its dark mode switch is on. Nothing is sent
+  to it.
+- In About, the source, the author's website and "Feed the llamas" (a donation page) open in
+  your browser, and the email address in your email app, only when you press them. The app
+  sends nothing there.
 
 ## What comes in
 

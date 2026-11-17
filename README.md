@@ -49,7 +49,8 @@ PDF417, QR Code, UPC-A and UPC-E.
   can scan it, or read it into its own Wallet.
 - **Glance** lists today's tickets by name on the lock screen: a flight today, a ferry ticket
   good for the weekend. Off in settings if it is not wanted.
-- **Files** is where exports go and come from: Android's own file picker shows it.
+- **Cabinet** is where exports go and come from when it is installed; otherwise the phone's
+  own file picker.
 
 ## What it does not do
 
