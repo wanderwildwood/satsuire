@@ -35,6 +35,15 @@ class ValidityTest {
         assertEquals(d, Validity.day(Validity.millis(d, zone), zone))
     }
 
+    /** A chosen day stays that day when the phone has since moved a few zones west or east. */
+    @Test
+    fun dayKeepsAcrossZones() {
+        val d = LocalDate.of(2026, 11, 17)
+        val picked = Validity.millis(d, zone)
+        assertEquals(d, Validity.day(picked, ZoneId.of("America/Los_Angeles")))
+        assertEquals(d, Validity.day(picked, ZoneId.of("Europe/Berlin")))
+    }
+
     @Test
     fun ticketsForToday() {
         // A weekend ferry ticket, a flight today, a ticket ending today.

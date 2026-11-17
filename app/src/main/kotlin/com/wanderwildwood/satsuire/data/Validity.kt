@@ -33,9 +33,12 @@ sealed interface Validity {
         fun day(millis: Long, zone: ZoneId = ZoneId.systemDefault()): LocalDate =
             Instant.ofEpochMilli(millis).atZone(zone).toLocalDate()
 
-        /** The start of [date] in [zone], which is how a chosen day is stored. */
+        /**
+         * Noon of [date] in [zone], which is how a chosen day is stored: read back in a zone up
+         * to eleven hours away, it is still the same day (local midnight moved a day west).
+         */
         fun millis(date: LocalDate, zone: ZoneId = ZoneId.systemDefault()): Long =
-            date.atStartOfDay(zone).toInstant().toEpochMilli()
+            date.atTime(12, 0).atZone(zone).toInstant().toEpochMilli()
     }
 }
 
