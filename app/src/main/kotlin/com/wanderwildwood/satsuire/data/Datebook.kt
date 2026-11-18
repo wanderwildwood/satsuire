@@ -1,8 +1,10 @@
 package com.wanderwildwood.satsuire.data
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.provider.CalendarContract
+import com.wanderwildwood.satsuire.ui.HouseApps
 
 /**
  * Datebook (com.wanderwildwood.koyomi), the only calendar "Add to calendar" talks to.
@@ -14,7 +16,7 @@ import android.provider.CalendarContract
  */
 object Datebook {
 
-    const val PACKAGE = "com.wanderwildwood.koyomi"
+    const val PACKAGE = HouseApps.DATEBOOK
 
     /** The apps that answer Datebook's request ([request]), by package. */
     fun interface Answering {
@@ -29,6 +31,14 @@ object Datebook {
     fun takes(answering: Answering): Boolean = runCatching {
         PACKAGE in answering.packages()
     }.getOrDefault(false)
+
+    /**
+     * Whether the real Datebook is on the phone to take the request: it answers it, and it is
+     * signed with Datebook's release certificate ([HouseApps]), so an app that only took its name
+     * is never handed the event.
+     */
+    fun isThere(context: Context): Boolean =
+        takes(answering(context.packageManager)) && HouseApps.isReal(context, PACKAGE)
 
     /** The real answer, from the package manager. */
     fun answering(pm: PackageManager) = Answering {

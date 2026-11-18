@@ -313,7 +313,7 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
             if (c != null) {
                 CardScreen(
                     card = c,
-                    datebook = { Datebook.takes(Datebook.answering(context.packageManager)) },
+                    datebook = { Datebook.isThere(context) },
                     onBack = ::pop,
                     onEdit = {
                         scope.launch {
