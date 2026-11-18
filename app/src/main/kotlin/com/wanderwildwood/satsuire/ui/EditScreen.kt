@@ -94,7 +94,8 @@ fun EditScreen(
         problem = when {
             draft.name.isBlank() -> needsName
             draft.number.isEmpty() -> needsNumber
-            draft.validFrom != null && draft.expiry != null && draft.expiry < draft.validFrom -> backwards
+            draft.validFrom != null && draft.expiry != null &&
+                Validity.day(draft.expiry).isBefore(Validity.day(draft.validFrom)) -> backwards
             format != null && runCatching {
                 Modules.encode(draft.barcodeValue?.takeIf { it.isNotEmpty() } ?: draft.number, format)
             }.isFailure -> cannotDraw.format(CatimaBarcode.fromBarcode(format).prettyName())
