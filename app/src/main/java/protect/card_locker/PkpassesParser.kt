@@ -48,9 +48,10 @@ class PkpassesParser(context: Context, uri: Uri?) {
                         // Mark as found
                         hasPkpassFiles = true
 
-                        // Extract .pkpass (.zip) inside .pkpasses to cache directory
-                        val tempFileName = "pkpassparser_" + System.currentTimeMillis() + "_" + localFileHeader.fileName
-                        val tempFile = Utils.copyToTempFile(mContext, zipInputStream, tempFileName)
+                        // Extract .pkpass (.zip) inside .pkpasses to cache directory, under a name
+                        // of our own: the entry's name may hold folders or "..".
+                        val tempFile = java.io.File.createTempFile("pkpassparser_", ".pkpass", mContext.cacheDir)
+                        Utils.copyToTempFile(mContext, zipInputStream, tempFile.name)
 
                         // Parse temporary file, and delete it whether or not that worked
                         try {
