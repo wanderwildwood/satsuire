@@ -119,7 +119,15 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
     fun push(s: String) { stack.add(s) }
     fun pop() { if (stack.size > 1) stack.removeAt(stack.lastIndex) }
 
-    fun startEditing(result: ParseResult) {
+    // A card handed in while another is being edited, held until the person says whether to
+    // leave the one in the editor; nothing replaces an unsaved draft without asking.
+    var waiting by remember { mutableStateOf<ParseResult?>(null) }
+
+    fun startEditing(result: ParseResult, leave: Boolean = false) {
+        if (!leave && stack.last() == EDIT) {
+            waiting = result
+            return
+        }
         val card = result.loyaltyCard
         if (result.parseResultType == ParseResultType.FULL) {
             base = card
@@ -128,7 +136,8 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
             base = null
             draft = Draft(number = card.cardId, format = card.barcodeType?.name(), groups = listOfNotNull(shownGroup))
         }
-        // One editor at a time: a card handed in while another was being edited takes its place.
+        // One editor at a time: a card handed in while another was being edited, once the person
+        // has chosen to leave that one, takes its place.
         if (stack.last() == EDIT) pop()
         push(EDIT)
     }
@@ -642,6 +651,24 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
                 onCancel = { locked = null },
                 onOk = { openLocked() },
                 okLabel = stringResource(R.string.transfer_open),
+            )
+        }
+    }
+
+    waiting?.let { result ->
+        EInkDialog(onDismiss = { waiting = null }) {
+            TextMMD(text = stringResource(R.string.edit_leave_title), style = MaterialTheme.typography.bodyLarge)
+            Spacer(Modifier.height(6.dp))
+            TextMMD(text = stringResource(R.string.edit_leave_text), style = MaterialTheme.typography.bodyMedium)
+            Spacer(Modifier.height(18.dp))
+            DialogButtons(
+                cancel = stringResource(R.string.edit_leave_keep),
+                confirm = stringResource(R.string.edit_leave_go),
+                onCancel = { waiting = null },
+                onConfirm = {
+                    waiting = null
+                    startEditing(result, leave = true)
+                },
             )
         }
     }

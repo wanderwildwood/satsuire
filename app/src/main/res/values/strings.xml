@@ -122,6 +122,11 @@
     <!-- %1$s is a kind of barcode -->
     <string name="edit_cannot_draw">This number cannot be drawn as %1$s. Check the number, or choose another kind.</string>
     <string name="edit_not_saved">The card could not be saved.</string>
+    <!-- A card was shared into the app while another was being edited and not yet saved -->
+    <string name="edit_leave_title">Leave the card you are editing?</string>
+    <string name="edit_leave_text">A card was handed in. Leaving the one you are editing throws away what has not been saved.</string>
+    <string name="edit_leave_keep">Keep editing</string>
+    <string name="edit_leave_go">Leave</string>
 
     <string name="format_none">No barcode</string>
     <string name="format_note_boarding">Boarding passes and rail tickets</string>
