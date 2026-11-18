@@ -2,11 +2,15 @@ package com.wanderwildwood.satsuire.data
 
 import android.content.Context
 import android.net.Uri
+import android.provider.OpenableColumns
 import protect.card_locker.DBHelper
 import protect.card_locker.importexport.DataFormat
 import protect.card_locker.importexport.ImportExportResultType
 import protect.card_locker.importexport.MultiFormatExporter
 import protect.card_locker.importexport.MultiFormatImporter
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
 
 /**
  * Cards in and out as files, in Catima's formats and through Catima's own importers.
@@ -61,11 +65,40 @@ object Transfer {
      * Every card, in Catima's own zip, which Catima and this app both read back. With a
      * [password] the zip is locked the way Catima locks its own (AES inside the zip), so
      * Catima opens it with the same password; without one it is a plain zip.
+     *
+     * The zip is made in a temporary file first and copied over only once it is whole, so a
+     * backup being written over is still there, untouched, when the export fails.
      */
     fun sendOut(context: Context, uri: Uri, password: CharArray? = null): Boolean {
-        val out = context.contentResolver.openOutputStream(uri, "wt") ?: return false
         val key = password?.takeIf { it.isNotEmpty() }
-        val result = out.use { MultiFormatExporter.exportData(context, Wallet.db(context), it, DataFormat.Catima, key) }
-        return result.resultType() == ImportExportResultType.Success
+        val temp = File.createTempFile("export", ".zip", context.cacheDir)
+        try {
+            val result = FileOutputStream(temp).use {
+                MultiFormatExporter.exportData(context, Wallet.db(context), it, DataFormat.Catima, key)
+            }
+            if (result.resultType() != ImportExportResultType.Success) return false
+            val out = context.contentResolver.openOutputStream(uri, "wt") ?: return false
+            out.use { o -> FileInputStream(temp).use { it.copyTo(o) } }
+            return true
+        } finally {
+            temp.delete()
+        }
+    }
+
+    /**
+     * True when the document holds nothing: the file picker has just made it, or it was empty
+     * anyway, so deleting it loses nothing. A provider that gives no size is asked for the first
+     * byte instead; anything that cannot be read counts as not empty and is left alone.
+     */
+    fun isEmpty(context: Context, uri: Uri): Boolean {
+        val size = runCatching {
+            context.contentResolver.query(uri, arrayOf(OpenableColumns.SIZE), null, null, null)?.use { c ->
+                if (c.moveToFirst() && !c.isNull(0)) c.getLong(0) else null
+            }
+        }.getOrNull()
+        if (size != null) return size == 0L
+        return runCatching {
+            context.contentResolver.openInputStream(uri)?.use { it.read() == -1 }
+        }.getOrNull() ?: false
     }
 }

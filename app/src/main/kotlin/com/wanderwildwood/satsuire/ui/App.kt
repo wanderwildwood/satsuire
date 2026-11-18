@@ -237,11 +237,7 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
     var exportIsNew by remember { mutableStateOf(false) }
     val exportFile = rememberLauncherForActivityResult(FilesCreateDocument("application/zip")) { uri ->
         if (uri != null) {
-            exportIsNew = runCatching {
-                context.contentResolver.query(uri, arrayOf(android.provider.OpenableColumns.SIZE), null, null, null)?.use { c ->
-                    c.moveToFirst() && !c.isNull(0) && c.getLong(0) == 0L
-                }
-            }.getOrNull() ?: false
+            exportIsNew = Transfer.isEmpty(context, uri)
             exporting = uri
         }
     }
