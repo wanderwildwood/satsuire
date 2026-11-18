@@ -24,6 +24,8 @@ sixteen grays, a slow redraw, and is read outdoors as often as indoors.
   Wallet pass file (`.pkpass`).
 - **Tickets and passes**: a card can have a first and a last day. The list says when one has
   expired or is not valid yet. Boarding passes use Aztec or PDF417, and both are drawn.
+- **Dark mode**, a switch in Settings; the app also follows the phone's own dark setting.
+  A barcode stays black on white either way, so a scanner can read it.
 - **Favorites** sit at the top of the list, marked with a star.
 - **Groups** sort cards into kinds — travel, shops — and the list shows all of them or one
   group. **Order** is by name, last used, last added, or soonest to expire or to start.
