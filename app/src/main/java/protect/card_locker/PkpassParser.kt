@@ -19,6 +19,9 @@ import java.nio.charset.Charset
 import java.nio.charset.StandardCharsets
 import java.text.DateFormat
 import java.text.ParseException
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeParseException
 import java.util.Currency
@@ -209,6 +212,28 @@ class PkpassParser(context: Context, uri: Uri?) {
         return Date.from(ZonedDateTime.parse(dateTime).toInstant())
     }
 
+    /**
+     * A pass's own start or end date. The format says a full date and time with its zone, but
+     * some issuers leave out the zone or the time; those are read in this phone's zone, and a
+     * date that cannot be read at all is left out rather than refusing the whole pass.
+     */
+    private fun parsePassDate(dateTime: String): Date? {
+        val zone = ZoneId.systemDefault()
+        return try {
+            parseDateTime(dateTime)
+        } catch (ignored: DateTimeParseException) {
+            try {
+                Date.from(LocalDateTime.parse(dateTime).atZone(zone).toInstant())
+            } catch (ignored: DateTimeParseException) {
+                try {
+                    Date.from(LocalDate.parse(dateTime).atStartOfDay(zone).toInstant())
+                } catch (ignored: DateTimeParseException) {
+                    null
+                }
+            }
+        }
+    }
+
     private fun parseLanguageStrings(data: String): Map<String, String> {
         val output = ArrayMap<String, String>()
 
@@ -261,11 +286,11 @@ class PkpassParser(context: Context, uri: Uri?) {
         noteText.append(getTranslation(jsonObject.getString("description"), locale))
 
         try {
-            validFrom = parseDateTime(jsonObject.getString("relevantDate"))
+            validFrom = parsePassDate(jsonObject.getString("relevantDate"))
         } catch (ignored: JSONException) {}
 
         try {
-            expiry = parseDateTime(jsonObject.getString("expirationDate"))
+            expiry = parsePassDate(jsonObject.getString("expirationDate"))
         } catch (ignored: JSONException) {}
 
         try {
