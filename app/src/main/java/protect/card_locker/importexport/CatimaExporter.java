@@ -20,6 +20,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
+import java.time.ZoneId;
+
+import com.wanderwildwood.satsuire.data.Validity;
 
 import protect.card_locker.DBHelper;
 import protect.card_locker.Group;
@@ -148,7 +151,7 @@ public class CatimaExporter implements Exporter {
             printer.printRecord(card.id,
                     card.store,
                     card.note,
-                    card.validFrom != null ? card.validFrom.getTime() : "",
+                    card.validFrom != null ? Validity.Companion.startForCatima(card.validFrom.getTime(), ZoneId.systemDefault()) : "",
                     card.expiry != null ? card.expiry.getTime() : "",
                     card.balance,
                     card.balanceType,

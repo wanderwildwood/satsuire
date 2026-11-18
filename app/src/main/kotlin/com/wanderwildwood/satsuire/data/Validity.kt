@@ -2,6 +2,7 @@ package com.wanderwildwood.satsuire.data
 
 import java.time.Instant
 import java.time.LocalDate
+import java.time.LocalTime
 import java.time.ZoneId
 
 /**
@@ -39,6 +40,16 @@ sealed interface Validity {
          */
         fun millis(date: LocalDate, zone: ZoneId = ZoneId.systemDefault()): Long =
             date.atTime(12, 0).atZone(zone).toInstant().toEpochMilli()
+
+        /**
+         * A first day as Catima wants it in a file: Catima counts a card as not valid yet until
+         * its start time has passed, so a day kept at noon is written as that day's midnight.
+         * Any other time (a pass that starts at 18:00) is written as it is.
+         */
+        fun startForCatima(millis: Long, zone: ZoneId = ZoneId.systemDefault()): Long {
+            val at = Instant.ofEpochMilli(millis).atZone(zone)
+            return if (at.toLocalTime() == LocalTime.NOON) at.toLocalDate().atStartOfDay(zone).toInstant().toEpochMilli() else millis
+        }
     }
 }
 

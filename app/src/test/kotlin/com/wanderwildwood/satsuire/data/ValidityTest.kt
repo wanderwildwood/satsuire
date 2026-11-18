@@ -44,6 +44,17 @@ class ValidityTest {
         assertEquals(d, Validity.day(picked, ZoneId.of("Europe/Berlin")))
     }
 
+    /** Catima reads a start after midnight as not valid yet, so a chosen day goes out at midnight. */
+    @Test
+    fun startDayForCatima() {
+        val d = LocalDate.of(2026, 11, 17)
+        val midnight = d.atStartOfDay(zone).toInstant().toEpochMilli()
+        assertEquals(midnight, Validity.startForCatima(ms(d), zone))
+        // A pass that starts in the evening keeps its time.
+        val evening = d.atTime(18, 0).atZone(zone).toInstant().toEpochMilli()
+        assertEquals(evening, Validity.startForCatima(evening, zone))
+    }
+
     @Test
     fun ticketsForToday() {
         // A weekend ferry ticket, a flight today, a ticket ending today.
