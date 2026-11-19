@@ -43,6 +43,11 @@ The app is excluded from Android backups (`allowBackup="false"`).
   asks gets nothing.
 - **Home**, when it is installed, is asked whether its dark mode switch is on. Nothing is sent
   to it.
+- **Cabinet**, when it is installed, answers "open a file" and "save a file" (bringing
+  cards in, saving them to a file) with its own screens instead of Android's.
+- Text you select in a field can be handed to another app's action from the selection
+  menu, and only when you choose that app.
+- The app can see which browsers the phone has, so a link opens in a real one.
 - In About, the source, the author's website and "Feed the llamas" (a donation page) open in
   your browser, and the email address in your email app, only when you press them. The app
   sends nothing there.
