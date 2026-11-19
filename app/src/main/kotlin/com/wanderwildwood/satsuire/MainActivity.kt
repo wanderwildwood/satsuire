@@ -10,6 +10,7 @@ import androidx.compose.runtime.mutableStateOf
 import com.mudita.mmd.ThemeMMD
 import com.wanderwildwood.satsuire.data.CardLink
 import com.wanderwildwood.satsuire.data.Incoming
+import com.wanderwildwood.satsuire.data.Prefs
 import com.wanderwildwood.satsuire.ui.WalletApp
 import com.wanderwildwood.satsuire.ui.houseTypography
 import com.wanderwildwood.satsuire.ui.monochrome
@@ -31,6 +32,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Prefs.applyScreenshots(this)
         // Read once: after the system recreates the activity the same intent comes back, and
         // the card it made is already on screen or saved.
         if (savedInstanceState == null && Incoming.carries(intent)) handed.value = intent

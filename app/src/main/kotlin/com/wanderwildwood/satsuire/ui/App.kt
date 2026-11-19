@@ -443,6 +443,7 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
         )
         top == SETTINGS -> {
             var on by remember { mutableStateOf(Prefs.onLockScreen(context)) }
+            var blocked by remember { mutableStateOf(Prefs.blockScreenshots(context)) }
             val glance = remember {
                 context.packageManager.getLaunchIntentForPackage(GlanceProvider.READER) != null
             }
@@ -453,6 +454,15 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
                     on = it
                     Prefs.setOnLockScreen(context, it)
                     GlanceProvider.changed(context)
+                },
+                blockScreenshots = blocked,
+                onBlockScreenshotsChange = {
+                    blocked = it
+                    Prefs.setBlockScreenshots(context, it)
+                    // The activity under any theme wrappers Compose puts around it.
+                    var c = context
+                    while (c is android.content.ContextWrapper && c !is android.app.Activity) c = c.baseContext
+                    (c as? android.app.Activity)?.let(Prefs::applyScreenshots)
                 },
                 order = orderName(order),
                 onOrder = { ordering = true },

@@ -24,6 +24,8 @@ sixteen grays, a slow redraw, and is read outdoors as often as indoors.
   Wallet pass file (`.pkpass`).
 - **Tickets and passes**: a card can have a first and a last day. The list says when one has
   expired or is not valid yet. Boarding passes use Aztec or PDF417, and both are drawn.
+- **Screenshots blocked**: no screenshot or recent-apps picture shows a card. On from the
+  start; a switch in Settings turns it off, for instance to save a code as a picture.
 - **Dark mode**, a switch in Settings; the app also follows the phone's own dark setting.
   A barcode stays black on white either way, so a scanner can read it.
 - **Favorites** sit at the top of the list, marked with a star.
@@ -59,6 +61,9 @@ PDF417, QR Code, UPC-A and UPC-E.
 No colors, card photos, balances, NFC or watch app: those parts of Catima are left out.
 Groups and the other fields a Catima export carries come in and go back out unchanged.
 No internet, and no cloud: the cards are only on the phone and in the files you save.
+The cards are not encrypted by the app itself. They sit in the app's private storage, which
+Android encrypts while the phone is locked, and Android's backup is switched off for them, so
+they do not leave the phone unless you save them to a file.
 
 ## Building
 

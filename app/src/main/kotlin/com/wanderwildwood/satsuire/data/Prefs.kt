@@ -15,6 +15,21 @@ object Prefs {
         context.getSharedPreferences(FILE, Context.MODE_PRIVATE).edit().putBoolean(LOCK_SCREEN, on).apply()
     }
 
+    private const val BLOCK_SCREENSHOTS = "block_screenshots"
+
+    /** Screenshots and the Recents thumbnail kept off the cards. On unless turned off. */
+    fun blockScreenshots(context: Context): Boolean = prefs(context).getBoolean(BLOCK_SCREENSHOTS, true)
+
+    fun setBlockScreenshots(context: Context, on: Boolean) {
+        prefs(context).edit().putBoolean(BLOCK_SCREENSHOTS, on).apply()
+    }
+
+    /** Puts the screenshot setting on [activity]'s window. */
+    fun applyScreenshots(activity: android.app.Activity) {
+        val flag = android.view.WindowManager.LayoutParams.FLAG_SECURE
+        if (blockScreenshots(activity)) activity.window.addFlags(flag) else activity.window.clearFlags(flag)
+    }
+
     private const val ORDER = "order"
     private const val GROUP = "group"
 

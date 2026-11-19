@@ -156,6 +156,8 @@
     <string name="groups_not_renamed">There is a group of that name already.</string>
     <string name="settings_lock_screen">Today\'s tickets on the lock screen</string>
     <string name="settings_lock_screen_no_glance">Glance draws them there, and it is not on this phone.</string>
+    <string name="settings_block_screenshots">Block screenshots</string>
+    <string name="settings_block_screenshots_note">Keeps your cards out of screenshots and the recent apps list.</string>
     <string name="settings_bring_in">Bring in cards</string>
     <string name="settings_bring_in_value">From a Catima, FidMe or Voucher Vault export</string>
     <string name="settings_send_out">Save every card to a file</string>

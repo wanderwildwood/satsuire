@@ -18,6 +18,8 @@ fun SettingsScreen(
     onLockScreen: Boolean,
     glanceInstalled: Boolean,
     onLockScreenChange: (Boolean) -> Unit,
+    blockScreenshots: Boolean,
+    onBlockScreenshotsChange: (Boolean) -> Unit,
     order: String,
     onOrder: () -> Unit,
     groupCount: Int,
@@ -61,6 +63,14 @@ fun SettingsScreen(
                     // Whether Glance is there is a fact about the phone the switch cannot show.
                     note = if (glanceInstalled) null else stringResource(R.string.settings_lock_screen_no_glance),
                     onChange = onLockScreenChange,
+                )
+            }
+            item(key = "screenshots") {
+                SwitchRow(
+                    title = stringResource(R.string.settings_block_screenshots),
+                    checked = blockScreenshots,
+                    note = stringResource(R.string.settings_block_screenshots_note),
+                    onChange = onBlockScreenshotsChange,
                 )
             }
             item(key = "in") {
