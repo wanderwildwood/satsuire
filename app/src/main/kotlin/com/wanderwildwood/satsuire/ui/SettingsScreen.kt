@@ -16,7 +16,7 @@ import com.wanderwildwood.satsuire.R
 @Composable
 fun SettingsScreen(
     onLockScreen: Boolean,
-    glanceInstalled: Boolean,
+    glanceHere: Boolean,
     onLockScreenChange: (Boolean) -> Unit,
     blockScreenshots: Boolean,
     onBlockScreenshotsChange: (Boolean) -> Unit,
@@ -56,12 +56,11 @@ fun SettingsScreen(
                     onChange = { DarkMode.set(context, it) },
                 )
             }
-            item(key = "lock") {
+            // Only where Glance is, or while the switch is still on so it can be turned off.
+            if (glanceHere || onLockScreen) item(key = "lock") {
                 SwitchRow(
                     title = stringResource(R.string.settings_lock_screen),
                     checked = onLockScreen,
-                    // Whether Glance is there is a fact about the phone the switch cannot show.
-                    note = if (glanceInstalled) null else stringResource(R.string.settings_lock_screen_no_glance),
                     onChange = onLockScreenChange,
                 )
             }

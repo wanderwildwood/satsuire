@@ -444,12 +444,12 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
         top == SETTINGS -> {
             var on by remember { mutableStateOf(Prefs.onLockScreen(context)) }
             var blocked by remember { mutableStateOf(Prefs.blockScreenshots(context)) }
-            val glance = remember {
+            val glanceHere = remember {
                 context.packageManager.getLaunchIntentForPackage(GlanceProvider.READER) != null
             }
             SettingsScreen(
-                onLockScreen = on && glance,
-                glanceInstalled = glance,
+                onLockScreen = on,
+                glanceHere = glanceHere,
                 onLockScreenChange = {
                     on = it
                     Prefs.setOnLockScreen(context, it)
