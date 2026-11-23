@@ -442,11 +442,13 @@ fun WalletApp(handed: Intent?, onHandled: () -> Unit, asked: Int? = null, onAske
             onBack = ::pop,
         )
         top == SETTINGS -> {
-            var on by remember { mutableStateOf(Prefs.onLockScreen(context)) }
-            var blocked by remember { mutableStateOf(Prefs.blockScreenshots(context)) }
             val glanceHere = remember {
                 context.packageManager.getLaunchIntentForPackage(GlanceProvider.READER) != null
             }
+            // The switch starts on. Without Glance that is no reason to show its row: only a
+            // switch somebody set on is, so it can be turned off again.
+            var on by remember { mutableStateOf(if (glanceHere) Prefs.onLockScreen(context) else Prefs.lockScreenChosenOn(context)) }
+            var blocked by remember { mutableStateOf(Prefs.blockScreenshots(context)) }
             SettingsScreen(
                 onLockScreen = on,
                 glanceHere = glanceHere,

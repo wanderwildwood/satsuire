@@ -7,9 +7,16 @@ object Prefs {
     private const val FILE = "settings"
     private const val LOCK_SCREEN = "tickets_on_lock_screen"
 
-    /** Today's tickets named on the lock screen, through Glance. On unless turned off; Settings shows it off while Glance is not on the phone. */
+    /** Today's tickets named on the lock screen, through Glance. On unless turned off; without Glance on the phone its row shows only once the switch has been set on by hand. */
     fun onLockScreen(context: Context): Boolean =
         context.getSharedPreferences(FILE, Context.MODE_PRIVATE).getBoolean(LOCK_SCREEN, true)
+
+    /**
+     * Whether the switch is on because someone set it, not because that is how it starts. Without
+     * Glance on the phone, only a chosen switch is worth a row in Settings.
+     */
+    fun lockScreenChosenOn(context: Context): Boolean =
+        context.getSharedPreferences(FILE, Context.MODE_PRIVATE).let { it.contains(LOCK_SCREEN) && it.getBoolean(LOCK_SCREEN, true) }
 
     fun setOnLockScreen(context: Context, on: Boolean) {
         context.getSharedPreferences(FILE, Context.MODE_PRIVATE).edit().putBoolean(LOCK_SCREEN, on).apply()
